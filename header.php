@@ -13,6 +13,7 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind v3 Play CDN with Class-based Dark Mode Config -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -62,16 +63,21 @@
             <ul id="floating-nav" class="flex flex-col items-center space-y-3 w-full">
                 <!-- Home -->
                 <li>
-                    <a href="<?php echo esc_url( home_url( '/#home' ) ); ?>" data-page="home" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'home' ) ? 'text-gray-900 dark:text-white active-page' : 'text-gray-400 hover:text-black'; ?>">
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" data-page="home" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'home' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
                         <div class="nav-icon-box <?php echo ( $current_slug === 'home' ) ? 'bg-black text-white shadow-md w-10 h-10' : 'w-9 h-9 text-gray-400'; ?> rounded-full flex items-center justify-center transition-all group-hover:scale-105 active:scale-95">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                         </div>
-                        <span class="text-[9px] font-medium mt-1 tracking-tight">Home</span>
+                        <span class="text-[9px] font-medium mt-0.5 tracking-tight">Home</span>
                     </a>
                 </li>
+                
                 <!-- Work -->
                 <li>
-                    <a href="<?php echo esc_url( home_url( '/#work' ) ); ?>" data-page="work" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'work' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
+                    <?php 
+                    $work_page = get_page_by_path('work');
+                    $work_url = $work_page ? get_permalink($work_page->ID) : home_url('/work/');
+                    ?>
+                    <a href="<?php echo esc_url($work_url); ?>" data-page="work" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'work' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
                         <div class="nav-icon-box <?php echo ( $current_slug === 'work' ) ? 'bg-black text-white shadow-md w-10 h-10' : 'w-9 h-9 text-gray-400'; ?> rounded-full flex items-center justify-center transition-all group-hover:scale-105 active:scale-95">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                         </div>
@@ -81,7 +87,7 @@
 
                 <!-- Capabilities -->
                 <li>
-                    <a href="<?php echo esc_url( home_url( '/#capabilities' ) ); ?>" data-page="capabilities" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'capabilities' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
+                    <a href="<?php echo esc_url( home_url( '/capabilities/' ) ); ?>" data-page="capabilities" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'capabilities' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
                         <div class="nav-icon-box <?php echo ( $current_slug === 'capabilities' ) ? 'bg-black text-white shadow-md w-10 h-10' : 'w-9 h-9 text-gray-400'; ?> rounded-full flex items-center justify-center transition-all group-hover:scale-105 active:scale-95">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                         </div>
@@ -91,7 +97,7 @@
 
                 <!-- About -->
                 <li>
-                    <a href="<?php echo esc_url( home_url( '/#about' ) ); ?>" data-page="about" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'about' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
+                    <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" data-page="about" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'about' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
                         <div class="nav-icon-box <?php echo ( $current_slug === 'about' ) ? 'bg-black text-white shadow-md w-10 h-10' : 'w-9 h-9 text-gray-400'; ?> rounded-full flex items-center justify-center transition-all group-hover:scale-105 active:scale-95">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         </div>
@@ -101,7 +107,7 @@
 
                 <!-- Experience -->
                 <li>
-                    <a href="<?php echo esc_url( home_url( '/#experience' ) ); ?>" data-page="experience" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'experience' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
+                    <a href="<?php echo esc_url( home_url( '/experience/' ) ); ?>" data-page="experience" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'experience' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
                         <div class="nav-icon-box <?php echo ( $current_slug === 'experience' ) ? 'bg-black text-white shadow-md w-10 h-10' : 'w-9 h-9 text-gray-400'; ?> rounded-full flex items-center justify-center transition-all group-hover:scale-105 active:scale-95">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
                         </div>
@@ -111,7 +117,7 @@
 
                 <!-- Contact -->
                 <li>
-                    <a href="<?php echo esc_url( home_url( '/#contact' ) ); ?>" data-page="contact" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'contact' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
+                    <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" data-page="contact" class="nav-item flex flex-col items-center group transition-all <?php echo ( $current_slug === 'contact' ) ? 'text-gray-900 active-page' : 'text-gray-400 hover:text-black'; ?>">
                         <div class="nav-icon-box <?php echo ( $current_slug === 'contact' ) ? 'bg-black text-white shadow-md w-10 h-10' : 'w-9 h-9 text-gray-400'; ?> rounded-full flex items-center justify-center transition-all group-hover:scale-105 active:scale-95">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </div>
@@ -182,6 +188,7 @@
                             iconBox.style.color = "#71717a";
                         }
                     } else {
+                        nav.style.color = "#ffffff"; // Fix: ensure active text turns white in dark mode
                         const iconBox = nav.querySelector("div");
                         if(iconBox) {
                             iconBox.className = "nav-icon-box bg-white text-black shadow-md w-10 h-10 rounded-full flex items-center justify-center transition-all group-hover:scale-105 active:scale-95";
@@ -219,6 +226,7 @@
                             iconBox.style.color = "#9ca3af";
                         }
                     } else {
+                        nav.style.color = "#111827"; // Fix: ensure active text stays dark in light mode
                         const iconBox = nav.querySelector("div");
                         if(iconBox) {
                             iconBox.className = "nav-icon-box bg-black text-white shadow-md w-10 h-10 rounded-full flex items-center justify-center transition-all group-hover:scale-105 active:scale-95";
@@ -240,11 +248,7 @@
             themeToggleBtn.addEventListener("click", function(e) {
                 e.preventDefault();
                 const currentTheme = localStorage.getItem("nav_theme") || "light";
-                if (currentTheme === "dark") {
-                    applyTheme("light");
-                } else {
-                    applyTheme("dark");
-                }
+                applyTheme(currentTheme === "dark" ? "light" : "dark");
             });
         }
 
@@ -290,11 +294,3 @@
         });
     });
     </script>
-
-    <!-- Top Right Menu Blob Placeholder Header -->
-    <header class="w-full py-8 px-12 md:px-24 flex justify-between items-center z-40">
-        <div class="hidden md:block"></div>
-        <div class="ml-auto flex items-center">
-            <div class="w-8 h-8 rounded-full bg-gray-200/60 flex items-center justify-center"></div>
-        </div>
-    </header>
