@@ -187,14 +187,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>05</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Design Systems</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Building scalable UI component libraries and design tokens.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• Tokenization</li><li>• Component Libs</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• Tokenization</li><li>• Component Libs</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400">Design Sys</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400" style="font-family: 'Montserrat', sans-serif;">Design Sys</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
             <!-- 6. Mobile Apps -->
@@ -202,14 +205,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>06</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Mobile Apps</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Cross-platform native applications engineered for performance.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• iOS &amp; Android</li><li>• React Native</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• iOS &amp; Android</li><li>• React Native</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500">Mobile App</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500" style="font-family: 'Montserrat', sans-serif;">Mobile App</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
             <!-- 7. API Architecture -->
@@ -217,14 +223,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>07</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">API Architecture</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Designing robust and secure RESTful and GraphQL endpoints.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• GraphQL</li><li>• REST APIs</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• GraphQL</li><li>• REST APIs</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-zinc-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500">API Arch</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-zinc-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500" style="font-family: 'Montserrat', sans-serif;">API Arch</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
             <!-- 8. Motion Design -->
@@ -232,14 +241,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>08</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Motion Design</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Bringing interactions to life with fluid micro-animations.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• Micro-interactions</li><li>• Lottie/SVG</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• Micro-interactions</li><li>• Lottie/SVG</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400">Motion</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400" style="font-family: 'Montserrat', sans-serif;">Motion</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
         </div>
@@ -251,14 +263,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>09</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H19m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">E-Commerce</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">High-converting online storefronts and payment gateway setups.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• WooCommerce</li><li>• Shopify Dev</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• WooCommerce</li><li>• Shopify Dev</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400">E-Commerce</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400" style="font-family: 'Montserrat', sans-serif;">E-Commerce</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
             <!-- 10. Cloud Infrastructure -->
@@ -266,14 +281,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>10</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Cloud Infrastructure</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Scalable cloud hosting, CI/CD pipelines, and server management.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• AWS / GCP</li><li>• Docker &amp; CI/CD</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• AWS / GCP</li><li>• Docker &amp; CI/CD</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500">Cloud Infra</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500" style="font-family: 'Montserrat', sans-serif;">Cloud Infra</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
             <!-- 11. SEO Optimization -->
@@ -281,14 +299,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>11</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">SEO &amp; Performance</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Technical audits and speed optimizations for peak search ranking.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• Core Web Vitals</li><li>• Technical SEO</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• Core Web Vitals</li><li>• Technical SEO</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-zinc-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500">SEO &amp; Perf</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-zinc-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500" style="font-family: 'Montserrat', sans-serif;">SEO &amp; Perf</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
             <!-- 12. Accessibility (a11y) -->
@@ -296,14 +317,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>12</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Accessibility (a11y)</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Ensuring web apps comply with WCAG standards for all users.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• WCAG Compliance</li><li>• Screen Readers</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• WCAG Compliance</li><li>• Screen Readers</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400">Accessibility</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400" style="font-family: 'Montserrat', sans-serif;">Accessibility</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
         </div>
@@ -315,14 +339,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>13</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Data Analytics</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Custom tracking pipelines and user behavior reporting dashboards.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• GA4 Tracking</li><li>• Custom Dashboards</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• GA4 Tracking</li><li>• Custom Dashboards</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400">Analytics</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400" style="font-family: 'Montserrat', sans-serif;">Analytics</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
             <!-- 14. Cybersecurity Audits -->
@@ -330,14 +357,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>14</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Security Audits</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Vulnerability assessments and penetration testing for web applications.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• Penetration Testing</li><li>• OWASP Compliance</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• Penetration Testing</li><li>• OWASP Compliance</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500">Security</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500" style="font-family: 'Montserrat', sans-serif;">Security</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
             <!-- 15. Content Strategy -->
@@ -345,14 +375,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>15</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Content Strategy</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Structuring brand messaging and content architecture for maximum impact.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• Copywriting</li><li>• Information Architecture</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• Copywriting</li><li>• Information Architecture</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-zinc-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500">Content</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-zinc-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500" style="font-family: 'Montserrat', sans-serif;">Content</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
             <!-- 16. Prototyping Lab -->
@@ -360,14 +393,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>16</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Prototyping Lab</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Experimental concept testing and hardware-software integration.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• Rapid Prototyping</li><li>• IoT Concepts</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• Rapid Prototyping</li><li>• IoT Concepts</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400">Prototype</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400" style="font-family: 'Montserrat', sans-serif;">Prototype</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
         </div>
@@ -379,14 +415,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>17</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Brand Consulting</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Strategic roadmapping and positioning for scaling enterprises.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• Strategic Roadmaps</li><li>• Brand Audits</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• Strategic Roadmaps</li><li>• Brand Audits</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400">Consulting</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-[200px] flex items-center justify-center border border-gray-200/60"><span class="text-xs uppercase text-gray-400" style="font-family: 'Montserrat', sans-serif;">Consulting</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
             <!-- 18. Maintenance & Support -->
@@ -394,14 +433,17 @@ get_header();
                 <div class="flex flex-col justify-between">
                     <div>
                         <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;"><span>18</span><span class="w-6 h-[1px] bg-gray-300"></span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-gray-100/80 flex items-center justify-center text-gray-800 mb-4 border border-gray-200/60 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Maintenance &amp; Support</h3>
                         <p class="text-xs text-gray-500 mb-4 leading-relaxed">Ongoing technical support, security patches, and iterative improvements.</p>
                     </div>
-                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold"><li>• SLA Support</li><li>• Iterative Updates</li></ul>
+                    <ul class="space-y-2 text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;"><li>• SLA Support</li><li>• Iterative Updates</li></ul>
                 </div>
                 <div class="flex flex-col justify-between h-full">
-                    <div class="bg-gray-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500">Support</span></div>
-                    <div class="pt-2"><a href="#" class="w-full py-2.5 px-4 rounded-xl bg-black text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between"><span>Explore</span><span>&rarr;</span></a></div>
+                    <div class="bg-gray-900 rounded-xl overflow-hidden h-[200px] flex items-center justify-center"><span class="text-xs uppercase text-zinc-500" style="font-family: 'Montserrat', sans-serif;">Support</span></div>
+                    <div class="pt-2"><a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="w-full py-2.5 px-4 rounded-xl bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase flex items-center justify-between" style="font-family: 'Montserrat', sans-serif;"><span>Explore</span><span>&rarr;</span></a></div>
                 </div>
             </div>
         </div>
