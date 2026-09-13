@@ -19,7 +19,7 @@ get_header();
                 <span class="w-6 h-[1px] bg-gray-300"></span>
                 <span>My Work</span>
             </div>
-            <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-955 whitespace-nowrap">Selected Projects</h1>
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-950 whitespace-nowrap">Selected Projects</h1>
             <p class="text-gray-500 text-sm max-w-md mt-3 leading-relaxed font-normal">
                 A collection of brands, interfaces, and web applications I've designed and developed. Each project represents a unique problem, process, and solution.
             </p>
@@ -40,90 +40,53 @@ get_header();
         </div>
     </div>
 
-    <!-- Projects Grid (6 Projects: 3 Columns) -->
-    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-12 my-12">
-        <!-- Project 1: Locana -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-1" data-category="branding ui-ux web development" data-title="Locana" data-category-text="Branding / UI-UX / Web Development" data-desc="A local tourism booking platform that connects travelers with authentic destinations and experiences." data-preview="Locana Preview">
-            <div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-[16/10] flex items-center justify-center border border-gray-200/60 shadow-sm group-hover:shadow-md transition-all">
-                <span class="text-xs tracking-widest text-gray-400 uppercase font-medium" style="font-family: 'Montserrat', sans-serif;">Locana Preview</span>
+    <!-- Projects Grid (3 Columns Layout matching reference style) -->
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16 my-12">
+       
+        <!-- Portfolio CMS -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-1 flex flex-col" data-category="ui-ux branding web development" data-title="CMS Portfolio" data-category-text="Branding / UI UX / Web Development" data-desc="A full-stack personal portfolio featuring an owner-only dashboard for managing projects and achievements." data-image="<?php echo get_template_directory_uri(); ?>/assets/portfoliocms.png">
+            <div class="bg-[#f3f3f1] rounded-2xl overflow-hidden mb-6 aspect-[4/3] flex items-center justify-center border border-gray-200/60 shadow-sm group-hover:shadow-md transition-all p-6">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/portfoliocms.png" alt="CMS Portfolio" class="w-full h-full object-cover rounded-lg">
             </div>
-            <div>
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-1" style="font-family: 'Montserrat', sans-serif;">Branding / UI-UX / Web Development</p>
-                <h3 class="text-base font-bold text-gray-900 mb-1">Locana</h3>
-                <p class="text-xs text-gray-500 mb-3 leading-relaxed">A local tourism booking platform that connects travelers with authentic destinations and experiences.</p>
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-900 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
-            </div>
-        </div>
-
-        <!-- Project 2: Reliable Touch -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-2" data-category="ui-ux web development" data-title="Reliable Touch" data-category-text="UI-UX / Web Development" data-desc="A modern website redesign for an IT company focused on reliability and innovation." data-preview="Reliable Touch">
-            <div class="bg-gray-900 rounded-xl overflow-hidden mb-3 aspect-[16/10] flex items-center justify-center shadow-sm group-hover:shadow-md transition-all">
-                <span class="text-xs tracking-widest text-zinc-500 uppercase font-medium" style="font-family: 'Montserrat', sans-serif;">Reliable Touch</span>
-            </div>
-            <div>
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-1" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
-                <h3 class="text-base font-bold text-gray-900 mb-1">Reliable Touch</h3>
-                <p class="text-xs text-gray-500 mb-3 leading-relaxed">A modern website redesign for an IT company focused on reliability and innovation.</p>
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-900 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
+            <div class="flex flex-col flex-grow">
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Branding / UI UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-2">CMS Portfolio</h3>
+                <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">A full-stack personal portfolio featuring an owner-only dashboard for managing projects and achievements.</p>
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
             </div>
         </div>
 
-        <!-- Project 3: Parallel -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-3" data-category="branding" data-title="Parallel" data-category-text="Branding / Graphic Design" data-desc="A modern brand identity for a local online thrift store built for the new generation." data-preview="Parallel">
-            <div class="bg-zinc-900 rounded-xl overflow-hidden mb-3 aspect-[16/10] flex items-center justify-center shadow-sm group-hover:shadow-md transition-all">
-                <span class="text-xs tracking-widest text-zinc-500 uppercase font-medium" style="font-family: 'Montserrat', sans-serif;">Parallel</span>
+        <!-- Sidequest -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-2 flex flex-col" data-category="ui-ux branding web development" data-title="sidequest-" data-category-text="Branding / UI UX / Web Development" data-desc="A modern website redesign for an IT company focused on reliability and innovation." data-image="<?php echo get_template_directory_uri(); ?>/assets/sidequest.png">
+            <div class="bg-[#f3f3f1] rounded-2xl overflow-hidden mb-6 aspect-[4/3] flex items-center justify-center border border-gray-200/60 shadow-sm group-hover:shadow-md transition-all p-6">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/sidequest.png" alt="sidequest-" class="w-full h-full object-cover rounded-lg">
             </div>
-            <div>
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-1" style="font-family: 'Montserrat', sans-serif;">Branding / Graphic Design</p>
-                <h3 class="text-base font-bold text-gray-900 mb-1">Parallel</h3>
-                <p class="text-xs text-gray-500 mb-3 leading-relaxed">A modern brand identity for a local online thrift store built for the new generation.</p>
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-900 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
-            </div>
-        </div>
-
-        <!-- Project 4: Barangay Management System -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-4" data-category="web development" data-title="Barangay Management System" data-category-text="Web Development" data-desc="A digital solution for local government units to manage residents, certificates, and incident reports." data-preview="BMS Preview">
-            <div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-[16/10] flex items-center justify-center border border-gray-200/60 shadow-sm group-hover:shadow-md transition-all">
-                <span class="text-xs tracking-widest text-gray-400 uppercase font-medium" style="font-family: 'Montserrat', sans-serif;">BMS Preview</span>
-            </div>
-            <div>
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-1" style="font-family: 'Montserrat', sans-serif;">Web Development</p>
-                <h3 class="text-base font-bold text-gray-900 mb-1">Barangay Management System</h3>
-                <p class="text-xs text-gray-500 mb-3 leading-relaxed">A digital solution for local government units to manage residents, certificates, and incident reports.</p>
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-900 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
+            <div class="flex flex-col flex-grow">
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Branding / UI UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-2">sidequest-</h3>
+                <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">A sidequest app for self improvement.</p>
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
             </div>
         </div>
 
-        <!-- Project 5: DIP -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-5" data-category="ui-ux branding" data-title="DIP" data-category-text="UI-UX / Branding" data-desc="A travel booking app concept with a focus on simplicity and discovery." data-preview="DIP Preview">
-            <div class="bg-zinc-900 rounded-xl overflow-hidden mb-3 aspect-[16/10] flex items-center justify-center shadow-sm group-hover:shadow-md transition-all">
-                <span class="text-xs tracking-widest text-zinc-500 uppercase font-medium" style="font-family: 'Montserrat', sans-serif;">DIP Preview</span>
+        <!-- Project Item 3 -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-3 flex flex-col" data-category="branding" data-title="Parallel" data-category-text="Branding" data-desc="A modern brand identity for a local online thrift store built for the new generation." data-image="<?php echo get_template_directory_uri(); ?>/assets/your-project-image.jpg">
+            <div class="bg-[#f3f3f1] rounded-2xl overflow-hidden mb-6 aspect-[4/3] flex items-center justify-center border border-gray-200/60 shadow-sm group-hover:shadow-md transition-all p-6">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/your-project-image.jpg" alt="Parallel" class="w-full h-full object-cover rounded-lg">
             </div>
-            <div>
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-1" style="font-family: 'Montserrat', sans-serif;">UI-UX / Branding</p>
-                <h3 class="text-base font-bold text-gray-900 mb-1">DIP</h3>
-                <p class="text-xs text-gray-500 mb-3 leading-relaxed">A travel booking app concept with a focus on simplicity and discovery.</p>
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-900 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
+            <div class="flex flex-col flex-grow">
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Branding</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-2">Parallel</h3>
+                <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">A modern brand identity for a local online thrift store built for the new generation.</p>
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
             </div>
         </div>
 
-        <!-- Project 6: ATS Resume Master Guide -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-6" data-category="graphic design" data-title="ATS Resume Master Guide" data-category-text="Graphic Design" data-desc="A beginner-friendly guide to help job seekers create ATS-optimized resumes." data-preview="ATS Guide Preview">
-            <div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-[16/10] flex items-center justify-center border border-gray-200/60 shadow-sm group-hover:shadow-md transition-all">
-                <span class="text-xs tracking-widest text-gray-400 uppercase font-medium" style="font-family: 'Montserrat', sans-serif;">ATS Guide Preview</span>
-            </div>
-            <div>
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-1" style="font-family: 'Montserrat', sans-serif;">Graphic Design</p>
-                <h3 class="text-base font-bold text-gray-900 mb-1">ATS Resume Master Guide</h3>
-                <p class="text-xs text-gray-500 mb-3 leading-relaxed">A beginner-friendly guide to help job seekers create ATS-optimized resumes.</p>
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-900 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
-            </div>
-        </div>
     </div>
 
     <!-- Bottom Indicator -->
     <div class="flex justify-between items-center w-full pt-4 text-xs tracking-widest text-gray-400 uppercase font-medium animate-page-load load-delay-6" style="font-family: 'Montserrat', sans-serif;">
-        <span id="project-counter">Showing 6 of 6 projects</span>
+        <span id="project-counter">Showing 3 of 3 projects</span>
         <span></span>
     </div>
 </main>
@@ -139,12 +102,12 @@ get_header();
         <!-- Modal Header Info -->
         <div class="mb-6">
             <span id="modal-category" class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-1 block" style="font-family: 'Montserrat', sans-serif;"></span>
-            <h2 id="modal-title" class="text-2xl md:text-4xl font-bold tracking-tight text-gray-955"></h2>
+            <h2 id="modal-title" class="text-2xl md:text-4xl font-bold tracking-tight text-gray-950"></h2>
         </div>
 
         <!-- Modal Image Showcase Box -->
-        <div id="modal-preview-box" class="bg-gray-100 rounded-xl overflow-hidden mb-6 aspect-[16/9] flex items-center justify-center border border-gray-200/60 shadow-inner">
-            <span id="modal-preview-text" class="text-xs tracking-widest text-gray-400 uppercase font-medium" style="font-family: 'Montserrat', sans-serif;"></span>
+        <div id="modal-preview-box" class="bg-[#f3f3f1] rounded-xl overflow-hidden mb-6 aspect-[16/9] flex items-center justify-center border border-gray-200/60 shadow-inner p-4">
+            <img id="modal-image" src="" alt="Project Preview" class="w-full h-full object-cover rounded-lg">
         </div>
 
         <!-- Modal Detailed Description -->
@@ -215,37 +178,41 @@ document.addEventListener("DOMContentLoaded", function() {
     const modalTitle = document.getElementById("modal-title");
     const modalCategory = document.getElementById("modal-category");
     const modalDesc = document.getElementById("modal-desc");
-    const modalPreviewText = document.getElementById("modal-preview-text");
+    const modalImage = document.getElementById("modal-image");
     const modalClose = document.getElementById("modal-close");
     const modalCloseBtn = document.getElementById("modal-close-btn");
 
-    // Open modal when clicking a project card or view project link
+    function updateCounter(visibleCount) {
+        if (counterSpan) {
+            counterSpan.textContent = `Showing ${visibleCount} of ${projectCards.length} projects`;
+        }
+    }
+
+    updateCounter(projectCards.length);
+
+    // Open modal and inject dynamic content including the image source
     projectCards.forEach(card => {
         card.addEventListener("click", function(e) {
             e.preventDefault();
             
-            // Extract attributes from clicked card data
             modalTitle.textContent = this.getAttribute("data-title");
             modalCategory.textContent = this.getAttribute("data-category-text");
             modalDesc.textContent = this.getAttribute("data-desc");
-            modalPreviewText.textContent = this.getAttribute("data-preview");
+            modalImage.src = this.getAttribute("data-image");
 
-            // Show modal
             modal.classList.add("active");
-            document.body.style.overflow = "hidden"; // Prevent background scrolling
+            document.body.style.overflow = "hidden";
         });
     });
 
-    // Close modal functions
     function closeModal() {
         modal.classList.remove("active");
-        document.body.style.overflow = ""; // Restore background scrolling
+        document.body.style.overflow = "";
     }
 
     if (modalClose) modalClose.addEventListener("click", closeModal);
     if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeModal);
 
-    // Close on clicking outside the modal box
     modal.addEventListener("click", function(e) {
         if (e.target === modal) {
             closeModal();
@@ -275,9 +242,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
 
-            if(counterSpan) {
-                counterSpan.textContent = `Showing ${visibleCount} of ${projectCards.length} projects`;
-            }
+            updateCounter(visibleCount);
         });
     });
 });
