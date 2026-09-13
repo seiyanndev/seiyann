@@ -7,10 +7,6 @@
  */
 
 get_header(); 
-
-// Check if a success or error message was passed via query parameters
-$success = isset($_GET['contact_sent']) && $_GET['contact_sent'] == '1';
-$error   = isset($_GET['contact_error']) && $_GET['contact_error'] == '1';
 ?>
 
 <!-- Contact Page Container (Dedicated Page Flow) -->
@@ -30,17 +26,6 @@ $error   = isset($_GET['contact_error']) && $_GET['contact_error'] == '1';
             <p class="text-gray-500 text-sm max-w-xl leading-relaxed font-normal">
                 Have a project in mind, a question, or just want to say hello? I'd love to hear from you. Feel free to reach out using the form or through my socials.
             </p>
-
-            <!-- Feedback Alerts -->
-            <?php if ($success): ?>
-                <div class="mt-4 p-4 bg-green-50 border border-green-200 text-green-800 text-xs rounded-xl">
-                    Thank you! Your message has been sent successfully.
-                </div>
-            <?php elseif ($error): ?>
-                <div class="mt-4 p-4 bg-red-50 border border-red-200 text-red-800 text-xs rounded-xl">
-                    Oops! Something went wrong. Please try again later.
-                </div>
-            <?php endif; ?>
         </div>
 
     </div>
@@ -88,7 +73,6 @@ $error   = isset($_GET['contact_error']) && $_GET['contact_error'] == '1';
             <!-- Middle Side inside Box: Sleek Minimalist Contact Form -->
             <div class="lg:col-span-5 flex flex-col justify-center">
                 <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="POST" class="space-y-6">
-                    <!-- Required hidden fields for WordPress admin-post handling -->
                     <input type="hidden" name="action" value="submit_portfolio_contact">
                     <?php wp_nonce_field('portfolio_contact_verify', 'portfolio_contact_nonce'); ?>
 
@@ -148,25 +132,33 @@ $error   = isset($_GET['contact_error']) && $_GET['contact_error'] == '1';
                     <p class="text-xs text-gray-500 leading-relaxed">Whether it's a new project, a collaboration, or just a friendly chat — I'm all ears.</p>
                 </div>
 
-                <!-- Social Links List -->
+                <!-- Social Links List with Image Icons -->
                 <div>
                     <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-4" style="font-family: 'Montserrat', sans-serif;">Follow Me</p>
                     <div class="space-y-3 text-xs font-semibold" style="font-family: 'Montserrat', sans-serif;">
                         <a href="https://linkedin.com" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-800 hover:text-black transition-colors group">
-                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-[10px] border border-gray-200/60 group-hover:bg-black group-hover:text-white transition-colors shadow-sm">in</span>
+                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border border-gray-200/60 shadow-sm flex-shrink-0">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/Linkedin.png" alt="LinkedIn" class="w-full h-full object-cover">
+                            </span>
                             <span>LinkedIn</span>
                         </a>
                         <a href="https://github.com" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-800 hover:text-black transition-colors group">
-                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-[10px] border border-gray-200/60 group-hover:bg-black group-hover:text-white transition-colors shadow-sm">gh</span>
+                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border border-gray-200/60 shadow-sm flex-shrink-0">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/Github.png" alt="GitHub" class="w-full h-full object-cover">
+                            </span>
                             <span>GitHub</span>
                         </a>
                         <a href="https://instagram.com" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-800 hover:text-black transition-colors group">
-                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-[10px] border border-gray-200/60 group-hover:bg-black group-hover:text-white transition-colors shadow-sm">ig</span>
+                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border border-gray-200/60 shadow-sm flex-shrink-0">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/Instagram.png" alt="Instagram" class="w-full h-full object-cover">
+                            </span>
                             <span>Instagram</span>
                         </a>
-                        <a href="https://behance.net" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-800 hover:text-black transition-colors group">
-                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-[10px] border border-gray-200/60 group-hover:bg-black group-hover:text-white transition-colors shadow-sm">be</span>
-                            <span>Behance</span>
+                        <a href="https://facebook.com" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-800 hover:text-black transition-colors group">
+                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border border-gray-200/60 shadow-sm flex-shrink-0">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/Facebook.png" alt="Facebook" class="w-full h-full object-cover">
+                            </span>
+                            <span>Facebook</span>
                         </a>
                     </div>
                 </div>
