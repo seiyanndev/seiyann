@@ -55,13 +55,14 @@ get_header();
         <!-- Right Column: Profile Image & Floating Metadata -->
         <div class="lg:col-span-5 flex justify-center relative">
             <div class="relative w-full max-w-md bg-gray-100 rounded-2xl overflow-hidden aspect-[4/5] flex items-center justify-center border border-gray-200/60 shadow-lg">
-                <span class="text-xs tracking-widest text-gray-400 uppercase font-medium" style="font-family: 'Montserrat', sans-serif;">Profile Photo</span>
+                <!-- Grayscale Profile Image -->
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/aboutimg.jpg" alt="Profile Photo" class="absolute inset-w-full h-full object-cover grayscale w-full h-full">
                 
                 <!-- Floating Vertical Badge -->
-                <div class="absolute right-4 top-4 text-[9px] tracking-widest uppercase text-gray-400 font-semibold space-y-1 text-right pointer-events-none hidden sm:block" style="font-family: 'Montserrat', sans-serif;">
+                <div class="absolute right-4 top-4 text-[9px] tracking-widest uppercase text-white drop-shadow-md font-semibold space-y-1 text-right pointer-events-none hidden sm:block z-10" style="font-family: 'Montserrat', sans-serif;">
                     <span class="block">Designer</span>
                     <span class="block">Developer</span>
-                    <span class="block text-gray-300">Creative</span>
+                    <span class="block text-gray-200">Creative</span>
                 </div>
             </div>
         </div>

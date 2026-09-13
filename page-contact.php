@@ -7,6 +7,10 @@
  */
 
 get_header(); 
+
+// Check if a success or error message was passed via query parameters
+$success = isset($_GET['contact_sent']) && $_GET['contact_sent'] == '1';
+$error   = isset($_GET['contact_error']) && $_GET['contact_error'] == '1';
 ?>
 
 <!-- Contact Page Container (Dedicated Page Flow) -->
@@ -26,6 +30,17 @@ get_header();
             <p class="text-gray-500 text-sm max-w-xl leading-relaxed font-normal">
                 Have a project in mind, a question, or just want to say hello? I'd love to hear from you. Feel free to reach out using the form or through my socials.
             </p>
+
+            <!-- Feedback Alerts -->
+            <?php if ($success): ?>
+                <div class="mt-4 p-4 bg-green-50 border border-green-200 text-green-800 text-xs rounded-xl">
+                    Thank you! Your message has been sent successfully.
+                </div>
+            <?php elseif ($error): ?>
+                <div class="mt-4 p-4 bg-red-50 border border-red-200 text-red-800 text-xs rounded-xl">
+                    Oops! Something went wrong. Please try again later.
+                </div>
+            <?php endif; ?>
         </div>
 
     </div>
@@ -43,7 +58,7 @@ get_header();
                     </div>
                     <div>
                         <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;">Email</p>
-                        <a href="mailto:yourname@email.com" class="text-xs font-semibold text-gray-900 hover:text-black transition-colors">yourname@email.com</a>
+                        <a href="mailto:kurtcyrsfa@gmail.com" class="text-xs font-semibold text-gray-900 hover:text-black transition-colors">kurtcyrsfa@gmail.com</a>
                     </div>
                 </div>
 
@@ -54,7 +69,7 @@ get_header();
                     </div>
                     <div>
                         <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;">Phone</p>
-                        <a href="tel:+639XXXXXXXXX" class="text-xs font-semibold text-gray-900 hover:text-black transition-colors">+63 9XX XXX XXXX</a>
+                        <a href="tel:+639942025107" class="text-xs font-semibold text-gray-900 hover:text-black transition-colors">+63 9942025107</a>
                     </div>
                 </div>
 
@@ -65,23 +80,27 @@ get_header();
                     </div>
                     <div>
                         <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;">Location</p>
-                        <p class="text-xs font-semibold text-gray-900">Manila, Philippines</p>
+                        <p class="text-xs font-semibold text-gray-900">Lucena, Philippines</p>
                     </div>
                 </div>
             </div>
 
             <!-- Middle Side inside Box: Sleek Minimalist Contact Form -->
             <div class="lg:col-span-5 flex flex-col justify-center">
-                <form action="#" method="POST" class="space-y-6">
+                <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="POST" class="space-y-6">
+                    <!-- Required hidden fields for WordPress admin-post handling -->
+                    <input type="hidden" name="action" value="submit_portfolio_contact">
+                    <?php wp_nonce_field('portfolio_contact_verify', 'portfolio_contact_nonce'); ?>
+
                     <!-- Name & Email Row -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="relative">
                             <label class="block text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Name *</label>
-                            <input type="text" required placeholder="Your name" class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors placeholder:text-gray-300">
+                            <input type="text" name="contact_name" required placeholder="Your name" class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors placeholder:text-gray-300">
                         </div>
                         <div class="relative">
                             <label class="block text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Email *</label>
-                            <input type="email" required placeholder="your@email.com" class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors placeholder:text-gray-300">
+                            <input type="email" name="contact_email" required placeholder="your@email.com" class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors placeholder:text-gray-300">
                         </div>
                     </div>
 
@@ -89,11 +108,11 @@ get_header();
                     <div class="relative">
                         <label class="block text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Subject</label>
                         <div class="relative">
-                            <select class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors appearance-none cursor-pointer">
+                            <select name="contact_subject" class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors appearance-none cursor-pointer">
                                 <option value="" disabled selected>Select a subject</option>
-                                <option value="project">New Project Inquiry</option>
-                                <option value="collaboration">Collaboration</option>
-                                <option value="chat">Friendly Chat</option>
+                                <option value="New Project Inquiry">New Project Inquiry</option>
+                                <option value="Collaboration">Collaboration</option>
+                                <option value="Friendly Chat">Friendly Chat</option>
                             </select>
                             <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
@@ -104,7 +123,7 @@ get_header();
                     <!-- Message Textarea -->
                     <div class="relative">
                         <label class="block text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Message *</label>
-                        <textarea rows="3" required placeholder="Type your message here..." class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors placeholder:text-gray-300 resize-none"></textarea>
+                        <textarea name="contact_message" rows="3" required placeholder="Type your message here..." class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors placeholder:text-gray-300 resize-none"></textarea>
                     </div>
 
                     <!-- Submit Button -->
