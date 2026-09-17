@@ -20,9 +20,6 @@ get_header();
                 <span>My Work</span>
             </div>
             <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-950 whitespace-nowrap">Selected Projects</h1>
-            <p class="text-gray-500 text-sm max-w-md mt-3 leading-relaxed font-normal">
-                A collection of brands, interfaces, and web applications I've designed and developed. Each project represents a unique problem, process, and solution.
-            </p>
         </div>
 
         <!-- Right Column: Back to Home and Filter Tabs -->
@@ -40,45 +37,91 @@ get_header();
         </div>
     </div>
 
-    <!-- Projects Grid (3 Columns Layout matching reference style) -->
-    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16 my-12">
+    <!-- Second Row: Subtext -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end w-full mt-6 gap-4">
+        <p class="text-gray-500 text-sm max-w-md leading-relaxed font-normal">
+            A collection of brands, interfaces, and web applications I've designed and developed. Each project represents a unique problem, process, and solution.
+        </p>
+    </div>
+
+    <!-- Projects Grid (Library of Cards: 3 Columns, Imageless cards layout with Option 1 Hover) -->
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-12 my-12">
        
-        <!-- Portfolio CMS -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-1 flex flex-col" data-category="ui-ux branding web development" data-title="CMS Portfolio" data-category-text="Branding / UI UX / Web Development" data-desc="A full-stack personal portfolio featuring an owner-only dashboard for managing projects and achievements." data-image="<?php echo get_template_directory_uri(); ?>/assets/portfoliocms.png">
-            <div class="bg-[#f3f3f1] rounded-2xl overflow-hidden mb-6 aspect-[4/3] flex items-center justify-center border border-gray-200/60 shadow-sm group-hover:shadow-md transition-all p-6">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/portfoliocms.png" alt="CMS Portfolio" class="w-full h-full object-cover rounded-lg">
+        <!-- Project 1: Locana -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-1 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="branding ui-ux web development" data-title="Locana" data-category-text="Branding / UI-UX / Web Development" data-desc="A local tourism booking platform that connects travelers with authentic destinations and experiences." data-image="<?php echo get_template_directory_uri(); ?>/assets/portfoliocms.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">Branding / UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Locana</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A local tourism booking platform that connects travelers with authentic destinations and experiences.</p>
             </div>
-            <div class="flex flex-col flex-grow">
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Branding / UI UX / Web Development</p>
-                <h3 class="text-xl font-bold text-gray-950 mb-2">CMS Portfolio</h3>
-                <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">A full-stack personal portfolio featuring an owner-only dashboard for managing projects and achievements.</p>
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
-            </div>
-        </div>
-
-        <!-- Sidequest -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-2 flex flex-col" data-category="ui-ux branding web development" data-title="sidequest-" data-category-text="Branding / UI UX / Web Development" data-desc="A modern website redesign for an IT company focused on reliability and innovation." data-image="<?php echo get_template_directory_uri(); ?>/assets/sidequest.png">
-            <div class="bg-[#f3f3f1] rounded-2xl overflow-hidden mb-6 aspect-[4/3] flex items-center justify-center border border-gray-200/60 shadow-sm group-hover:shadow-md transition-all p-6">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/sidequest.png" alt="sidequest-" class="w-full h-full object-cover rounded-lg">
-            </div>
-            <div class="flex flex-col flex-grow">
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Branding / UI UX / Web Development</p>
-                <h3 class="text-xl font-bold text-gray-950 mb-2">sidequest-</h3>
-                <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">A sidequest app for self improvement.</p>
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
             </div>
         </div>
 
-        <!-- Project Item 3 -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-3 flex flex-col" data-category="branding" data-title="Parallel" data-category-text="Branding" data-desc="A modern brand identity for a local online thrift store built for the new generation." data-image="<?php echo get_template_directory_uri(); ?>/assets/your-project-image.jpg">
-            <div class="bg-[#f3f3f1] rounded-2xl overflow-hidden mb-6 aspect-[4/3] flex items-center justify-center border border-gray-200/60 shadow-sm group-hover:shadow-md transition-all p-6">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/your-project-image.jpg" alt="Parallel" class="w-full h-full object-cover rounded-lg">
+        <!-- Project 2: Reliable Touch -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-2 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="ui-ux web development" data-title="Reliable Touch" data-category-text="UI-UX / Web Development" data-desc="A modern website redesign for an IT company focused on reliability and innovation." data-image="<?php echo get_template_directory_uri(); ?>/assets/sidequest.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Reliable Touch</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A modern website redesign for an IT company focused on reliability and innovation.</p>
             </div>
-            <div class="flex flex-col flex-grow">
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Branding</p>
-                <h3 class="text-xl font-bold text-gray-950 mb-2">Parallel</h3>
-                <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">A modern brand identity for a local online thrift store built for the new generation.</p>
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1 transition-transform inline-flex items-center">View Project &rarr;</span>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project 3: Parallel -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-3 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="branding" data-title="Parallel" data-category-text="Branding" data-desc="A modern brand identity for a local online thrift store built for the new generation." data-image="<?php echo get_template_directory_uri(); ?>/assets/your-project-image.jpg">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">Branding</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Parallel</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A modern brand identity for a local online thrift store built for the new generation.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project 4: CMS Portfolio -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-4 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="ui-ux web development" data-title="CMS Portfolio" data-category-text="UI-UX / Web Development" data-desc="A full-stack personal portfolio featuring an owner-only dashboard for managing projects and achievements." data-image="<?php echo get_template_directory_uri(); ?>/assets/portfoliocms.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">CMS Portfolio</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A full-stack personal portfolio featuring an owner-only dashboard for managing projects and achievements.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project 5: Sidequest -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-5 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="ui-ux branding" data-title="Sidequest" data-category-text="Branding / UI-UX" data-desc="A sidequest app designed for tracking daily habit updates and personal self-improvement." data-image="<?php echo get_template_directory_uri(); ?>/assets/sidequest.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">Branding / UI-UX</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Sidequest</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A sidequest app designed for tracking daily habit updates and personal self-improvement.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project 6: Ecosystem -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-6 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="web development" data-title="Ecosystem" data-category-text="Web Development" data-desc="An enterprise cloud infrastructure ecosystem providing performance tracking metrics." data-image="<?php echo get_template_directory_uri(); ?>/assets/your-project-image.jpg">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Ecosystem</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">An enterprise cloud infrastructure ecosystem providing performance tracking metrics.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
             </div>
         </div>
 
@@ -86,12 +129,12 @@ get_header();
 
     <!-- Bottom Indicator -->
     <div class="flex justify-between items-center w-full pt-4 text-xs tracking-widest text-gray-400 uppercase font-medium animate-page-load load-delay-6" style="font-family: 'Montserrat', sans-serif;">
-        <span id="project-counter">Showing 3 of 3 projects</span>
+        <span id="project-counter">Showing 6 of 6 projects</span>
         <span></span>
     </div>
 </main>
 
-<!-- Project Modal Overlay -->
+<!-- Project Modal Overlay (Reveals the image when clicked) -->
 <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
     <div id="modal-content-box" class="bg-white rounded-2xl w-11/12 max-w-3xl p-8 md:p-12 shadow-2xl transform scale-95 transition-all duration-300 relative max-h-[90vh] overflow-y-auto">
         <!-- Close Button -->
@@ -125,14 +168,8 @@ get_header();
 
 <style>
     @keyframes pageLoadEntry {
-        from {
-            opacity: 0;
-            transform: translateY(16px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .animate-page-load {
@@ -148,7 +185,7 @@ get_header();
     .load-delay-6 { animation-delay: 0.35s; }
 
     .project-card {
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .project-card.hidden-card {
@@ -157,7 +194,6 @@ get_header();
         display: none !important;
     }
 
-    /* Active modal display rules */
     #project-modal.active {
         opacity: 1;
         pointer-events: auto;
@@ -173,7 +209,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const projectCards = document.querySelectorAll(".project-card");
     const counterSpan = document.getElementById("project-counter");
 
-    // Modal elements
     const modal = document.getElementById("project-modal");
     const modalTitle = document.getElementById("modal-title");
     const modalCategory = document.getElementById("modal-category");
@@ -190,7 +225,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     updateCounter(projectCards.length);
 
-    // Open modal and inject dynamic content including the image source
     projectCards.forEach(card => {
         card.addEventListener("click", function(e) {
             e.preventDefault();
@@ -219,7 +253,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Filtering logic
     filterButtons.forEach(button => {
         button.addEventListener("click", function() {
             filterButtons.forEach(btn => {
