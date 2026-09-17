@@ -54,9 +54,9 @@ get_header();
 
         <!-- Right Column: Profile Image & Floating Metadata -->
         <div class="lg:col-span-5 flex justify-center relative">
-            <div class="relative w-full max-w-md bg-gray-100 rounded-2xl overflow-hidden aspect-[4/5] flex items-center justify-center border border-gray-200/60 shadow-lg">
-                <!-- Grayscale Profile Image -->
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/aboutimg.jpg" alt="Profile Photo" class="absolute inset-w-full h-full object-cover grayscale w-full h-full">
+            <div class="relative w-full max-w-md bg-gray-100 rounded-2xl overflow-hidden aspect-[4/5] flex items-center justify-center border border-gray-200/60 shadow-lg group">
+                <!-- Grayscale to Color Profile Image on Hover -->
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/aboutimg.jpg" alt="Profile Photo" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                 
                 <!-- Floating Vertical Badge -->
                 <div class="absolute right-4 top-4 text-[9px] tracking-widest uppercase text-white drop-shadow-md font-semibold space-y-1 text-right pointer-events-none hidden sm:block z-10" style="font-family: 'Montserrat', sans-serif;">
@@ -74,28 +74,28 @@ get_header();
         <div>
             <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">5+</h4>
             <p class="text-[9px] tracking-widest uppercase text-gray-400 font-semibold mb-1">Projects Completed</p>
-            <p class="text-[11px] text-gray-500 font-normal leading-relaxed capitalize-none" style="text-transform: none;">From brand identities to full-stack web applications.</p>
+            <p class="text-[11px] text-gray-500 font-normal leading-relaxed" style="text-transform: none;">From brand identities to full-stack web applications.</p>
         </div>
 
         <!-- Metric 2 -->
         <div>
             <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">2+</h4>
             <p class="text-[9px] tracking-widest uppercase text-gray-400 font-semibold mb-1">Years of Experience</p>
-            <p class="text-[11px] text-gray-500 font-normal leading-relaxed capitalize-none" style="text-transform: none;">In design, development, and digital product creation.</p>
+            <p class="text-[11px] text-gray-500 font-normal leading-relaxed" style="text-transform: none;">In design, development, and digital product creation.</p>
         </div>
 
         <!-- Metric 3 -->
         <div>
             <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">15+</h4>
             <p class="text-[9px] tracking-widest uppercase text-gray-400 font-semibold mb-1">Tech Stacks</p>
-            <p class="text-[11px] text-gray-500 font-normal leading-relaxed capitalize-none" style="text-transform: none;">Modern tools for design, development, and deployment.</p>
+            <p class="text-[11px] text-gray-500 font-normal leading-relaxed" style="text-transform: none;">Modern tools for design, development, and deployment.</p>
         </div>
 
         <!-- Metric 4 -->
         <div>
             <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">1</h4>
             <p class="text-[9px] tracking-widest uppercase text-gray-400 font-semibold mb-1">Goal</p>
-            <p class="text-[11px] text-gray-500 font-normal leading-relaxed capitalize-none" style="text-transform: none;">To keep building, creating, and making an impact.</p>
+            <p class="text-[11px] text-gray-500 font-normal leading-relaxed" style="text-transform: none;">To keep building, creating, and making an impact.</p>
         </div>
     </div>
 </main>
