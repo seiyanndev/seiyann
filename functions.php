@@ -1,23 +1,10 @@
 <?php
-// Enqueue Tailwind CSS CDN and GSAP scripts
 function seiyann_enqueue_styles() {
     // Tailwind CSS
-    wp_enqueue_script(
-        'tailwind',
-        'https://cdn.tailwindcss.com',
-        array(),
-        null,
-        false
-    );
+    wp_enqueue_script( 'tailwind', 'https://cdn.tailwindcss.com', array(), null, false );
 
-    // GSAP Core CDN
-    wp_enqueue_script(
-        'gsap',
-        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
-        array(),
-        '3.12.2',
-        true
-    );
+    // Alpine.js Core CDN (loaded in footer with defer)
+    wp_enqueue_script( 'alpine', 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js', array(), '3.x.x', true );
 }
 add_action('wp_enqueue_scripts', 'seiyann_enqueue_styles', 999);
 
