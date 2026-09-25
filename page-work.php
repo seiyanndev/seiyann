@@ -44,54 +44,74 @@ get_header();
         </p>
     </div>
 
-    <!-- Projects Grid (Library of Cards: 3 Columns, Imageless cards layout with Option 1 Hover) -->
+    <!-- Projects Grid (Library of Cards) -->
     <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-12 my-12">
        
-        <!-- Project 1: Locana -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-1 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="branding ui-ux web development" data-title="Locana" data-category-text="Branding / UI-UX / Web Development" data-desc="A local tourism booking platform that connects travelers with authentic destinations and experiences." data-image="<?php echo get_template_directory_uri(); ?>/assets/portfoliocms.png">
+        <!-- Project 1: Agrilink -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-1 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux web development" 
+             data-title="Agrilink" 
+             data-category-text="UI-UX / Web Development" 
+             data-desc="A demand-driven agricultural e-commerce and GIS-based monitoring system designed for Lucena City. It connects local farmers and consumers directly, allowing buyers to request products and farmers to respond, creating a flexible farm-to-table marketplace." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/agrilink.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Agrilink</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A demand-driven agricultural e-commerce and GIS-based monitoring system designed for Lucena City.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project 2: BRRCS -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-2 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux web development" 
+             data-title="BRRCS" 
+             data-category-text="UI-UX / Web Development" 
+             data-desc="Barangay Residential Record and Certification System (BRRCS) is a streamlined digital tool built to automate resident record tracking, clearances, and barangay certificate issuance securely." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/brrcs.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">BRRCS</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">Barangay Residential Record and Certification System designed to automate resident profiles and speed up official document generation.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project 3: LoanTrackr -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-3 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux web development" 
+             data-title="LoanTrackr" 
+             data-category-text="UI-UX / Web Development" 
+             data-desc="LoanTrackr is a simple and efficient personal loan tracking Progressive Web App (PWA) that helps you stay in control of your finances. It allows you to record loans, monitor payments, and track remaining balances—all in one place."
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/loantrackr.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">LoanTrackr</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">LoanTrackr is a simple and efficient personal loan tracking Progressive Web App (PWA) that helps you stay in control of your finances.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project 4: Seiyann -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-4 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="branding ui-ux web development" 
+             data-title="Seiyann" 
+             data-category-text="Branding / UI-UX / Web Development" 
+             data-desc="Seiyann is a custom, full-stack dynamic portfolio and content management system built from scratch. It features modular custom page templates, an interactive multi-category project filtering engine, dynamic modals, and a robust owner-only dashboard designed to seamlessly manage projects, credentials, and achievements in real time."
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/seiyann.png">
             <div>
                 <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">Branding / UI-UX / Web Development</p>
-                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Locana</h3>
-                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A local tourism booking platform that connects travelers with authentic destinations and experiences.</p>
-            </div>
-            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
-                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
-            </div>
-        </div>
-
-        <!-- Project 2: Reliable Touch -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-2 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="ui-ux web development" data-title="Reliable Touch" data-category-text="UI-UX / Web Development" data-desc="A modern website redesign for an IT company focused on reliability and innovation." data-image="<?php echo get_template_directory_uri(); ?>/assets/sidequest.png">
-            <div>
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
-                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Reliable Touch</h3>
-                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A modern website redesign for an IT company focused on reliability and innovation.</p>
-            </div>
-            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
-                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
-            </div>
-        </div>
-
-        <!-- Project 3: Parallel -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-3 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="branding" data-title="Parallel" data-category-text="Branding" data-desc="A modern brand identity for a local online thrift store built for the new generation." data-image="<?php echo get_template_directory_uri(); ?>/assets/your-project-image.jpg">
-            <div>
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">Branding</p>
-                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Parallel</h3>
-                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A modern brand identity for a local online thrift store built for the new generation.</p>
-            </div>
-            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
-                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
-                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
-            </div>
-        </div>
-
-        <!-- Project 4: CMS Portfolio -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-4 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="ui-ux web development" data-title="CMS Portfolio" data-category-text="UI-UX / Web Development" data-desc="A full-stack personal portfolio featuring an owner-only dashboard for managing projects and achievements." data-image="<?php echo get_template_directory_uri(); ?>/assets/portfoliocms.png">
-            <div>
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
-                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">CMS Portfolio</h3>
-                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A full-stack personal portfolio featuring an owner-only dashboard for managing projects and achievements.</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Seiyann</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A custom, full-stack dynamic portfolio and content management system featuring modular architecture and interactive design flows.</p>
             </div>
             <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
                 <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
@@ -100,11 +120,16 @@ get_header();
         </div>
 
         <!-- Project 5: Sidequest -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-5 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="ui-ux branding" data-title="Sidequest" data-category-text="Branding / UI-UX" data-desc="A sidequest app designed for tracking daily habit updates and personal self-improvement." data-image="<?php echo get_template_directory_uri(); ?>/assets/sidequest.png">
+        <div class="project-card group cursor-pointer animate-page-load load-delay-5 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux branding" 
+             data-title="Sidequest" 
+             data-category-text="Branding / UI-UX" 
+             data-desc="Sidequest is a gamified self-improvement platform designed to turn personal growth into an engaging adventure. By combining daily micro-quests, habit streaks, mood reflection tools, and XP progression systems, it helps users stay accountable, break productivity slumps, and build lasting lifestyle habits." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/sidequest.png">
             <div>
                 <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">Branding / UI-UX</p>
                 <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Sidequest</h3>
-                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A sidequest app designed for tracking daily habit updates and personal self-improvement.</p>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A gamified self-improvement app that turns daily routines, habit tracking, and personal growth milestones into an interactive adventure.</p>
             </div>
             <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
                 <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
@@ -112,12 +137,143 @@ get_header();
             </div>
         </div>
 
-        <!-- Project 6: Ecosystem -->
-        <div class="project-card group cursor-pointer animate-page-load load-delay-6 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" data-category="web development" data-title="Ecosystem" data-category-text="Web Development" data-desc="An enterprise cloud infrastructure ecosystem providing performance tracking metrics." data-image="<?php echo get_template_directory_uri(); ?>/assets/your-project-image.jpg">
+        <!-- Project 6: BrewFlow -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-6 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux web development" 
+             data-title="BrewFlow" 
+             data-category-text="UI-UX / Web Development" 
+             data-desc="BrewFlow is a smart POS & inventory management system engineered specifically for modern coffee shops. It streamlines daily operations by automating stock tracking for perishable ingredients, providing rapid-fire order processing interfaces, and delivering real-time analytics to help cafe owners optimize margins and reduce waste." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/brewflow.png">
             <div>
-                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">Web Development</p>
-                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Ecosystem</h3>
-                <p class="text-xs text-gray-500 mb-8 leading-relaxed">An enterprise cloud infrastructure ecosystem providing performance tracking metrics.</p>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">BrewFlow</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">Smart POS & inventory management system for modern coffee shops focused on speed, automated stock tracking, and sales analytics.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project 7: Parallel HQ -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-7 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="branding ui-ux web development" 
+             data-title="Parallel HQ" 
+             data-category-text="Branding / UI-UX / Web Development" 
+             data-desc="Parallel HQ is a digital storefront and curated brand identity platform built for modern thrifted and vintage apparel. The project blends sustainable fashion aesthetics with an intuitive e-commerce experience, featuring seamless product discovery, editorial-style lookbooks, and a streamlined checkout flow designed to elevate secondhand shopping for the next generation." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/parallel.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">Branding / UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Parallel HQ</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A specialized website and brand identity for thrifted and curated apparel, combining sustainable fashion aesthetics with a modern digital storefront.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project 8: Vestia -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-8 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/80 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux web development" 
+             data-title="Vestia" 
+             data-category-text="UI-UX / Web Development" 
+             data-desc="Vestia exists to simplify the search for exceptional living spaces through a modern, trustworthy, and beautifully designed digital experience. It provides intuitive property discovery flows, detailed accommodation insights, and a seamless interface tailored for modern renters." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/vestia.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Vestia</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">Vestia exists to simplify the search for exceptional living spaces through a modern, trustworthy, and beautifully designed digital experience.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project 9: Veya -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-9 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/85 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux web development" 
+             data-title="Veya" 
+             data-category-text="UI-UX / Web Development" 
+             data-desc="Veya is an all-in-one travel management and itinerary planning platform designed to streamline trip coordination. It features interactive route mapping, collaborative travel schedules, real-time booking updates, and an immersive user interface built to simplify destination discovery for modern travelers." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/veya.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Veya</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A travel management and itinerary planning platform that streamlines trip coordination and destination discovery.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project: Auslands Care -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-10 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/85 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux" 
+             data-title="Auslands Care" 
+             data-category-text="UI-UX Design" 
+             data-desc="Auslands Care is a comprehensive UI/UX design revamp for an NDIS accommodation website. The redesign focuses on accessibility, user trust, and a seamless discovery process to help participants and families easily find specialized disability housing and support services." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/auslands.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX Design</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Auslands Care</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A complete UI/UX design revamp for an NDIS accommodation website focused on accessibility, empathetic user experience, and clarity.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project: BEST DSS -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-11 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/85 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux web development" 
+             data-title="BEST DSS" 
+             data-category-text="UI-UX / Web Development" 
+             data-desc="BEST DSS is an advanced decision support system where I spearheaded both the UI/UX design and frontend development. The project focuses on translating complex data structures into clean, intuitive interfaces and responsive, high-performance web components for optimized decision-making." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/bestdss.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">BEST DSS</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A specialized decision support system featuring comprehensive UI/UX design and custom frontend web development.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project: Alan Associates -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-12 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/85 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux web development" 
+             data-title="Alan Associates" 
+             data-category-text="UI-UX / Web Development" 
+             data-desc="Alan Associates is a trusted Australian business debt collection and credit management specialist website. I handled the complete UI/UX design revamp and frontend development, creating a clean, professional, and empathetic digital experience designed to build trust and streamline client outreach." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/alanassociates.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Alan Associates</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A professional UI/UX design revamp and frontend web development project for an Australian credit and debt recovery specialist.</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 group-hover:bg-black transition-colors"></span>
+            </div>
+        </div>
+
+        <!-- Project: Reliable Touch Cleaning Services -->
+        <div class="project-card group cursor-pointer animate-page-load load-delay-13 flex flex-col justify-between p-8 rounded-3xl bg-[#fcfcfa] border border-gray-200/60 hover:border-black/85 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden" 
+             data-category="ui-ux web development" 
+             data-title="Reliable Touch Cleaning Services" 
+             data-category-text="UI-UX / Web Development" 
+             data-desc="Reliable Touch Cleaning Services is a modern website redesign and frontend development project. I spearheaded the UI/UX revamp and custom frontend implementation to deliver a clean, trustworthy, and conversion-focused platform optimized for service bookings." 
+             data-image="<?php echo get_template_directory_uri(); ?>/assets/reliabletouch.png">
+            <div>
+                <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-3" style="font-family: 'Montserrat', sans-serif;">UI-UX / Web Development</p>
+                <h3 class="text-xl font-bold text-gray-950 mb-3 group-hover:text-black transition-colors">Reliable Touch Cleaning Services</h3>
+                <p class="text-xs text-gray-500 mb-8 leading-relaxed">A complete UI/UX design revamp and frontend web development project focused on elevating brand credibility and simplifying service bookings.</p>
             </div>
             <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
                 <span class="view-project-btn text-xs font-semibold tracking-wider text-gray-950 group-hover:translate-x-1.5 transition-transform duration-300 inline-flex items-center">View Project &rarr;</span>
@@ -129,12 +285,12 @@ get_header();
 
     <!-- Bottom Indicator -->
     <div class="flex justify-between items-center w-full pt-4 text-xs tracking-widest text-gray-400 uppercase font-medium animate-page-load load-delay-6" style="font-family: 'Montserrat', sans-serif;">
-        <span id="project-counter">Showing 6 of 6 projects</span>
+        <span id="project-counter">Showing 4 of 4 projects</span>
         <span></span>
     </div>
 </main>
 
-<!-- Project Modal Overlay (Reveals the image when clicked) -->
+<!-- Project Modal Overlay -->
 <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
     <div id="modal-content-box" class="bg-white rounded-2xl w-11/12 max-w-3xl p-8 md:p-12 shadow-2xl transform scale-95 transition-all duration-300 relative max-h-[90vh] overflow-y-auto">
         <!-- Close Button -->
@@ -181,7 +337,6 @@ get_header();
     .load-delay-2 { animation-delay: 0.15s; }
     .load-delay-3 { animation-delay: 0.2s; }
     .load-delay-4 { animation-delay: 0.25s; }
-    .load-delay-5 { animation-delay: 0.3s; }
     .load-delay-6 { animation-delay: 0.35s; }
 
     .project-card {
