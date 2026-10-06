@@ -10,7 +10,7 @@ get_header();
 ?>
 
 <!-- Experience Page Container (Dedicated Page Flow) -->
-<main class="flex-1 flex flex-col justify-between px-12 md:px-24 lg:px-36 pt-12 pb-12 ml-24 overflow-hidden">
+<main class="flex-1 flex flex-col justify-between px-6 sm:px-12 md:px-24 lg:px-36 pt-12 pb-12 md:ml-24 overflow-hidden">
     <!-- Top Header & Subtext -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-end w-full gap-6 animate-page-load">
         <div>

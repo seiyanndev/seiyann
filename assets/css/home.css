@@ -1,0 +1,166 @@
+/*
+ * Homepage styles (front-page.php). Loaded on the front page only.
+ */
+
+/* ---------- Staggered fade-up entry ---------- */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+/* ---------- Headline font glitch (assets/js/hero-headline.js) ----------
+ * Letters are fixed-width boxes (width set in JS) aligned to the top,
+ * so swapping to fonts with different widths/metrics never reflows the headline.
+ */
+/* Grey headline lines: #80868f is 3.48:1 on the page background (WCAG AA for large text). */
+.hero-line-muted { color: #80868f; }
+html.dark .hero-line-muted { color: #8b8b94; }
+
+#hero-headline .hero-word,
+#hero-headline .hero-char { vertical-align: top; }
+#hero-headline .hero-char { justify-content: center; font-synthesis: none; will-change: transform; }
+#hero-headline .hero-word { transition: color 0.4s ease; }
+#hero-headline .hero-word.is-glitching { color: #111827; transition-duration: 0.08s; }
+html.dark #hero-headline .hero-word.is-glitching { color: #f4f4f5; }
+
+/* ---------- Hero visual: construction lines + brutalist slideshow (assets/js/hero-visual.js) ---------- */
+
+/* Hidden until the script has placed the cards, so they never flash stacked/unrotated. */
+html.js .hero-visual:not(.is-ready) { visibility: hidden; }
+
+.hero-visual {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    perspective: 1400px;
+}
+
+.hero-stage {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+}
+
+/* Front card: 60% x 80% of the box, centred at (36%, 50%) before its 12deg tilt. */
+.hero-card {
+    position: absolute;
+    left: 6%;
+    top: 10%;
+    width: 60%;
+    aspect-ratio: 3 / 4;
+    border-radius: 22px;
+    overflow: hidden;
+    background-color: #d4d4d8;
+    box-shadow: 0 45px 80px -25px rgba(0, 0, 0, 0.45), 0 14px 28px -14px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    will-change: transform;
+}
+.hero-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.08);
+    user-select: none;
+    -webkit-user-drag: none;
+}
+/* Washes out cards that aren't in front (opacity animated in JS). */
+.hero-card-veil {
+    position: absolute;
+    inset: 0;
+    background-color: #faf9f5;
+    pointer-events: none;
+}
+
+.hero-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+.hero-lines .draw {
+    fill: none;
+    stroke: #c4c4ca;
+    stroke-width: 1.3;
+    stroke-dasharray: 1;   /* with pathLength="1": lets JS draw each line in */
+}
+.hero-lines .marker      { fill: #18181b; }
+.hero-lines .marker-soft { fill: #d4d4d8; }
+
+/* Centred on the grid's right vertical (x = 455/500) where it crosses the big circle.
+   The background matches the page so the line stops behind the dots. */
+.hero-dots {
+    position: absolute;
+    left: 91%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 10px 6px;
+    background-color: #faf9f5;
+    z-index: 5;
+}
+.hero-dot {
+    position: relative;
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    background-color: #a1a1aa;
+    cursor: pointer;
+}
+/* Active slide: outlined, so it reads as current even before its countdown fill grows. */
+.hero-dot[aria-current="true"] { outline: 1px solid #18181b; outline-offset: 3px; }
+/* Fills over each slide's duration (JS), doubling as the autoplay countdown. */
+.hero-dot-fill {
+    position: absolute;
+    inset: 0;
+    background-color: #18181b;
+    transform: scaleY(0);
+    transform-origin: top;
+}
+.hero-dot:focus-visible { outline: 2px solid #18181b; outline-offset: 3px; }
+
+/* Runs along the front card's bottom edge: its tilted bottom-left corner lands at about
+   (-1.7%, 82.9%) of the box, so start just below it and rotate by the same 12deg. */
+.hero-caption {
+    position: absolute;
+    left: calc(-1.7% - 15px); /* -9px chip padding so the text stays put */
+    top: calc(82.9% + 22px);
+    /* translateZ keeps it above the cards inside the 3D stage */
+    transform: rotate(12deg) translateZ(1px);
+    transform-origin: 0 0;
+    z-index: 5;
+    /* Solid chip so the circle line and card shadow stop behind it */
+    padding: 5px 9px;
+    background-color: #faf9f5;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    color: #6b7280;
+    white-space: nowrap;
+}
+.hero-caption-place { color: #111827; }
+
+/* ---------- Dark mode ---------- */
+html.dark .hero-card { background-color: #27272a; box-shadow: 0 45px 80px -25px rgba(0, 0, 0, 0.85), 0 14px 28px -14px rgba(0, 0, 0, 0.6); }
+html.dark .hero-card-veil { background-color: #0f0f10; }
+html.dark .hero-lines .draw { stroke: #3f3f46; }
+html.dark .hero-lines .marker { fill: #e4e4e7; }
+html.dark .hero-lines .marker-soft { fill: #3f3f46; }
+html.dark .hero-dots { background-color: #0f0f10; }
+html.dark .hero-dot { background-color: #52525b; }
+html.dark .hero-dot[aria-current="true"] { outline-color: #f4f4f5; }
+html.dark .hero-dot-fill { background-color: #f4f4f5; }
+html.dark .hero-dot:focus-visible { outline-color: #f4f4f5; }
+html.dark .hero-caption { color: #a1a1aa; background-color: #0f0f10; }
+html.dark .hero-caption-place { color: #f4f4f5; }
