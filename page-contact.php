@@ -10,7 +10,7 @@ get_header();
 ?>
 
 <!-- Contact Page Container (Dedicated Page Flow) -->
-<main class="flex-1 flex flex-col justify-between px-12 md:px-24 lg:px-36 pt-12 pb-6 ml-24 overflow-hidden">
+<main class="flex-1 flex flex-col justify-between px-6 sm:px-12 md:px-24 lg:px-36 pt-12 pb-6 md:ml-24 overflow-hidden">
     <!-- Top Header & Main Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full animate-page-load pt-4 items-start">
         

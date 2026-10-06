@@ -1,0 +1,422 @@
+/*
+ * Work page: "Freefall" project deck (page-work.php, assets/js/work-freefall.js).
+ * The section is pinned while the cards cascade; JS sets each card's transform from scroll progress.
+ */
+
+:root {
+    --ff-accent: #4f2bff;
+}
+
+/* ---------- Layout ---------- */
+.ff-section {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden; /* the "pit": falling cards disappear past the bottom edge */
+}
+
+.ff-layout {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 40px 64px 0 24px; /* right: room for the rail */
+}
+
+@media (min-width: 640px) {
+    .ff-layout { padding: 48px 96px 0 48px; }
+}
+
+@media (min-width: 1024px) {
+    .ff-layout {
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+        grid-template-rows: 1fr;
+        align-items: center;
+        padding: 0 160px 0 112px;
+    }
+}
+
+/* ---------- Intro (left column) ---------- */
+.ff-intro { position: relative; z-index: 2; max-width: 32rem; }
+
+.ff-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+.ff-eyebrow-line { width: 40px; height: 1px; background-color: #a1a1aa; }
+
+.ff-title {
+    margin: 0 0 24px;
+    font-weight: 800;
+    font-size: clamp(2.6rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+}
+.ff-title-solid { display: block; color: #0a0a0a; }
+.ff-title-gradient {
+    display: block;
+    padding-right: 0.08em; /* italic overhang would otherwise be clipped by background-clip */
+    font-style: italic;
+    background-image: linear-gradient(90deg, var(--ff-accent) 0%, #b026c9 52%, #ff4d3d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.ff-lede {
+    max-width: 23rem;
+    margin: 0 0 32px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4b5563;
+}
+
+.ff-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 14px 14px 22px;
+    border: 0;
+    border-radius: 9999px;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.ff-cta:hover { transform: translateY(-1px); background-color: #27272a; }
+.ff-cta:focus-visible { outline: 3px solid var(--ff-accent); outline-offset: 3px; }
+.ff-cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.16);
+}
+
+@media (max-width: 1023px) {
+    .ff-title { margin-bottom: 14px; }
+    .ff-lede { margin-bottom: 18px; font-size: 13px; }
+    .ff-cta { padding: 10px 10px 10px 18px; font-size: 12px; }
+}
+@media (max-width: 639px) {
+    .ff-lede { display: none; }
+}
+
+/* ---------- Deck (right column) ---------- */
+.ff-stage-wrap {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ff-stage {
+    --S: clamp(200px, 58vw, 280px);
+    position: relative;
+    width: var(--S);
+    height: calc(var(--S) * 1.04);
+    margin-top: calc(var(--S) * 0.5); /* room for the pile peeking above the active card */
+    /* Perspective gives each card its 3D tilt. Deliberately no preserve-3d: in a shared 3D space the
+       browser sorts cards by depth and ignores z-index, so tilted pile cards would cut through the
+       active card. Flat compositing keeps the z-index order set in work-freefall.js. */
+    perspective: 1200px;
+    perspective-origin: 50% 0%;
+}
+@media (min-width: 1024px) {
+    .ff-stage { --S: clamp(240px, 23vw, 340px); margin-top: calc(var(--S) * 0.45); }
+}
+
+/* Hidden until the script has placed every card (avoids a flash of 13 stacked flat cards). */
+html.js .ff-section:not(.is-ready) .ff-card { visibility: hidden; }
+
+.ff-card {
+    position: absolute;
+    inset: 0;
+    display: block;
+    padding: 0;
+    border: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #111111;
+    color: #ffffff;
+    text-align: left;
+    cursor: pointer;
+    transform-origin: 50% 100%; /* cards tilt back and fall forward on their bottom edge */
+    box-shadow: 0 30px 60px -22px rgba(0, 0, 0, 0.45), 0 10px 22px -12px rgba(0, 0, 0, 0.3);
+    will-change: transform, opacity;
+    -webkit-tap-highlight-color: transparent;
+}
+.ff-card:focus-visible { outline: 3px solid var(--ff-accent); outline-offset: 4px; }
+
+.ff-card-media,
+.ff-card-media img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.ff-card-media img { object-fit: cover; user-select: none; -webkit-user-drag: none; }
+
+.ff-card-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to top, rgba(8, 8, 12, 0.85) 0%, rgba(8, 8, 12, 0.45) 34%, rgba(8, 8, 12, 0) 62%),
+        linear-gradient(to bottom, rgba(8, 8, 12, 0.35) 0%, rgba(8, 8, 12, 0) 26%);
+    pointer-events: none;
+}
+
+.ff-card-pill {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 4px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.16);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+}
+
+.ff-card-tag {
+    position: absolute;
+    top: 19px;
+    right: 16px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.ff-card-body {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    display: block;
+}
+.ff-card-eyebrow {
+    display: block;
+    margin-bottom: 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+.ff-card-title {
+    display: block;
+    font-size: clamp(20px, calc(var(--S) * 0.095), 32px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+.ff-card-caption {
+    display: block;
+    margin-top: 6px;
+    overflow: hidden;
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    opacity: 0.72;
+}
+
+/* ---------- Generated abstract art (cards without a screenshot) ----------
+ * Each variant layers gradients from four colours (--c1..--c4); ::after adds film grain.
+ */
+.ff-art {
+    position: absolute;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+    background-color: var(--c4);
+}
+.ff-art::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+}
+.ff-art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.4;
+}
+
+/* Fluid marble: soft overlapping blobs */
+.art-marble::before {
+    background:
+        radial-gradient(38% 32% at 22% 28%, var(--c2), transparent 70%),
+        radial-gradient(42% 36% at 76% 24%, var(--c3), transparent 70%),
+        radial-gradient(48% 42% at 58% 74%, var(--c1), transparent 72%),
+        radial-gradient(34% 30% at 24% 80%, var(--c3), transparent 70%),
+        radial-gradient(30% 26% at 86% 70%, var(--c2), transparent 70%),
+        var(--c4);
+    filter: blur(14px) saturate(1.25);
+}
+
+/* Light-speed streaks: rays from a bright core */
+.art-streaks::before {
+    background:
+        radial-gradient(circle at 50% 58%, var(--c4) 0 3%, transparent 20%),
+        repeating-conic-gradient(from 0deg at 50% 58%, var(--c1) 0deg 3deg, var(--c2) 4deg 7deg, var(--c1) 8deg 10deg, var(--c3) 11deg 13deg, var(--c1) 14deg 17deg);
+    filter: blur(1.2px) saturate(1.2);
+}
+
+/* Folded paper: hard-edged planes with fold highlights and shadows */
+.art-folds::before {
+    background:
+        linear-gradient(118deg, rgba(0, 0, 0, 0.28) 0 18%, transparent 18%),
+        linear-gradient(64deg, transparent 0 46%, rgba(255, 255, 255, 0.35) 46% 47%, rgba(0, 0, 0, 0.12) 47% 62%, transparent 62%),
+        linear-gradient(160deg, transparent 0 58%, rgba(255, 255, 255, 0.25) 58% 59%, transparent 59%),
+        linear-gradient(140deg, var(--c1) 0 30%, var(--c2) 30% 52%, var(--c3) 52% 76%, var(--c4) 76%);
+}
+
+/* Silk ribbons: blurred colour sweep with soft sheen bands */
+.art-silk::before {
+    background:
+        repeating-linear-gradient(115deg, transparent 0 22px, rgba(255, 255, 255, 0.4) 28px, transparent 38px),
+        conic-gradient(from 210deg at 38% 55%, var(--c1), var(--c2), var(--c3), var(--c4), var(--c1));
+    filter: blur(9px) saturate(1.2);
+}
+
+/* Acrylic pour: rippled cells */
+.art-pour::before {
+    background:
+        radial-gradient(30% 26% at 70% 30%, var(--c4), transparent 70%),
+        repeating-radial-gradient(circle at 32% 42%, var(--c1) 0 10px, var(--c2) 13px 19px, var(--c3) 22px 27px, var(--c4) 30px 34px, var(--c1) 37px 44px);
+    filter: blur(1.5px) saturate(1.2);
+    transform: rotate(-12deg) scale(1.15);
+}
+
+/* ---------- Progress rail (right edge) ---------- */
+.ff-rail {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    height: min(62vh, 560px);
+    transform: translateY(-50%);
+}
+@media (min-width: 1024px) {
+    .ff-rail { right: 48px; gap: 20px; height: min(70vh, 600px); }
+}
+
+.ff-counter { display: flex; align-items: flex-start; line-height: 1; }
+.ff-counter-num {
+    font-size: clamp(1.6rem, 3.4vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    font-variant-numeric: tabular-nums;
+    color: #0a0a0a;
+}
+.ff-counter-total {
+    top: 0;
+    margin-left: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #9ca3af;
+}
+
+.ff-track {
+    position: relative;
+    flex: 1;
+    width: 1px;
+    background-color: #d4d4d8;
+}
+.ff-tick {
+    position: absolute;
+    left: 50%;
+    width: 3px;
+    height: 3px;
+    border-radius: 9999px;
+    background-color: #a1a1aa;
+    transform: translate(-50%, -50%);
+}
+.ff-track-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 0;
+    background-color: var(--ff-accent);
+    box-shadow: 0 0 8px rgba(79, 43, 255, 0.6);
+}
+.ff-track-dot {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 11px;
+    height: 11px;
+    border-radius: 9999px;
+    background-color: var(--ff-accent);
+    box-shadow: 0 0 0 4px rgba(79, 43, 255, 0.18), 0 0 16px 2px rgba(79, 43, 255, 0.65);
+    transform: translate(-50%, -50%);
+}
+
+.ff-rail-label {
+    writing-mode: vertical-rl;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+/* ---------- Reduced motion: a plain grid, no pin or cascade ---------- */
+.ff-section.ff--static { height: auto; overflow: visible; }
+.ff--static .ff-layout { grid-template-columns: 1fr; grid-template-rows: auto; gap: 40px; padding-top: 48px; padding-bottom: 64px; }
+.ff--static .ff-stage-wrap { height: auto; display: block; }
+.ff--static .ff-stage {
+    --S: 280px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+    perspective: none;
+}
+.ff--static .ff-card { position: relative; inset: auto; aspect-ratio: 1 / 1; }
+.ff--static .ff-rail { display: none; }
+
+/* ---------- Dark mode ---------- */
+html.dark .ff-eyebrow { color: #a1a1aa; }
+html.dark .ff-eyebrow-line { background-color: #52525b; }
+html.dark .ff-title-solid { color: #f4f4f5; }
+html.dark .ff-title-gradient { background-image: linear-gradient(90deg, #7c63ff 0%, #d04ae6 52%, #ff6b5c 100%); }
+html.dark .ff-lede { color: #a1a1aa; }
+html.dark .ff-cta { background-color: #f4f4f5; color: #0a0a0a; }
+html.dark .ff-cta:hover { background-color: #d4d4d8; }
+html.dark .ff-cta-icon { background-color: rgba(0, 0, 0, 0.1); }
+html.dark .ff-card { box-shadow: 0 30px 60px -22px rgba(0, 0, 0, 0.85), 0 10px 22px -12px rgba(0, 0, 0, 0.6); }
+html.dark .ff-counter-num { color: #f4f4f5; }
+html.dark .ff-counter-total { color: #8b8b94; }
+html.dark .ff-track { background-color: #3f3f46; }
+html.dark .ff-tick { background-color: #52525b; }
+html.dark .ff-rail-label { color: #8b8b94; }

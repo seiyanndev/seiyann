@@ -10,7 +10,7 @@ get_header();
 ?>
 
 <!-- About Page Container (Dedicated Page Flow) -->
-<main class="flex-1 flex flex-col justify-between px-12 md:px-24 lg:px-36 pt-12 pb-12 ml-24 overflow-hidden">
+<main class="flex-1 flex flex-col justify-between px-6 sm:px-12 md:px-24 lg:px-36 pt-12 pb-12 md:ml-24 overflow-hidden">
     <!-- Top Hero Section: Left Text & Right Profile Image -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full animate-page-load">
         <!-- Left Column: Intro & Bio -->
