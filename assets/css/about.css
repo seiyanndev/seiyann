@@ -1,0 +1,452 @@
+/*
+ * About page (page-about.php).
+ * 1. Personnel file: headline/bio/quote + a taped-on ID card (motion: assets/js/about-intro.js).
+ * 2. Toolbox: two tapes crossing in an X (assets/js/about-tools.js). Ink tape = languages &
+ *    frameworks, paper tape = tools & apps; hovering a chip fills it with its brand colour.
+ * 3. Stats: a spec-sheet row; numbers count up when scrolled into view.
+ */
+
+/* ================= 1. Personnel file ================= */
+
+/* Hidden until about-intro.js has set the starting states (avoids a flash before the intro). */
+html.js .about-hero:not(.is-ready) { visibility: hidden; }
+
+.about-hero {
+    display: grid;
+    gap: 56px;
+    align-items: center;
+    padding-top: 12px;
+}
+@media (min-width: 1024px) {
+    .about-hero { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 72px; }
+}
+
+.about-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+.about-eyebrow-line { width: 40px; height: 1px; margin-right: 2px; background-color: #a1a1aa; }
+.about-eyebrow-sep { color: #d1d5db; }
+
+.about-title {
+    margin: 0 0 28px;
+    font-size: clamp(2.6rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: #0a0a0a;
+}
+/* Each line is a mask; its inner span rises into view in the intro. */
+.about-line { display: block; overflow: hidden; padding-bottom: 0.06em; }
+.about-line > span { display: block; }
+.about-line.is-muted { color: #80868f; }
+
+.about-bio {
+    max-width: 34rem;
+    margin: 0 0 32px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #374151;
+}
+
+.about-quote {
+    position: relative;
+    max-width: 32rem;
+    margin: 0 0 36px;
+    padding: 4px 0 0 56px;
+}
+.about-quote-mark {
+    position: absolute;
+    top: -14px;
+    left: 0;
+    font-size: 88px;
+    font-weight: 800;
+    line-height: 1;
+    color: #0a0a0a;
+}
+.about-quote blockquote {
+    margin: 0;
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: #0a0a0a;
+}
+.about-quote figcaption {
+    margin-top: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #9ca3af;
+}
+
+.about-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 14px 14px 24px;
+    border-radius: 9999px;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.2s ease;
+}
+.about-cta:hover { background-color: #27272a; }
+.about-cta:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; }
+.about-cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.16);
+    transition: transform 0.2s ease;
+}
+.about-cta:hover .about-cta-icon { transform: translateX(3px); }
+
+/* ---------- ID card ---------- */
+.about-card-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 24px 12px 12px 0; /* room for the tape and the hard shadow */
+}
+
+.id-card {
+    position: relative;
+    width: min(100%, 400px);
+    padding: 14px 14px 16px;
+    border: 1px solid #0a0a0a;
+    border-radius: 6px;
+    background-color: #ffffff;
+    box-shadow: 10px 10px 0 #0a0a0a; /* hard offset shadow: printed, not floating */
+    transform: rotate(3deg);
+}
+
+/* A strip of the paper tape from the toolbox, holding the card to the page */
+.id-tape {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    z-index: 2;
+    width: 190px;
+    padding: 9px 0;
+    background-color: rgba(239, 237, 230, 0.94);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    clip-path: polygon(0 8%, 4% 0, 9% 10%, 14% 0, 86% 0, 91% 9%, 96% 0, 100% 10%, 100% 92%, 95% 100%, 90% 90%, 85% 100%, 15% 100%, 10% 91%, 5% 100%, 0 90%);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.22em;
+    text-align: center;
+    text-transform: uppercase;
+    color: #52525b;
+    transform: translateX(-50%) rotate(-5deg);
+}
+
+.id-photo {
+    position: relative;
+    aspect-ratio: 1 / 1.05;
+    overflow: hidden;
+    border: 1px solid #0a0a0a;
+    background-color: #e4e4e7;
+}
+.id-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 0.5s ease, transform 0.6s ease;
+}
+.id-card:hover .id-photo img { filter: grayscale(0) contrast(1); transform: scale(1.03); }
+.id-photo-tag {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 4px 8px;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.id-name {
+    margin: 16px 0 10px;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #0a0a0a;
+}
+.id-name span {
+    display: block;
+    margin-top: 5px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+.id-fields { margin: 0; }
+.id-fields > div {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 12px;
+    align-items: baseline;
+    padding: 8px 0;
+    border-top: 1px dashed #d4d4d8;
+}
+.id-fields dt {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9ca3af;
+}
+.id-fields dd {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #0a0a0a;
+}
+.id-status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    vertical-align: 1px;
+    background-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+    animation: id-pulse 2s ease-in-out infinite;
+}
+@keyframes id-pulse {
+    50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+}
+
+.id-barcode {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+    padding-top: 12px;
+    border-top: 1px solid #0a0a0a;
+}
+.id-barcode-bars {
+    flex: 1;
+    max-width: 150px;
+    height: 30px;
+    background: repeating-linear-gradient(90deg,
+        #0a0a0a 0 2px, transparent 2px 4px, #0a0a0a 4px 5px, transparent 5px 8px,
+        #0a0a0a 8px 11px, transparent 11px 12px, #0a0a0a 12px 13px, transparent 13px 16px);
+}
+.id-barcode-text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: #6b7280;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .id-status-dot { animation: none; }
+}
+
+/* ================= 3. Stats (spec-sheet row) ================= */
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 72px 0 0;
+    border-top: 1px solid #0a0a0a;
+    border-bottom: 1px solid #0a0a0a;
+}
+@media (min-width: 768px) { .about-stats { grid-template-columns: repeat(4, 1fr); } }
+
+.about-stat {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 20px 26px;
+    border-left: 1px solid #e4e4e7;
+}
+.about-stat:nth-child(odd) { border-left: 0; }
+@media (min-width: 768px) {
+    .about-stat:nth-child(odd) { border-left: 1px solid #e4e4e7; }
+    .about-stat:first-child { border-left: 0; padding-left: 0; }
+}
+@media (max-width: 767px) {
+    .about-stat:nth-child(-n + 2) { border-bottom: 1px solid #e4e4e7; }
+}
+.about-stat-value {
+    order: -1; /* number above its label */
+    margin: 0 0 6px;
+    font-size: clamp(2.2rem, 4vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    font-variant-numeric: tabular-nums;
+    color: #0a0a0a;
+}
+.about-stat-label {
+    margin-bottom: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+.about-stat-desc {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #6b7280;
+}
+
+/* ================= 2. Toolbox ================= */
+.tools { margin-top: 24px; }
+
+/* The stage clips the tapes; they're wider than the screen so the tilted ends never show. */
+.tools-stage {
+    position: relative;
+    height: clamp(300px, 30vw, 420px);
+    overflow: hidden;
+}
+
+.tape {
+    position: absolute;
+    top: 50%;
+    left: -10%;
+    width: 120%;
+    padding: 26px 0;
+    overflow: hidden;
+}
+.tape--paper {
+    z-index: 1;
+    top: calc(50% + 2.2vw); /* offset + opposite tilt: the tapes cross left of centre */
+    transform: translateY(-50%) rotate(6deg);
+    border-top: 1px solid #0a0a0a;
+    border-bottom: 1px solid #0a0a0a;
+    background-color: #efede6;
+    color: #0a0a0a;
+}
+.tape--ink {
+    z-index: 2;
+    top: calc(50% - 2.2vw);
+    transform: translateY(-50%) rotate(-6deg);
+    background-color: #0a0a0a;
+    color: #fafafa;
+    box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.55);
+}
+
+/* Printed edge text, like labelled packing tape */
+.tape-edge {
+    position: absolute;
+    left: 0;
+    white-space: nowrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    pointer-events: none;
+}
+.tape-edge--top { top: 6px; }
+.tape-edge--bottom { bottom: 6px; }
+
+.tape-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+}
+.tape-set {
+    display: flex;
+    flex: none;
+    align-items: center;
+}
+
+.tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: 0.5em 0.95em;
+    border-radius: 9999px;
+    font-size: clamp(16px, 1.8vw, 26px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease, color 0.25s ease;
+}
+.tool-icon {
+    flex: none;
+    width: 1.05em;
+    height: 1.05em;
+}
+.tool:hover {
+    transform: translateY(-5px) rotate(-3deg) scale(1.06);
+    background-color: var(--brand);
+    color: var(--on-brand);
+}
+/* Faint ring so dark brand fills (e.g. SQL, Python) still read against the ink tape. */
+.tape--ink .tool:hover { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15); }
+
+.tool-sep {
+    padding: 0 0.6em;
+    font-size: clamp(12px, 1.2vw, 16px);
+    opacity: 0.35;
+}
+
+@media (max-width: 639px) {
+    .tape { padding: 20px 0; }
+    .tape--ink { transform: translateY(-50%) rotate(-8deg); }
+    .tape--paper { transform: translateY(-50%) rotate(8deg); }
+}
+
+/* ---------- Dark mode ---------- */
+html.dark .about-eyebrow { color: #a1a1aa; }
+html.dark .about-eyebrow-line { background-color: #52525b; }
+html.dark .about-eyebrow-sep { color: #3f3f46; }
+html.dark .about-title,
+html.dark .about-quote-mark,
+html.dark .about-quote blockquote,
+html.dark .about-stat-value { color: #f4f4f5; }
+html.dark .about-line.is-muted { color: #8b8b94; }
+html.dark .about-bio { color: #d4d4d8; }
+html.dark .about-quote figcaption { color: #71717a; }
+html.dark .about-cta { background-color: #f4f4f5; color: #0a0a0a; }
+html.dark .about-cta:hover { background-color: #d4d4d8; }
+html.dark .about-cta-icon { background-color: rgba(0, 0, 0, 0.1); }
+html.dark .id-card { border-color: #f4f4f5; background-color: #18181b; box-shadow: 10px 10px 0 #3f3f46; }
+html.dark .id-tape { background-color: rgba(63, 63, 70, 0.95); color: #d4d4d8; }
+html.dark .id-photo { border-color: #f4f4f5; }
+html.dark .id-name,
+html.dark .id-fields dd { color: #f4f4f5; }
+html.dark .id-fields > div { border-top-color: #3f3f46; }
+html.dark .id-barcode { border-top-color: #f4f4f5; }
+html.dark .id-barcode-bars {
+    background: repeating-linear-gradient(90deg,
+        #f4f4f5 0 2px, transparent 2px 4px, #f4f4f5 4px 5px, transparent 5px 8px,
+        #f4f4f5 8px 11px, transparent 11px 12px, #f4f4f5 12px 13px, transparent 13px 16px);
+}
+html.dark .about-stats { border-color: #f4f4f5; }
+html.dark .about-stat,
+html.dark .about-stat:nth-child(-n + 2) { border-color: #27272a; }
+html.dark .tape--ink { background-color: #f4f4f5; color: #0a0a0a; box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.9); }
+html.dark .tape--paper { border-color: #3f3f46; background-color: #18181b; color: #f4f4f5; }

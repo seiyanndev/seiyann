@@ -46,11 +46,11 @@
 </head>
 
 <!-- Light-mode classes; assets/dark-mode.css remaps them when <html> has the `dark` class -->
-<body <?php body_class('bg-[#faf9f5] text-gray-900 antialiased selection:bg-black selection:text-white min-h-screen flex flex-col relative overflow-x-hidden'); ?>>
+<body <?php body_class('bg-[#faf9f5] text-gray-900 antialiased selection:bg-black selection:text-white min-h-screen flex flex-col relative overflow-x-clip'); ?>>
 <?php wp_body_open(); ?>
 
 <!-- Bottom padding on phones keeps content clear of the bottom nav bar -->
-<div id="page" class="site min-h-screen flex flex-col relative overflow-x-hidden pb-24 md:pb-0">
+<div id="page" class="site min-h-screen flex flex-col relative overflow-x-clip pb-24 md:pb-0">
 
     <!-- Floating Navigation: bottom bar on phones, vertical pill on the left from md up -->
     <div id="nav-wrapper">

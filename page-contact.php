@@ -1,199 +1,181 @@
 <?php
 /**
  * Template Name: Contact Page
- * The template for displaying the Contact page
+ *
+ * "The Dossier", File No. 003: Request Form. A "direct lines" card (email, phone, local time,
+ * channels) beside a printed request form with a rubber-stamp submit button.
+ *
+ * The form posts to admin-post.php → handle_portfolio_contact_form() (functions.php), which emails it
+ * and redirects back with ?contact_sent=1 or ?contact_error=1|invalid, shown here as a RECEIVED /
+ * RETURNED stamp. Details: seiyann_contact(). Styles: assets/css/contact.css. Motion: assets/js/contact.js.
  *
  * @package Seiyann
  */
 
-get_header(); 
+get_header();
+
+$contact  = seiyann_contact();
+$subjects = array( 'New project', 'Full-time role', 'Collaboration', 'Just saying hi' );
+
+// Result of a submission (set by the handler's redirect).
+$sent  = isset( $_GET['contact_sent'] );
+$error = isset( $_GET['contact_error'] ) ? sanitize_key( wp_unslash( $_GET['contact_error'] ) ) : '';
 ?>
 
-<!-- Contact Page Container (Dedicated Page Flow) -->
-<main class="flex-1 flex flex-col justify-between px-6 sm:px-12 md:px-24 lg:px-36 pt-12 pb-6 md:ml-24 overflow-hidden">
-    <!-- Top Header & Main Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full animate-page-load pt-4 items-start">
-        
-        <!-- Left Column: Heading and Bio -->
-        <div class="lg:col-span-12">
-            <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;">
-                <span class="w-6 h-[1px] bg-gray-300"></span>
-                <span>Contact</span>
-            </div>
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 leading-[1.1] mb-6 whitespace-nowrap">
-                Let’s work together.
-            </h1>
-            <p class="text-gray-500 text-sm max-w-xl leading-relaxed font-normal">
-                Have a project in mind, a question, or just want to say hello? I'd love to hear from you. Feel free to reach out using the form or through my socials.
-            </p>
+<main class="contact flex-1 px-6 sm:px-12 md:px-24 lg:px-36 pt-12 pb-24 md:ml-24">
+
+    <!-- ============ Header ============ -->
+    <header class="ct-hero" id="ct-hero">
+        <div class="ct-eyebrow">
+            <span class="ct-eyebrow-line"></span>
+            <span>Contact</span><span class="ct-eyebrow-sep">/</span><span>File No. 003</span>
         </div>
+        <h1 class="ct-title">
+            <span class="ct-line"><span>Open a file.</span></span>
+            <span class="ct-line is-muted"><span>Let's work together.</span></span>
+        </h1>
+        <p class="ct-lede">Have a project in mind, a question, or just want to say hello? Fill in the request below, or reach me directly.</p>
+    </header>
 
-    </div>
+    <div class="ct-body" id="ct-body">
 
-    <!-- Enclosing Rectangle Box with Transparent Background -->
-    <div class="w-full bg-transparent p-0 my-8 animate-page-load load-delay-1">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
-            <!-- Left Side inside Box: Contact Info -->
-            <div class="lg:col-span-4 space-y-6 pt-2">
-                <!-- Email -->
-                <div class="flex items-start space-x-4">
-                    <div class="w-8 h-8 rounded-xl bg-gray-100 flex items-center justify-center text-gray-800 flex-shrink-0 border border-gray-200/60 shadow-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <div>
-                        <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;">Email</p>
-                        <a href="mailto:kurtcyrsfa@gmail.com" class="text-xs font-semibold text-gray-900 hover:text-black transition-colors">kurtcyrsfa@gmail.com</a>
-                    </div>
+        <!-- ============ Direct lines (ID-card style) ============ -->
+        <aside class="ct-card" aria-label="Direct contact details">
+            <span class="ct-card-label">Direct lines</span>
+
+            <dl class="ct-fields">
+                <div>
+                    <dt>Email</dt>
+                    <dd class="ct-email">
+                        <a href="mailto:<?php echo esc_attr( $contact['email'] ); ?>"><?php echo esc_html( $contact['email'] ); ?></a>
+                        <button type="button" class="ct-copy" data-copy="<?php echo esc_attr( $contact['email'] ); ?>" aria-label="Copy email address">
+                            <span class="ct-copy-label">Copy</span>
+                        </button>
+                    </dd>
                 </div>
-
-                <!-- Phone -->
-                <div class="flex items-start space-x-4">
-                    <div class="w-8 h-8 rounded-xl bg-gray-100 flex items-center justify-center text-gray-800 flex-shrink-0 border border-gray-200/60 shadow-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                    </div>
-                    <div>
-                        <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;">Phone</p>
-                        <a href="tel:+639942025107" class="text-xs font-semibold text-gray-900 hover:text-black transition-colors">+63 9942025107</a>
-                    </div>
+                <div>
+                    <dt>Phone</dt>
+                    <dd><a href="tel:<?php echo esc_attr( $contact['phone_tel'] ); ?>"><?php echo esc_html( $contact['phone'] ); ?></a></dd>
                 </div>
-
-                <!-- Location -->
-                <div class="flex items-start space-x-4">
-                    <div class="w-8 h-8 rounded-xl bg-gray-100 flex items-center justify-center text-gray-800 flex-shrink-0 border border-gray-200/60 shadow-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    </div>
-                    <div>
-                        <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold" style="font-family: 'Montserrat', sans-serif;">Location</p>
-                        <p class="text-xs font-semibold text-gray-900">Lucena, Philippines</p>
-                    </div>
+                <div>
+                    <dt>Based in</dt>
+                    <dd><?php echo esc_html( $contact['location'] ); ?></dd>
                 </div>
+                <div>
+                    <dt>Local time</dt>
+                    <dd><span class="ct-clock" data-tz="<?php echo esc_attr( $contact['timezone'] ); ?>">&mdash;</span> <span class="ct-tz">PHT</span></dd>
+                </div>
+                <div>
+                    <dt>Status</dt>
+                    <dd><b class="ct-status-dot" aria-hidden="true"></b>Open to work &mdash; full-time or freelance</dd>
+                </div>
+            </dl>
+
+            <span class="ct-card-label ct-card-label--channels">Channels</span>
+            <ul class="ct-channels">
+                <?php foreach ( $contact['socials'] as $social ) : ?>
+                    <li>
+                        <a href="<?php echo esc_url( $social['url'] ); ?>" target="_blank" rel="noopener">
+                            <span class="ct-channel-code" aria-hidden="true"><?php echo esc_html( $social['code'] ); ?></span>
+                            <span class="ct-channel-name"><?php echo esc_html( $social['name'] ); ?></span>
+                            <span class="ct-channel-handle">@<?php echo esc_html( $social['handle'] ); ?></span>
+                            <span class="ct-channel-arrow" aria-hidden="true">&nearr;</span>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+
+            <div class="ct-barcode" aria-hidden="true">
+                <span class="ct-barcode-bars"></span>
+                <span class="ct-barcode-text">KA &middot; 003 &middot; LUC-PH</span>
             </div>
+        </aside>
 
-            <!-- Middle Side inside Box: Sleek Minimalist Contact Form -->
-            <div class="lg:col-span-5 flex flex-col justify-center">
-                <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="POST" class="space-y-6">
+        <!-- ============ Request form ============ -->
+        <section class="req" id="request" aria-labelledby="req-title">
+            <span class="req-tape" aria-hidden="true">Form 003 &mdash; Request</span>
+
+            <header class="req-head">
+                <h2 id="req-title" class="req-title">Request form</h2>
+                <span class="req-form-no">Form 003</span>
+            </header>
+
+            <?php if ( $sent ) : ?>
+                <!-- Success: the request is "on file" -->
+                <div class="req-result is-received" role="status">
+                    <span class="req-result-stamp">Received</span>
+                    <p class="req-result-title">Your request is on file.</p>
+                    <p class="req-result-text">Thanks for reaching out &mdash; I'll get back to you by email soon.</p>
+                    <a class="req-result-link" href="<?php echo esc_url( remove_query_arg( array( 'contact_sent', 'contact_error' ) ) ); ?>#request">File another request &rarr;</a>
+                </div>
+            <?php else : ?>
+
+                <?php if ( $error ) : ?>
+                    <!-- Error: the request was "returned"; the form stays below to try again -->
+                    <div class="req-result is-returned" role="alert">
+                        <span class="req-result-stamp">Returned</span>
+                        <p class="req-result-title"><?php echo 'invalid' === $error ? 'Some fields need another look.' : "Your request couldn't be sent."; ?></p>
+                        <p class="req-result-text">
+                            <?php if ( 'invalid' === $error ) : ?>
+                                Please add your name, a valid email and a message, then file it again.
+                            <?php else : ?>
+                                Please try again, or email me directly at <a href="mailto:<?php echo esc_attr( $contact['email'] ); ?>"><?php echo esc_html( $contact['email'] ); ?></a>.
+                            <?php endif; ?>
+                        </p>
+                    </div>
+                <?php endif; ?>
+
+                <form class="req-form" id="req-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="POST">
                     <input type="hidden" name="action" value="submit_portfolio_contact">
-                    <?php wp_nonce_field('portfolio_contact_verify', 'portfolio_contact_nonce'); ?>
+                    <?php wp_nonce_field( 'portfolio_contact_verify', 'portfolio_contact_nonce' ); ?>
 
-                    <!-- Name & Email Row -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="relative">
-                            <label class="block text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Name *</label>
-                            <input type="text" name="contact_name" required placeholder="Your name" class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors placeholder:text-gray-300">
-                        </div>
-                        <div class="relative">
-                            <label class="block text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Email *</label>
-                            <input type="email" name="contact_email" required placeholder="your@email.com" class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors placeholder:text-gray-300">
-                        </div>
+                    <!-- Honeypot: hidden from people; bots that fill it are ignored by the handler -->
+                    <div class="req-hp" aria-hidden="true">
+                        <label>Website <input type="text" name="contact_website" tabindex="-1" autocomplete="off"></label>
                     </div>
 
-                    <!-- Subject Dropdown -->
-                    <div class="relative">
-                        <label class="block text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Subject</label>
-                        <div class="relative">
-                            <select name="contact_subject" class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors appearance-none cursor-pointer">
-                                <option value="" disabled selected>Select a subject</option>
-                                <option value="New Project Inquiry">New Project Inquiry</option>
-                                <option value="Collaboration">Collaboration</option>
-                                <option value="Friendly Chat">Friendly Chat</option>
-                            </select>
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
-                            </div>
+                    <div class="req-row">
+                        <label class="req-label" for="contact_name"><span class="req-num">01</span>Name <i>*</i></label>
+                        <input class="req-input" type="text" id="contact_name" name="contact_name" required autocomplete="name" placeholder="Your name">
+                    </div>
+
+                    <div class="req-row">
+                        <label class="req-label" for="contact_email"><span class="req-num">02</span>Email <i>*</i></label>
+                        <input class="req-input" type="email" id="contact_email" name="contact_email" required autocomplete="email" placeholder="you@email.com">
+                    </div>
+
+                    <fieldset class="req-row req-subjects">
+                        <legend class="req-label"><span class="req-num">03</span>Regarding</legend>
+                        <div class="req-options">
+                            <?php foreach ( $subjects as $i => $subject ) : ?>
+                                <label class="req-option">
+                                    <input type="radio" name="contact_subject" value="<?php echo esc_attr( $subject ); ?>"<?php checked( 0, $i ); ?>>
+                                    <span class="req-box" aria-hidden="true"></span>
+                                    <span><?php echo esc_html( $subject ); ?></span>
+                                </label>
+                            <?php endforeach; ?>
                         </div>
+                    </fieldset>
+
+                    <div class="req-row req-row--message">
+                        <label class="req-label" for="contact_message"><span class="req-num">04</span>Message <i>*</i></label>
+                        <textarea class="req-input req-message" id="contact_message" name="contact_message" rows="5" required placeholder="Tell me about your project, role or idea..."></textarea>
                     </div>
 
-                    <!-- Message Textarea -->
-                    <div class="relative">
-                        <label class="block text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">Message *</label>
-                        <textarea name="contact_message" rows="3" required placeholder="Type your message here..." class="w-full bg-transparent border-b border-gray-300 pb-2 text-xs text-gray-900 focus:outline-none focus:border-black transition-colors placeholder:text-gray-300 resize-none"></textarea>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="pt-2">
-                        <button type="submit" class="inline-flex items-center space-x-3 py-3 px-6 rounded-full bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-sm group cursor-pointer" style="font-family: 'Montserrat', sans-serif;">
-                            <span class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:-translate-x-0.5 transition-transform">&rarr;</span>
-                            <span>Send Message</span>
+                    <div class="req-submit-row">
+                        <span class="req-note">* Required. Your details are only used to reply to you.</span>
+                        <button type="submit" class="req-stamp" id="req-submit">
+                            <span>File request</span>
                         </button>
                     </div>
                 </form>
-            </div>
-
-            <!-- Right Side inside Box: Get In Touch & Socials with Vertical Separator Border -->
-            <div class="lg:col-span-3 flex flex-col justify-between space-y-8 pl-0 lg:pl-8 border-l border-gray-200/80">
-                <!-- Top Tag & Mini CTA -->
-                <div>
-                    <div class="flex items-center space-x-3 text-[10px] tracking-widest text-gray-400 uppercase font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">
-                        <span class="w-6 h-[1px] bg-gray-300"></span>
-                        <span>Get in Touch</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2 leading-tight">Let's create something great.</h3>
-                    <p class="text-xs text-gray-500 leading-relaxed">Whether it's a new project, a collaboration, or just a friendly chat — I'm all ears.</p>
-                </div>
-
-                <!-- Social Links List with Image Icons -->
-                <div>
-                    <p class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-4" style="font-family: 'Montserrat', sans-serif;">Follow Me</p>
-                    <div class="space-y-3 text-xs font-semibold" style="font-family: 'Montserrat', sans-serif;">
-                        <a href="https://linkedin.com" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-800 hover:text-black transition-colors group">
-                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border border-gray-200/60 shadow-sm flex-shrink-0">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/Linkedin.png" alt="LinkedIn" class="w-full h-full object-cover">
-                            </span>
-                            <span>LinkedIn</span>
-                        </a>
-                        <a href="https://github.com" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-800 hover:text-black transition-colors group">
-                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border border-gray-200/60 shadow-sm flex-shrink-0">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/Github.png" alt="GitHub" class="w-full h-full object-cover">
-                            </span>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-800 hover:text-black transition-colors group">
-                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border border-gray-200/60 shadow-sm flex-shrink-0">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/Instagram.png" alt="Instagram" class="w-full h-full object-cover">
-                            </span>
-                            <span>Instagram</span>
-                        </a>
-                        <a href="https://facebook.com" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-800 hover:text-black transition-colors group">
-                            <span class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border border-gray-200/60 shadow-sm flex-shrink-0">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/Facebook.png" alt="Facebook" class="w-full h-full object-cover">
-                            </span>
-                            <span>Facebook</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+            <?php endif; ?>
+        </section>
     </div>
 
-    <!-- Bottom Footer Tagline Bar -->
-    <div class="flex justify-between items-center w-full pt-4 mt-2 border-t border-gray-200/60 text-xs tracking-widest text-gray-400 uppercase font-medium animate-page-load load-delay-2" style="font-family: 'Montserrat', sans-serif;">
-        <span>Good ideas. Better together.</span>
-        <span>K A</span>
-    </div>
+    <!-- Sign-off, printed on a strip of tape. Full-bleed: negative margins cancel <main>'s padding and nav margin. -->
+    <p class="ct-signoff -mx-6 sm:-mx-12 md:-mr-24 md:-ml-48 lg:-mr-36 lg:-ml-60" aria-hidden="true"><span>Good ideas. Better together. &mdash; Good ideas. Better together. &mdash; Good ideas. Better together. &mdash; Good ideas. Better together.</span></p>
 </main>
 
-<style>
-    @keyframes pageLoadEntry {
-        from {
-            opacity: 0;
-            transform: translateY(16px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-page-load {
-        opacity: 0;
-        animation: pageLoadEntry 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .load-delay-1 { animation-delay: 0.1s; }
-    .load-delay-2 { animation-delay: 0.2s; }
-</style>
-
-<?php 
+<?php
 get_footer();

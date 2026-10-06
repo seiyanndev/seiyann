@@ -22,17 +22,24 @@ $total    = count( $projects );
             <div class="ff-intro">
                 <div class="ff-eyebrow">
                     <span class="ff-eyebrow-line"></span>
-                    <span>Selected Work &middot; Vol. 01</span>
+                    <span>Work</span><span class="ff-eyebrow-sep">/</span><span>File No. 005</span>
                 </div>
                 <h1 class="ff-title">
-                    <span class="ff-title-solid">Selected</span>
-                    <span class="ff-title-gradient">Work.</span>
+                    <span class="ff-line"><span>Case files.</span></span>
+                    <span class="ff-line is-muted"><span>Selected work.</span></span>
                 </h1>
                 <p class="ff-lede">
-                    <?php echo esc_html( sprintf( '%d projects, one at a time. Scroll, and each one folds over the crest and drops into the pit.', $total ) ); ?>
+                    <?php echo esc_html( sprintf( '%d cases, one at a time. Scroll, and each file folds over the crest and drops into the pit.', $total ) ); ?>
                 </p>
+
+                <!-- Case summary: "In front" follows the deck (work-freefall.js) -->
+                <dl class="ff-summary">
+                    <div><dt>On file</dt><dd><?php echo esc_html( sprintf( '%02d', $total ) ); ?> cases</dd></div>
+                    <div><dt>In front</dt><dd><span id="ff-front-num">01</span> &middot; <span id="ff-front-tag"><?php echo esc_html( $projects[0]['tag'] ); ?></span></dd></div>
+                </dl>
+
                 <button type="button" class="ff-cta" id="ff-open">
-                    <span>View <span class="ff-cta-title"><?php echo esc_html( $projects[0]['title'] ); ?></span></span>
+                    <span>Open case: <span class="ff-cta-title"><?php echo esc_html( $projects[0]['title'] ); ?></span></span>
                     <span class="ff-cta-icon" aria-hidden="true">&rarr;</span>
                 </button>
             </div>
@@ -51,7 +58,11 @@ $total    = count( $projects );
                                 data-category="<?php echo esc_attr( $project['category'] ); ?>"
                                 data-desc="<?php echo esc_attr( $project['description'] ); ?>"
                                 data-image="<?php echo esc_url( $image ); ?>"
-                                aria-label="<?php echo esc_attr( sprintf( 'Project %d of %d: %s. Open details', $i + 1, $total, $project['title'] ) ); ?>">
+                                data-number="<?php echo esc_attr( $number ); ?>"
+                                data-tag="<?php echo esc_attr( $project['tag'] ); ?>"
+                                aria-label="<?php echo esc_attr( sprintf( 'Case %d of %d: %s. Open case file', $i + 1, $total, $project['title'] ) ); ?>">
+                            <!-- Evidence-photo style: paper frame around the media, tape across the top -->
+                            <span class="ff-card-tape" aria-hidden="true">Case <?php echo esc_html( $number . ' / ' . sprintf( '%02d', $total ) ); ?></span>
                             <span class="ff-card-media">
                                 <?php if ( $image ) : ?>
                                     <img src="<?php echo esc_url( $image ); ?>" alt="" loading="<?php echo $i < 3 ? 'eager' : 'lazy'; ?>" decoding="async" draggable="false">
@@ -60,10 +71,9 @@ $total    = count( $projects );
                                 <?php endif; ?>
                             </span>
                             <span class="ff-card-scrim" aria-hidden="true"></span>
-                            <span class="ff-card-pill"><?php echo esc_html( $number . ' / ' . sprintf( '%02d', $total ) ); ?></span>
                             <span class="ff-card-tag"><?php echo esc_html( $project['tag'] ); ?></span>
                             <span class="ff-card-body">
-                                <span class="ff-card-eyebrow">Project <?php echo esc_html( $number ); ?></span>
+                                <span class="ff-card-eyebrow">Case <?php echo esc_html( $number ); ?></span>
                                 <span class="ff-card-title"><?php echo esc_html( $project['title'] ); ?></span>
                                 <span class="ff-card-caption"><?php echo esc_html( $project['summary'] ); ?></span>
                             </span>
@@ -75,6 +85,7 @@ $total    = count( $projects );
 
         <!-- Right edge: progress rail -->
         <aside class="ff-rail" aria-hidden="true">
+            <span class="ff-counter-label">Case</span>
             <div class="ff-counter">
                 <span class="ff-counter-num" id="ff-counter">01</span><sup class="ff-counter-total">/<?php echo esc_html( $total ); ?></sup>
             </div>
@@ -90,36 +101,35 @@ $total    = count( $projects );
     </section>
 </main>
 
-<!-- Project Modal Overlay -->
-<div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div id="modal-content-box" class="bg-white rounded-2xl w-11/12 max-w-3xl p-8 md:p-12 shadow-2xl transform scale-95 transition-all duration-300 relative max-h-[90vh] overflow-y-auto">
-        <!-- Close Button -->
-        <button id="modal-close" aria-label="Close" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-gray-100 hover:bg-black hover:text-white flex items-center justify-center transition-colors text-gray-700 cursor-pointer">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
+<!-- Case file (project modal): filled in by work-freefall.js from the card's data attributes -->
+<div id="project-modal" class="case-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="modal-content-box" class="case-sheet">
+        <span class="case-tape" aria-hidden="true">Case <span id="modal-number">01</span> &mdash; File 005</span>
 
-        <!-- Modal Header Info -->
-        <div class="mb-6">
-            <span id="modal-category" class="text-[10px] tracking-widest uppercase text-gray-400 font-semibold mb-1 block"></span>
-            <h2 id="modal-title" class="text-2xl md:text-4xl font-bold tracking-tight text-gray-950"></h2>
-        </div>
+        <button id="modal-close" class="case-close" aria-label="Close case file">&times;</button>
 
-        <!-- Modal Image Showcase Box: the project screenshot, or the card's generated art if there is none -->
-        <div id="modal-preview-box" class="bg-[#f3f3f1] rounded-xl overflow-hidden mb-6 aspect-[16/9] flex items-center justify-center border border-gray-200/60 shadow-inner p-4 relative">
-            <img id="modal-image" src="" alt="" class="w-full h-full object-cover rounded-lg">
-            <div id="modal-art" class="absolute inset-4 rounded-lg overflow-hidden" hidden></div>
-        </div>
+        <header class="case-head">
+            <span class="case-eyebrow">Case <span id="modal-number-2">01</span> / <?php echo esc_html( sprintf( '%02d', $total ) ); ?></span>
+            <h2 id="modal-title" class="case-title"></h2>
+        </header>
 
-        <!-- Modal Detailed Description -->
-        <div class="space-y-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-gray-900">Overview</h3>
-            <p id="modal-desc" class="text-sm text-gray-600 leading-relaxed"></p>
-        </div>
+        <!-- Exhibit: the project screenshot, or the card's generated art if there is none -->
+        <figure id="modal-preview-box" class="case-exhibit">
+            <img id="modal-image" src="" alt="">
+            <div id="modal-art" class="case-art" hidden></div>
+            <figcaption class="case-exhibit-label">Fig. <span id="modal-number-3">01</span></figcaption>
+        </figure>
 
-        <!-- Modal Footer Actions -->
-        <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end">
-            <button id="modal-close-btn" class="px-6 py-2.5 rounded-full bg-black text-white text-xs font-bold tracking-widest uppercase hover:bg-gray-800 transition-colors cursor-pointer">Close Project</button>
-        </div>
+        <dl class="case-fields">
+            <div><dt>Discipline</dt><dd id="modal-category"></dd></div>
+            <div><dt>Type</dt><dd id="modal-tag"></dd></div>
+            <div><dt>Overview</dt><dd id="modal-desc"></dd></div>
+        </dl>
+
+        <footer class="case-foot">
+            <span class="case-barcode" aria-hidden="true"></span>
+            <button id="modal-close-btn" class="case-stamp">Close file</button>
+        </footer>
     </div>
 </div>
 

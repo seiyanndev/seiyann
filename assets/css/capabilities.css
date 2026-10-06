@@ -1,0 +1,733 @@
+/*
+ * Capabilities page (page-capabilities.php, assets/js/capabilities.js).
+ * 1. Lens: pinned section; a scrubbed timeline takes the artifact through brand → design → code → shipped.
+ * 2. Proof matrix: projects × capabilities.
+ */
+
+/* ---------- Shared ---------- */
+.lens-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+.lens-eyebrow-line { width: 40px; height: 1px; background-color: #a1a1aa; }
+.lens-eyebrow-sep { color: #d1d5db; }
+
+/* ================= 1. Lens ================= */
+.lens-section {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+}
+
+.lens-layout {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 16px;
+    padding: 36px 24px 96px;
+}
+@media (min-width: 640px) { .lens-layout { padding: 48px 48px 96px; } }
+@media (min-width: 1024px) {
+    .lens-layout {
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        grid-template-rows: 1fr;
+        align-items: center;
+        gap: 48px;
+        padding: 0 72px 0 112px;
+    }
+}
+
+.lens-intro { max-width: 30rem; }
+
+.lens-title {
+    margin: 0 0 14px;
+    font-size: clamp(2rem, 4.2vw, 4.25rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    color: #0a0a0a;
+}
+.lens-title span { color: #80868f; }
+
+.lens-lede {
+    max-width: 24rem;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #4b5563;
+}
+
+/* Capability steps: the current stage is expanded and dark, the rest collapsed and grey. */
+.lens-steps {
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #0a0a0a; /* ruled like a form */
+}
+.lens-step { border-bottom: 1px solid #e4e4e7; }
+.lens-step-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 13px 0;
+    border: 0;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+/* Tick box: filled and ticked for the current stage, like a checked item on an assessment sheet */
+.lens-step-box {
+    position: relative;
+    flex: none;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid #a1a1aa;
+    border-radius: 2px;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+.lens-step.is-active .lens-step-box { border-color: #0a0a0a; background-color: #0a0a0a; }
+.lens-step.is-active .lens-step-box::after {
+    content: "";
+    position: absolute;
+    left: 3.5px;
+    top: 0.5px;
+    width: 4px;
+    height: 8px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.lens-step-num {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: #a1a1aa;
+    transition: color 0.3s ease;
+}
+.lens-step-title {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #a1a1aa;
+    transition: color 0.3s ease;
+}
+.lens-step.is-active .lens-step-num,
+.lens-step.is-active .lens-step-title,
+.lens-step-head:hover .lens-step-title { color: #0a0a0a; }
+.lens-step-head:focus-visible { outline: 2px solid #0a0a0a; outline-offset: 2px; }
+
+.lens-step-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* One wrapper inside the 0fr/1fr grid row, so the summary and the tags collapse together. */
+.lens-step-inner { min-height: 0; overflow: hidden; }
+.lens-step.is-active .lens-step-body { grid-template-rows: 1fr; }
+.lens-step-body p {
+    margin: 0;
+    padding-left: 64px; /* lines up with the step title (box + number) */
+    font-size: 13px;
+    line-height: 1.55;
+    color: #4b5563;
+}
+.lens-step-body ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0 0 0 64px;
+    list-style: none;
+}
+.lens-step.is-active .lens-step-body ul { padding-top: 10px; padding-bottom: 14px; }
+.lens-step-body li {
+    padding: 3px 9px;
+    border: 1px solid #d4d4d8;
+    border-radius: 9999px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4b5563;
+}
+
+@media (max-width: 1023px) {
+    .lens-lede { display: none; }
+    .lens-steps { margin-top: 16px; }
+    .lens-step-head { padding: 9px 0; }
+    .lens-step-title { font-size: 14px; }
+    .lens-step-body ul { display: none; }
+    .lens-step.is-active .lens-step-body p { padding-bottom: 10px; }
+}
+
+/* ---------- The artifact ---------- */
+.lens-canvas-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+}
+
+html.js .lens-section:not(.is-ready) .lens-canvas { visibility: hidden; }
+
+/* "Exhibit A": the taped evidence sheet the artifact is filed on. It sets the size; the canvas fills it. */
+.lens-exhibit {
+    position: relative;
+    width: min(100%, 700px);
+    margin: 0;
+    padding: 20px 20px 0;
+    border: 1px solid #0a0a0a;
+    border-radius: 6px;
+    background-color: #ffffff;
+    background-image:
+        linear-gradient(rgba(10, 10, 10, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10, 10, 10, 0.045) 1px, transparent 1px);
+    background-size: 24px 24px;
+    box-shadow: 10px 10px 0 #0a0a0a;
+    transform: rotate(-0.8deg);
+}
+@media (max-width: 1023px) {
+    .lens-exhibit { width: min(100%, 540px, calc((100svh - 480px) * 4 / 3 + 40px)); padding: 14px 14px 0; box-shadow: 6px 6px 0 #0a0a0a; }
+}
+
+.lens-exhibit-tape {
+    position: absolute;
+    top: -15px;
+    left: 44px;
+    z-index: 3;
+    padding: 8px 22px;
+    background-color: rgba(239, 237, 230, 0.94);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    clip-path: polygon(0 8%, 4% 0, 9% 10%, 14% 0, 86% 0, 91% 9%, 96% 0, 100% 10%, 100% 92%, 95% 100%, 90% 90%, 85% 100%, 15% 100%, 10% 91%, 5% 100%, 0 90%);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #52525b;
+    transform: rotate(-3deg);
+}
+
+/* Printer's crop marks in the corners */
+.lens-crop { position: absolute; width: 14px; height: 14px; border-color: #0a0a0a; border-style: solid; border-width: 0; }
+.lens-crop--tl { top: 7px; left: 7px; border-top-width: 1px; border-left-width: 1px; }
+.lens-crop--tr { top: 7px; right: 7px; border-top-width: 1px; border-right-width: 1px; }
+.lens-crop--bl { bottom: 7px; left: 7px; border-bottom-width: 1px; border-left-width: 1px; }
+.lens-crop--br { bottom: 7px; right: 7px; border-bottom-width: 1px; border-right-width: 1px; }
+
+.lens-canvas {
+    container-type: inline-size; /* everything inside is sized in cqw so the artifact scales as one */
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+}
+
+/* Caption strip: follows the current stage (capabilities.js) */
+.lens-exhibit-foot {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 6px;
+    padding: 11px 4px 14px;
+    border-top: 1px solid #0a0a0a;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+.lens-exhibit-id { font-weight: 700; color: #0a0a0a; white-space: nowrap; }
+.lens-exhibit-label { flex: 1; overflow: hidden; color: #6b7280; white-space: nowrap; text-overflow: ellipsis; }
+.lens-exhibit-bars {
+    flex: none;
+    width: 90px;
+    height: 16px;
+    background: repeating-linear-gradient(90deg,
+        #0a0a0a 0 2px, transparent 2px 4px, #0a0a0a 4px 5px, transparent 5px 8px,
+        #0a0a0a 8px 11px, transparent 11px 12px, #0a0a0a 12px 13px, transparent 13px 16px);
+}
+@media (max-width: 639px) { .lens-exhibit-bars { display: none; } }
+
+/* 01 Brand */
+.lens-brand {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+.lens-construct circle,
+.lens-construct line {
+    fill: none;
+    stroke: #c4c4ca;
+    stroke-width: 1;
+    stroke-dasharray: 1;
+}
+.lens-mono text {
+    font-family: Montserrat, ui-sans-serif, system-ui, sans-serif;
+    font-size: 150px;
+    font-weight: 800;
+    letter-spacing: -6px;
+    fill: #0a0a0a;
+}
+.lens-mono .lens-mono-k { fill: #9ca3af; }
+.lens-brand-labels text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    fill: #9ca3af;
+}
+
+/* 02 Design: browser frame with the homepage */
+.lens-frame {
+    position: absolute;
+    inset: 7% 3%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #e4e4e7;
+    border-radius: 2.4cqw;
+    background-color: #faf9f5;
+    box-shadow: 0 4cqw 8cqw -3cqw rgba(0, 0, 0, 0.25);
+    color: #0a0a0a;
+}
+.lens-frame-bar {
+    position: relative;
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 0.9cqw;
+    height: 5cqw;
+    padding: 0 2cqw;
+    border-bottom: 1px solid #e4e4e7;
+    background-color: #ffffff;
+}
+.lens-frame-bar i { width: 1.2cqw; height: 1.2cqw; border-radius: 50%; background-color: #e4e4e7; }
+
+.lens-live {
+    position: absolute;
+    right: 2cqw;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7cqw;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 1.4cqw;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #15803d;
+}
+.lens-live b,
+.lens-toast b { width: 1cqw; height: 1cqw; border-radius: 50%; background-color: #22c55e; box-shadow: 0 0 0 0.5cqw rgba(34, 197, 94, 0.2); }
+
+.lens-frame-body {
+    display: grid;
+    flex: 1;
+    grid-template-columns: 9cqw 1fr;
+    min-height: 0;
+}
+.lens-ui-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.2cqw;
+    margin: 3cqw 0 3cqw 2.2cqw;
+    padding: 2.4cqw 0;
+    border-radius: 9cqw;
+    background-color: #ffffff;
+    box-shadow: 0 1cqw 2.5cqw rgba(0, 0, 0, 0.06);
+}
+.lens-ui-main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3cqw 6cqw 3cqw 5cqw;
+}
+
+/* Each UI element has a wireframe block (.lens-skel) over its real content (.lens-real). */
+.lens-el { position: relative; display: block; }
+.lens-skel {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.6cqw;
+    background-color: #e4e4e7;
+    transform-origin: left center;
+}
+.lens-ui-logo { font-size: 2.2cqw; font-weight: 800; letter-spacing: -0.05em; }
+.lens-ui-logo .k { color: #9ca3af; }
+.lens-ui-dot { width: 3.6cqw; height: 3.6cqw; }
+.lens-ui-dot .lens-skel { border-radius: 50%; }
+.lens-ui-dot .lens-real { position: absolute; inset: 0; border-radius: 50%; background-color: #e4e4e7; }
+.lens-ui-dot.is-active .lens-real { background-color: #0a0a0a; }
+
+.lens-ui-eyebrow {
+    margin-bottom: 2.6cqw;
+    font-size: 1.3cqw;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #9ca3af;
+}
+.lens-ui-h {
+    font-size: 4.3cqw;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+}
+.lens-ui-h.is-muted { color: #80868f; }
+.lens-ui-p {
+    max-width: 44cqw;
+    margin-top: 2.6cqw;
+    font-size: 1.55cqw;
+    line-height: 1.5;
+    color: #6b7280;
+}
+.lens-ui-btn {
+    margin-top: 3cqw;
+    border-radius: 9999px;
+    color: #ffffff;
+    text-decoration: none;
+}
+.lens-ui-btn .lens-skel { border-radius: 9999px; }
+.lens-ui-btn .lens-real {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.4cqw;
+    padding: 1cqw 2.4cqw 1cqw 1cqw;
+    border-radius: 9999px;
+    background-color: #0a0a0a;
+    font-size: 1.35cqw;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+.lens-ui-btn i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.4cqw;
+    height: 3.4cqw;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.16);
+    font-style: normal;
+}
+
+.lens-cursor {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3.4cqw;
+    height: 3.4cqw;
+    overflow: visible;
+    pointer-events: none;
+}
+.lens-cursor path { fill: #0a0a0a; stroke: #ffffff; stroke-width: 1.5; stroke-linejoin: round; }
+
+.lens-toast {
+    position: absolute;
+    right: 3cqw;
+    bottom: 3cqw;
+    display: inline-flex;
+    align-items: center;
+    gap: 1cqw;
+    padding: 1cqw 2cqw;
+    border-radius: 9999px;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 1.4cqw;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* 03 Code */
+.lens-code {
+    position: absolute;
+    top: 13%;
+    right: 4%; /* with the frame at 4%-74%, the pair is centred in the exhibit */
+    bottom: 13%;
+    width: 52%;
+    margin: 0;
+    padding: 3cqw 3cqw 3cqw 2cqw;
+    overflow: hidden;
+    border-radius: 2cqw;
+    background-color: #111113;
+    box-shadow: 0 4cqw 8cqw -3cqw rgba(0, 0, 0, 0.45);
+    color: #e4e4e7;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 1.4cqw;
+    line-height: 1.7;
+    white-space: pre;
+}
+.lens-line { display: block; }
+.lens-line .ln {
+    display: inline-block;
+    width: 3.4cqw;
+    margin-right: 1cqw;
+    text-align: right;
+    color: #52525b;
+}
+.lens-code .t { color: #a78bfa; }
+.lens-code .a { color: #f9a8d4; }
+.lens-code .s { color: #86efac; }
+.lens-code .c { color: #71717a; font-style: italic; }
+.lens-code .k { color: #fbbf24; }
+
+/* Stage progress across the bottom of the pinned section */
+.lens-progress {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: #e4e4e7;
+}
+.lens-progress span { display: block; width: 0; height: 100%; background-color: #0a0a0a; }
+
+/* Reduced motion: unpinned, artifact shown in its finished state, all steps open. */
+.lens-section.lens--static { height: auto; overflow: visible; }
+.lens--static .lens-layout { padding-top: 48px; padding-bottom: 64px; }
+.lens--static .lens-step-body { grid-template-rows: 1fr; }
+.lens--static .lens-step-num,
+.lens--static .lens-step-title { color: #0a0a0a; }
+.lens--static .lens-progress { display: none; }
+
+/* ================= 2. Proof matrix ================= */
+.proof-section { padding: 88px 24px 120px; }
+@media (min-width: 640px) { .proof-section { padding: 104px 48px 140px; } }
+@media (min-width: 1024px) { .proof-section { padding: 128px 72px 160px 112px; } }
+
+.proof-head { max-width: 40rem; margin-bottom: 48px; }
+.proof-title {
+    margin: 0 0 16px;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    color: #0a0a0a;
+}
+.proof-title span { color: #80868f; }
+.proof-lede { margin: 0; font-size: 14px; color: #4b5563; }
+
+/* "Index B": the matrix printed on a taped sheet */
+.proof-sheet {
+    position: relative;
+    padding: 30px 28px 18px;
+    border: 1px solid #0a0a0a;
+    border-radius: 6px;
+    background-color: #ffffff;
+    box-shadow: 10px 10px 0 #0a0a0a;
+    transform: rotate(0.3deg);
+}
+@media (max-width: 639px) { .proof-sheet { padding: 26px 14px 14px; box-shadow: 6px 6px 0 #0a0a0a; } }
+.proof-tape {
+    position: absolute;
+    top: -15px;
+    left: 44px;
+    z-index: 2;
+    padding: 8px 22px;
+    background-color: rgba(239, 237, 230, 0.94);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    clip-path: polygon(0 8%, 4% 0, 9% 10%, 14% 0, 86% 0, 91% 9%, 96% 0, 100% 10%, 100% 92%, 95% 100%, 90% 90%, 85% 100%, 15% 100%, 10% 91%, 5% 100%, 0 90%);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #52525b;
+    transform: rotate(-3deg);
+}
+.proof-foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 16px;
+}
+.proof-foot-bars {
+    width: 140px;
+    height: 24px;
+    background: repeating-linear-gradient(90deg,
+        #0a0a0a 0 2px, transparent 2px 4px, #0a0a0a 4px 5px, transparent 5px 8px,
+        #0a0a0a 8px 11px, transparent 11px 12px, #0a0a0a 12px 13px, transparent 13px 16px);
+}
+.proof-foot-text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+.proof-scroll { overflow-x: auto; }
+
+.proof-table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+}
+.proof-table th,
+.proof-table td { padding: 14px 12px; }
+
+.proof-table thead th {
+    border-bottom: 1px solid #0a0a0a;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-align: left;
+    text-transform: uppercase;
+    color: #6b7280;
+    vertical-align: bottom;
+}
+.proof-table thead .proof-cap {
+    width: 13%;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.proof-table thead .proof-cap.is-lit,
+.proof-table thead .proof-cap:hover { color: #0a0a0a; }
+.proof-table thead .proof-cap:focus-visible { outline: 2px solid #0a0a0a; outline-offset: -2px; }
+
+.proof-col-num {
+    width: 56px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: #9ca3af;
+}
+.proof-row {
+    border-bottom: 1px solid #e4e4e7;
+    cursor: pointer;
+    transition: opacity 0.25s ease, background-color 0.2s ease;
+}
+.proof-row:hover { background-color: #f1f0ec; }
+.proof-row .proof-col-name { text-align: left; font-weight: normal; }
+.proof-row .proof-col-name a {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #0a0a0a;
+    text-decoration: none;
+}
+.proof-row .proof-col-name a::after {
+    content: " \2192";
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.proof-row:hover .proof-col-name a::after,
+.proof-row .proof-col-name a:focus-visible::after { opacity: 1; }
+.proof-tag {
+    margin-left: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #9ca3af;
+}
+@media (max-width: 639px) { .proof-tag { display: none; } }
+
+.proof-cell { text-align: center; transition: background-color 0.2s ease; }
+.proof-mark {
+    display: inline-block;
+    width: 12px;
+    height: 1px;
+    vertical-align: middle;
+    background-color: #d4d4d8;
+}
+.proof-mark.is-on { width: 11px; height: 11px; background-color: #0a0a0a; }
+
+/* Focus mode: hovering a capability dims projects that don't use it. */
+.proof-table.has-focus .proof-row { opacity: 0.25; }
+.proof-table.has-focus .proof-row.is-lit { opacity: 1; }
+.proof-table .proof-cell.is-lit,
+.proof-table .proof-count.is-lit { background-color: #f1f0ec; }
+
+.proof-table tfoot th,
+.proof-table tfoot td {
+    border-top: 1px solid #0a0a0a;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+.proof-table tfoot th { text-align: left; font-weight: 500; }
+.proof-count { text-align: center; }
+
+/* ================= Dark mode ================= */
+html.dark .lens-eyebrow { color: #a1a1aa; }
+html.dark .lens-eyebrow-line { background-color: #52525b; }
+html.dark .lens-eyebrow-sep { color: #3f3f46; }
+html.dark .lens-steps { border-top-color: #f4f4f5; }
+html.dark .lens-step-box { border-color: #52525b; }
+html.dark .lens-step.is-active .lens-step-box { border-color: #f4f4f5; background-color: #f4f4f5; }
+html.dark .lens-step.is-active .lens-step-box::after { border-color: #0a0a0a; }
+html.dark .lens-exhibit,
+html.dark .proof-sheet {
+    border-color: #f4f4f5;
+    background-color: #18181b;
+    box-shadow: 10px 10px 0 #3f3f46;
+}
+html.dark .lens-exhibit {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+html.dark .lens-exhibit-tape,
+html.dark .proof-tape { background-color: rgba(63, 63, 70, 0.95); color: #d4d4d8; }
+html.dark .lens-crop { border-color: #f4f4f5; }
+html.dark .lens-exhibit-foot { border-top-color: #f4f4f5; }
+html.dark .lens-exhibit-id { color: #f4f4f5; }
+html.dark .lens-exhibit-label,
+html.dark .proof-foot-text { color: #a1a1aa; }
+html.dark .lens-exhibit-bars,
+html.dark .proof-foot-bars {
+    background: repeating-linear-gradient(90deg,
+        #f4f4f5 0 2px, transparent 2px 4px, #f4f4f5 4px 5px, transparent 5px 8px,
+        #f4f4f5 8px 11px, transparent 11px 12px, #f4f4f5 12px 13px, transparent 13px 16px);
+}
+html.dark .lens-title,
+html.dark .proof-title { color: #f4f4f5; }
+html.dark .lens-title span,
+html.dark .proof-title span { color: #8b8b94; }
+html.dark .lens-lede,
+html.dark .proof-lede,
+html.dark .lens-step-body p { color: #a1a1aa; }
+html.dark .lens-steps,
+html.dark .lens-step { border-color: #27272a; }
+html.dark .lens-step-num,
+html.dark .lens-step-title { color: #52525b; }
+html.dark .lens-step.is-active .lens-step-num,
+html.dark .lens-step.is-active .lens-step-title,
+html.dark .lens-step-head:hover .lens-step-title,
+html.dark .lens--static .lens-step-num,
+html.dark .lens--static .lens-step-title { color: #f4f4f5; }
+html.dark .lens-step-body li { border-color: #3f3f46; color: #a1a1aa; }
+html.dark .lens-construct circle,
+html.dark .lens-construct line { stroke: #3f3f46; }
+html.dark .lens-mono text { fill: #f4f4f5; }
+html.dark .lens-mono .lens-mono-k { fill: #71717a; }
+html.dark .lens-brand-labels text { fill: #71717a; }
+html.dark .lens-frame { border-color: #27272a; box-shadow: 0 4cqw 8cqw -3cqw rgba(0, 0, 0, 0.8); }
+html.dark .lens-progress { background-color: #27272a; }
+html.dark .lens-progress span { background-color: #f4f4f5; }
+
+html.dark .proof-table thead th { border-bottom-color: #f4f4f5; color: #a1a1aa; }
+html.dark .proof-table thead .proof-cap.is-lit,
+html.dark .proof-table thead .proof-cap:hover { color: #f4f4f5; }
+html.dark .proof-row { border-bottom-color: #27272a; }
+html.dark .proof-row:hover,
+html.dark .proof-table .proof-cell.is-lit,
+html.dark .proof-table .proof-count.is-lit { background-color: #18181b; }
+html.dark .proof-row .proof-col-name a { color: #f4f4f5; }
+html.dark .proof-mark { background-color: #3f3f46; }
+html.dark .proof-mark.is-on { background-color: #f4f4f5; }
+html.dark .proof-table tfoot th,
+html.dark .proof-table tfoot td { border-top-color: #f4f4f5; color: #a1a1aa; }

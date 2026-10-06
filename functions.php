@@ -46,6 +46,45 @@ function seiyann_enqueue_styles() {
         wp_enqueue_script( 'seiyann-work-freefall', get_template_directory_uri() . '/assets/js/work-freefall.js', array( 'gsap', 'gsap-scrolltrigger' ), filemtime( $work_js ), true );
     }
 
+    // Capabilities page: scroll-driven "lens" section + proof matrix
+    if ( is_page( 'capabilities' ) ) {
+        $caps_css = get_template_directory() . '/assets/css/capabilities.css';
+        wp_enqueue_style( 'seiyann-capabilities', get_template_directory_uri() . '/assets/css/capabilities.css', array(), filemtime( $caps_css ) );
+
+        $caps_js = get_template_directory() . '/assets/js/capabilities.js';
+        wp_enqueue_script( 'seiyann-capabilities', get_template_directory_uri() . '/assets/js/capabilities.js', array( 'gsap', 'gsap-scrolltrigger' ), filemtime( $caps_js ), true );
+    }
+
+    // About page: crossing "toolbox" tapes
+    if ( is_page( 'about' ) ) {
+        $about_css = get_template_directory() . '/assets/css/about.css';
+        wp_enqueue_style( 'seiyann-about', get_template_directory_uri() . '/assets/css/about.css', array(), filemtime( $about_css ) );
+
+        $about_js = get_template_directory() . '/assets/js/about-tools.js';
+        wp_enqueue_script( 'seiyann-about-tools', get_template_directory_uri() . '/assets/js/about-tools.js', array( 'gsap' ), filemtime( $about_js ), true );
+
+        $intro_js = get_template_directory() . '/assets/js/about-intro.js';
+        wp_enqueue_script( 'seiyann-about-intro', get_template_directory_uri() . '/assets/js/about-intro.js', array( 'gsap', 'gsap-scrolltrigger' ), filemtime( $intro_js ), true );
+    }
+
+    // Experience page: "service record" cards
+    if ( is_page( 'experience' ) ) {
+        $exp_css = get_template_directory() . '/assets/css/experience.css';
+        wp_enqueue_style( 'seiyann-experience', get_template_directory_uri() . '/assets/css/experience.css', array(), filemtime( $exp_css ) );
+
+        $exp_js = get_template_directory() . '/assets/js/experience.js';
+        wp_enqueue_script( 'seiyann-experience', get_template_directory_uri() . '/assets/js/experience.js', array( 'gsap', 'gsap-scrolltrigger' ), filemtime( $exp_js ), true );
+    }
+
+    // Contact page: "request form"
+    if ( is_page( 'contact' ) ) {
+        $contact_css = get_template_directory() . '/assets/css/contact.css';
+        wp_enqueue_style( 'seiyann-contact', get_template_directory_uri() . '/assets/css/contact.css', array(), filemtime( $contact_css ) );
+
+        $contact_js = get_template_directory() . '/assets/js/contact.js';
+        wp_enqueue_script( 'seiyann-contact', get_template_directory_uri() . '/assets/js/contact.js', array( 'gsap' ), filemtime( $contact_js ), true );
+    }
+
     // Alpine.js Core CDN (loaded in footer with defer)
     wp_enqueue_script( 'alpine', 'https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js', array(), '3.x.x', true );
 }
@@ -121,6 +160,131 @@ function seiyann_projects() {
     );
 }
 
+// Capabilities page: the four stages of the "lens" section and the rows of the proof matrix.
+// Which projects back each one is derived from the project categories (seiyann_project_caps()).
+function seiyann_capabilities() {
+    return array(
+        'brand' => array(
+            'title'        => 'Brand Identity',
+            'summary'      => 'Visual systems that make a business recognisable at a glance.',
+            'deliverables' => array( 'Logo design', 'Brand guidelines', 'Print & digital collateral', 'Visual systems' ),
+        ),
+        'ui' => array(
+            'title'        => 'UI/UX Design',
+            'summary'      => 'Interfaces that are clear, intuitive and built around the people using them.',
+            'deliverables' => array( 'Wireframes & prototypes', 'User research', 'Interactive design', 'Responsive design' ),
+        ),
+        'web' => array(
+            'title'        => 'Web Development',
+            'summary'      => 'Responsive web applications, from the database to deployment.',
+            'deliverables' => array( 'Frontend development', 'Backend development', 'Database management', 'Deployment' ),
+        ),
+        'e2e' => array(
+            'title'        => 'End-to-End',
+            'summary'      => 'One person from first sketch to shipped product, so nothing gets lost between design and code.',
+            'deliverables' => array( 'Concept development', 'Art direction', 'Visual storytelling', 'End-to-end production' ),
+        ),
+    );
+}
+
+// Capability keys a project demonstrates, from its category text. End-to-end = all three disciplines.
+function seiyann_project_caps( $project ) {
+    $caps = array();
+    if ( false !== stripos( $project['category'], 'Branding' ) )        { $caps[] = 'brand'; }
+    if ( false !== stripos( $project['category'], 'UI-UX' ) )           { $caps[] = 'ui'; }
+    if ( false !== stripos( $project['category'], 'Web Development' ) ) { $caps[] = 'web'; }
+    if ( 3 === count( $caps ) )                                           { $caps[] = 'e2e'; }
+    return $caps;
+}
+
+// Experience page "service record" (page-experience.php), newest first.
+// PLACEHOLDER CONTENT: carried over from the previous page design; Kurt will replace it with his real history.
+// Fields: `end` = '' means current (stamped CURRENT). `type`/`location` optional (hidden when empty).
+// `tools` = names from seiyann_tools() (shown with their logos). `projects` = titles from seiyann_projects() (linked).
+function seiyann_experience() {
+    return array(
+        array( 'role' => 'Social Media Manager / Graphic Designer', 'org' => 'XYZ Digital Agency',
+               'start' => '2025', 'end' => '', 'type' => '', 'location' => '',
+               'duties' => array( 'Managed social media content and campaigns across multiple platforms.', 'Created graphics and digital materials for brand promotion.', 'Planned and organized content calendar and influencer collaborations.' ),
+               'tools' => array(), 'projects' => array() ),
+        array( 'role' => 'Web Developer / IT Specialist', 'org' => 'ABC Solutions',
+               'start' => '2024', 'end' => '2025', 'type' => '', 'location' => '',
+               'duties' => array( 'Developed and maintained web applications and internal systems.', 'Worked with UI/UX and frontend technologies (HTML, CSS, JavaScript).', 'Collaborated with cross-functional teams on technical projects.' ),
+               'tools' => array( 'HTML', 'CSS', 'JavaScript' ), 'projects' => array() ),
+        array( 'role' => 'Project / Organization Experience', 'org' => 'University / Student Organization',
+               'start' => '2022', 'end' => '2024', 'type' => '', 'location' => '',
+               'duties' => array( 'Led and participated in various projects and initiatives.', 'Organized events, workshops, and community activities.', 'Collaborated with teams and stakeholders to achieve goals.' ),
+               'tools' => array(), 'projects' => array() ),
+        array( 'role' => 'UI/UX Designer Intern', 'org' => 'Design Studio Hub',
+               'start' => '2021', 'end' => '2022', 'type' => 'Internship', 'location' => '',
+               'duties' => array( 'Assisted in conducting user research and persona mapping.', 'Created wireframes, user flows, and interactive prototypes in Figma.', 'Participated in client design reviews and design system maintenance.' ),
+               'tools' => array( 'Figma' ), 'projects' => array() ),
+        array( 'role' => 'Freelance Web Developer', 'org' => 'Self-Employed',
+               'start' => '2020', 'end' => '2021', 'type' => 'Freelance', 'location' => '',
+               'duties' => array( 'Built custom WordPress websites and landing pages for small businesses.', 'Optimized site performance, responsiveness, and basic on-page SEO.', 'Managed direct client communications and project requirements.' ),
+               'tools' => array( 'WordPress' ), 'projects' => array() ),
+        array( 'role' => 'Open Source Contributor', 'org' => 'Community Projects',
+               'start' => '2019', 'end' => '2020', 'type' => '', 'location' => '',
+               'duties' => array( 'Contributed bug fixes and documentation to frontend repositories.', 'Collaborated globally via GitHub issues and pull requests.', 'Engaged with developer communities to improve software accessibility.' ),
+               'tools' => array( 'GitHub' ), 'projects' => array() ),
+    );
+}
+
+// About page "toolbox" tapes. `icon` is a Simple Icons slug in assets/img/tools/ (simple-icons 16.34.0,
+// CC0), or a neutral glyph for tools Simple Icons doesn't carry: '' = code brackets (VS Code, logo removed
+// at Microsoft's request), 'glyph:chat' (ChatGPT, OpenAI logos removed), 'glyph:orbit' (Antigravity, not listed).
+// `hex` is the brand colour a chip fills with on hover. `tape`: 'ink' (languages/frameworks) or 'paper' (tools/apps).
+function seiyann_tools() {
+    return array(
+        array( 'name' => 'HTML',          'icon' => 'html5',       'hex' => '#E34F26', 'tape' => 'ink' ),
+        array( 'name' => 'CSS',           'icon' => 'css',         'hex' => '#663399', 'tape' => 'ink' ),
+        array( 'name' => 'JavaScript',    'icon' => 'javascript',  'hex' => '#F7DF1E', 'tape' => 'ink' ),
+        array( 'name' => 'Tailwind CSS',  'icon' => 'tailwindcss', 'hex' => '#06B6D4', 'tape' => 'ink' ),
+        array( 'name' => 'React',         'icon' => 'react',       'hex' => '#61DAFB', 'tape' => 'ink' ),
+        array( 'name' => 'PHP',           'icon' => 'php',         'hex' => '#777BB4', 'tape' => 'ink' ),
+        array( 'name' => 'Laravel',       'icon' => 'laravel',     'hex' => '#FF2D20', 'tape' => 'ink' ),
+        array( 'name' => 'Python',        'icon' => 'python',      'hex' => '#3776AB', 'tape' => 'ink' ),
+        array( 'name' => 'WordPress',     'icon' => 'wordpress',   'hex' => '#21759B', 'tape' => 'ink' ),
+        array( 'name' => 'SQL',           'icon' => 'mysql',       'hex' => '#4479A1', 'tape' => 'ink' ),
+        array( 'name' => 'Supabase',      'icon' => 'supabase',    'hex' => '#3FCF8E', 'tape' => 'ink' ),
+        array( 'name' => 'VS Code',       'icon' => '',            'hex' => '#007ACC', 'tape' => 'paper' ),
+        array( 'name' => 'Cursor',        'icon' => 'cursor',      'hex' => '#000000', 'tape' => 'paper' ),
+        array( 'name' => 'Git',           'icon' => 'git',         'hex' => '#F03C2E', 'tape' => 'paper' ),
+        array( 'name' => 'GitHub',        'icon' => 'github',      'hex' => '#181717', 'tape' => 'paper' ),
+        array( 'name' => 'Figma',         'icon' => 'figma',       'hex' => '#F24E1E', 'tape' => 'paper' ),
+        array( 'name' => 'GSAP',          'icon' => 'gsap',        'hex' => '#0AE448', 'tape' => 'paper' ),
+        array( 'name' => 'Claude',        'icon' => 'claude',       'hex' => '#D97757', 'tape' => 'paper' ),
+        array( 'name' => 'ChatGPT',       'icon' => 'glyph:chat',   'hex' => '#10A37F', 'tape' => 'paper' ),
+        array( 'name' => 'Gemini',        'icon' => 'googlegemini', 'hex' => '#8E75B2', 'tape' => 'paper' ),
+        array( 'name' => 'Antigravity',   'icon' => 'glyph:orbit',  'hex' => '#4285F4', 'tape' => 'paper' ),
+    );
+}
+
+// Inline SVG for a tool (fills with currentColor so the chip controls its colour).
+function seiyann_tool_icon( $slug ) {
+    $glyphs = array(
+        'glyph:chat'  => '<path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/>',
+        'glyph:orbit' => '<circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(-30 12 12)"/><path d="M19.5 4.5h.01"/>',
+        ''            => '<path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/>',
+    );
+    $file = get_template_directory() . '/assets/img/tools/' . $slug . '.svg';
+    if ( isset( $glyphs[ $slug ] ) || ! file_exists( $file ) ) {
+        $paths = isset( $glyphs[ $slug ] ) ? $glyphs[ $slug ] : $glyphs[''];
+        return '<svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' . $paths . '</svg>';
+    }
+    $svg = file_get_contents( $file );
+    $svg = preg_replace( '#<title>.*?</title>#s', '', $svg );
+    return str_replace( '<svg ', '<svg class="tool-icon" aria-hidden="true" fill="currentColor" ', $svg );
+}
+
+// Readable text colour (#0a0a0a or #ffffff) on top of a hex background.
+function seiyann_on_color( $hex ) {
+    $hex = ltrim( $hex, '#' );
+    list( $r, $g, $b ) = array_map( 'hexdec', str_split( $hex, 2 ) );
+    $luminance = ( 0.299 * $r + 0.587 * $g + 0.114 * $b ) / 255;
+    return $luminance > 0.6 ? '#0a0a0a' : '#ffffff';
+}
+
 // A project's image URL if its file exists in assets/, otherwise '' (the card uses its generated art).
 function seiyann_project_image_url( $project ) {
     if ( empty( $project['image'] ) || ! file_exists( get_template_directory() . '/assets/' . $project['image'] ) ) {
@@ -162,18 +326,57 @@ function seiyann_theme_setup() {
 }
 add_action('after_setup_theme', 'seiyann_theme_setup');
 
-// Handle portfolio contact form submission
+// Contact details used across the site (Contact page "direct lines" card, form recipient).
+function seiyann_contact() {
+    return array(
+        'email'     => 'kurtcyrsfa@gmail.com',
+        'phone'     => '0994 202 5107',   // shown on the page
+        'phone_tel' => '+639942025107',   // dialled (international format works from abroad)
+        'location'  => 'Lucena City, Philippines',
+        'timezone'  => 'Asia/Manila',     // for the live local-time clock
+        'socials'   => array(
+            array( 'code' => 'in', 'name' => 'LinkedIn',  'handle' => 'kurt-atoat',    'url' => 'https://www.linkedin.com/in/kurt-atoat/' ),
+            array( 'code' => 'gh', 'name' => 'GitHub',    'handle' => 'seiyanndev',    'url' => 'https://github.com/seiyanndev' ),
+            array( 'code' => 'ig', 'name' => 'Instagram', 'handle' => 'kurtcyrs',      'url' => 'https://www.instagram.com/kurtcyrs/' ),
+            array( 'code' => 'fb', 'name' => 'Facebook',  'handle' => 'kurt.atoat.90', 'url' => 'https://www.facebook.com/kurt.atoat.90' ),
+        ),
+    );
+}
+
+// Handle portfolio contact form submission: emails the form data to the address in seiyann_contact(),
+// then redirects back to the form with ?contact_sent=1 or ?contact_error=1|invalid (shown as a
+// RECEIVED / RETURNED stamp on the page).
 function handle_portfolio_contact_form() {
     if ( ! isset( $_POST['portfolio_contact_nonce'] ) || ! wp_verify_nonce( $_POST['portfolio_contact_nonce'], 'portfolio_contact_verify' ) ) {
         wp_die( 'Security check failed.' );
     }
 
-    $name    = sanitize_text_field( $_POST['contact_name'] );
-    $email   = sanitize_email( $_POST['contact_email'] );
-    $subject = sanitize_text_field( $_POST['contact_subject'] );
-    $message = sanitize_textarea_field( $_POST['contact_message'] );
+    $redirect_url = wp_get_referer();
+    if ( ! $redirect_url ) {
+        $redirect_url = home_url( '/contact/' );
+    }
+    // Drop the result of any earlier submission so only this one's shows.
+    $redirect_url = remove_query_arg( array( 'contact_sent', 'contact_error' ), strtok( $redirect_url, '#' ) );
 
-    $to = 'kurtcyrsfa@gmail.com';
+    // Honeypot: a hidden field people never see. Bots that fill it get a fake success, and no email.
+    if ( ! empty( $_POST['contact_website'] ) ) {
+        wp_safe_redirect( add_query_arg( 'contact_sent', '1', $redirect_url ) . '#request' );
+        exit;
+    }
+
+    $name    = isset( $_POST['contact_name'] ) ? sanitize_text_field( wp_unslash( $_POST['contact_name'] ) ) : '';
+    $email   = isset( $_POST['contact_email'] ) ? sanitize_email( wp_unslash( $_POST['contact_email'] ) ) : '';
+    $subject = isset( $_POST['contact_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['contact_subject'] ) ) : '';
+    $message = isset( $_POST['contact_message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['contact_message'] ) ) : '';
+
+    // Required fields (also enforced in the browser; this covers requests that skip it).
+    if ( '' === $name || ! is_email( $email ) || '' === $message ) {
+        wp_safe_redirect( add_query_arg( 'contact_error', 'invalid', $redirect_url ) . '#request' );
+        exit;
+    }
+
+    $contact = seiyann_contact();
+    $to = $contact['email'];
     $email_subject = 'New Portfolio Message: ' . ( !empty($subject) ? $subject : 'General Inquiry' );
 
     $body  = "You have received a new message from your portfolio contact form:\n\n";
@@ -186,18 +389,13 @@ function handle_portfolio_contact_form() {
 
     $sent = wp_mail( $to, $email_subject, $body, $headers );
 
-    $redirect_url = wp_get_referer();
-    if ( ! $redirect_url ) {
-        $redirect_url = home_url('/contact');
-    }
-
     if ( $sent ) {
         $redirect_url = add_query_arg( 'contact_sent', '1', $redirect_url );
     } else {
         $redirect_url = add_query_arg( 'contact_error', '1', $redirect_url );
     }
 
-    wp_safe_redirect( $redirect_url );
+    wp_safe_redirect( $redirect_url . '#request' );
     exit;
 }
 add_action( 'admin_post_nopriv_submit_portfolio_contact', 'handle_portfolio_contact_form' );
