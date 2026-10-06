@@ -25,21 +25,27 @@
     const dot = document.getElementById("ff-dot");
     const cta = document.getElementById("ff-open");
     const ctaTitle = cta && cta.querySelector(".ff-cta-title");
+    const frontNum = document.getElementById("ff-front-num");
+    const frontTag = document.getElementById("ff-front-tag");
 
-    /* ---------- Project modal ---------- */
+    /* ---------- Case file (project modal) ---------- */
     const modal = document.getElementById("project-modal");
     const modalTitle = document.getElementById("modal-title");
     const modalCategory = document.getElementById("modal-category");
+    const modalTag = document.getElementById("modal-tag");
     const modalDesc = document.getElementById("modal-desc");
     const modalImage = document.getElementById("modal-image");
     const modalArt = document.getElementById("modal-art");
+    const modalNumbers = ["modal-number", "modal-number-2", "modal-number-3"].map(id => document.getElementById(id));
     let lastFocus = null;
 
     function openModal(card) {
         if (!modal) return;
         modalTitle.textContent = card.dataset.title;
         modalCategory.textContent = card.dataset.category;
+        modalTag.textContent = card.dataset.tag;
         modalDesc.textContent = card.dataset.desc;
+        modalNumbers.forEach(el => { if (el) el.textContent = card.dataset.number; });
 
         // Screenshot if there is one, otherwise a copy of the card's generated art.
         const image = card.dataset.image;
@@ -142,6 +148,8 @@
             active = index;
             counter.textContent = String(index + 1).padStart(2, "0");
             if (ctaTitle) ctaTitle.textContent = cards[index].dataset.title;
+            if (frontNum) frontNum.textContent = cards[index].dataset.number;
+            if (frontTag) frontTag.textContent = cards[index].dataset.tag;
             // Only the front card is in the tab order; the rest are reachable by scrolling.
             cards.forEach((card, i) => {
                 card.tabIndex = i === index ? 0 : -1;
@@ -175,14 +183,31 @@
         render(current);
     });
 
-    target = current = trigger.progress * (total - 1);
-    render(current);
-    section.classList.add("is-ready");
-
     // Scroll position at which card i is the active one.
     function scrollFor(i) {
         return trigger.start + (trigger.end - trigger.start) * (i / (total - 1));
     }
+
+    // Deep link from the Capabilities page, e.g. /work/#project-05: open the deck on that card.
+    const deepLink = window.location.hash.match(/^#project-(\d+)$/);
+    if (deepLink) {
+        const i = clamp(parseInt(deepLink[1], 10) - 1, 0, total - 1);
+        window.scrollTo({ top: scrollFor(i), behavior: "instant" });
+        ScrollTrigger.update();
+    }
+
+    target = current = trigger.progress * (total - 1);
+    render(current);
+
+    // Intro: headline lines rise from their masks (as on the other Dossier pages), the rest fades up.
+    const introLines = section.querySelectorAll(".ff-line > span");
+    const introRest = section.querySelectorAll(".ff-eyebrow, .ff-lede, .ff-summary, .ff-cta");
+    gsap.set(introLines, { yPercent: 110 });
+    gsap.set(introRest, { autoAlpha: 0, y: 16 });
+    section.classList.add("is-ready");
+    gsap.timeline({ delay: 0.15 })
+        .to(introLines, { yPercent: 0, duration: 1, stagger: 0.1, ease: "expo.out" }, 0)
+        .to(introRest, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.08, ease: "power3.out" }, 0.2);
 
     cards.forEach((card, i) => {
         card.addEventListener("click", () => {

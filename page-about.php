@@ -1,125 +1,152 @@
 <?php
 /**
  * Template Name: About Page
- * The template for displaying the About page
+ *
+ * A "personnel file": headline + bio + pull quote on the left, a taped-on ID card on the right,
+ * then the crossing toolbox tapes and a spec-sheet row of stats.
+ * Styles: assets/css/about.css. Motion: assets/js/about-intro.js (hero + stats), assets/js/about-tools.js (tapes).
  *
  * @package Seiyann
  */
 
-get_header(); 
+get_header();
+
+$tools    = seiyann_tools();
+$projects = seiyann_projects();
+
+$work_page = get_page_by_path( 'work' );
+$work_url  = $work_page ? get_permalink( $work_page->ID ) : home_url( '/work/' );
+
+// Stats: projects and tools are counted from the real data so they never drift.
+$stats = array(
+    array( 'value' => count( $projects ), 'suffix' => '',  'label' => 'Projects completed',  'desc' => 'From brand identities to full-stack web applications.' ),
+    array( 'value' => 3,                  'suffix' => '+', 'label' => 'Years of experience', 'desc' => 'In design, development, and digital product creation.' ),
+    array( 'value' => count( $tools ),    'suffix' => '',  'label' => 'Tools in the box',    'desc' => 'Languages, frameworks and apps I build with every day.' ),
+    array( 'value' => 1,                  'suffix' => '',  'label' => 'Goal',                'desc' => 'To keep building, creating, and making an impact.' ),
+);
 ?>
 
-<!-- About Page Container (Dedicated Page Flow) -->
-<main class="flex-1 flex flex-col justify-between px-6 sm:px-12 md:px-24 lg:px-36 pt-12 pb-12 md:ml-24 overflow-hidden">
-    <!-- Top Hero Section: Left Text & Right Profile Image -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full animate-page-load">
-        <!-- Left Column: Intro & Bio -->
-        <div class="lg:col-span-7 flex flex-col justify-center">
-            <!-- Section Tag -->
-            <div class="flex items-center space-x-3 text-xs tracking-widest text-gray-400 uppercase font-medium mb-3" style="font-family: 'Montserrat', sans-serif;">
-                <span class="w-6 h-[1px] bg-gray-300"></span>
-                <span>About Me</span>
+<main class="about flex-1 px-6 sm:px-12 md:px-24 lg:px-36 pt-12 pb-20 md:ml-24">
+
+    <!-- ============ Personnel file ============ -->
+    <section class="about-hero" id="about-hero">
+
+        <!-- Left: headline, bio, approach, CTA -->
+        <div class="about-text">
+            <div class="about-eyebrow">
+                <span class="about-eyebrow-line"></span>
+                <span>About</span><span class="about-eyebrow-sep">/</span><span>File No. 001</span>
             </div>
 
-            <!-- Main Title -->
-            <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 leading-[1.1] mb-6">
-                <span class="block">Designing experiences.</span>
-                <span class="text-gray-400 block">Building products.</span>
+            <h1 class="about-title">
+                <span class="about-line"><span>Designing</span></span>
+                <span class="about-line"><span>experiences.</span></span>
+                <span class="about-line is-muted"><span>Building products.</span></span>
             </h1>
 
-            <!-- Bio Description -->
-            <p class="text-gray-500 text-sm max-w-lg leading-relaxed font-normal mb-8">
+            <p class="about-bio about-reveal">
                 I'm a graphic designer and full-stack developer passionate about building digital experiences from concept to deployment. I enjoy blending strategy, branding, interface design, and engineering into products that are both functional and visually refined.
             </p>
 
-            <!-- My Approach Sub-section -->
-            <div class="mb-8">
-                <div class="flex items-center space-x-3 text-[10px] tracking-widest text-gray-400 uppercase font-semibold mb-2" style="font-family: 'Montserrat', sans-serif;">
-                    <span>My Approach</span>
-                    <span class="w-6 h-[1px] bg-gray-300"></span>
+            <figure class="about-quote about-reveal">
+                <span class="about-quote-mark" aria-hidden="true">&ldquo;</span>
+                <blockquote>I believe great products start with a clear problem, thoughtful design, and solid code.</blockquote>
+                <figcaption>My approach</figcaption>
+            </figure>
+
+            <a href="<?php echo esc_url( $work_url ); ?>" class="about-cta about-reveal">
+                <span>View my work</span>
+                <span class="about-cta-icon" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+
+        <!-- Right: ID card, taped to the page -->
+        <div class="about-card-wrap">
+            <article class="id-card" aria-label="Profile card">
+                <span class="id-tape" aria-hidden="true">File 001 &mdash; Do not bend</span>
+
+                <div class="id-photo">
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/aboutimg.jpg' ); ?>" alt="Kurt Atoat" width="800" height="1000">
+                    <span class="id-photo-tag" aria-hidden="true">Fig. 01</span>
                 </div>
-                <p class="text-xs text-gray-600 font-medium leading-relaxed italic">
-                    I believe great products start with a clear problem, thoughtful design, and solid code.
-                </p>
-            </div>
 
-            <!-- CTA Button -->
-            <div>
-                <a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="inline-flex items-center space-x-3 py-3 px-6 rounded-full bg-black hover:bg-gray-800 text-white text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-sm group cursor-pointer" style="font-family: 'Montserrat', sans-serif;">
-                    <span>View My Work</span>
-                    <span class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center group-hover:translate-x-1 transition-transform">&rarr;</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Right Column: Profile Image & Floating Metadata -->
-        <div class="lg:col-span-5 flex justify-center relative">
-            <div class="relative w-full max-w-md bg-gray-100 rounded-2xl overflow-hidden aspect-[4/5] flex items-center justify-center border border-gray-200/60 shadow-lg group">
-                <!-- Grayscale to Color Profile Image on Hover -->
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/aboutimg.jpg" alt="Profile Photo" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                
-                <!-- Floating Vertical Badge -->
-                <div class="absolute right-4 top-4 text-[9px] tracking-widest uppercase text-white drop-shadow-md font-semibold space-y-1 text-right pointer-events-none hidden sm:block z-10" style="font-family: 'Montserrat', sans-serif;">
-                    <span class="block">Designer</span>
-                    <span class="block">Developer</span>
-                    <span class="block text-gray-200">Creative</span>
+                <div class="id-name">
+                    Kurt Atoat
+                    <span>Designer &amp; Developer</span>
                 </div>
+
+                <dl class="id-fields">
+                    <div><dt>Role</dt><dd>Graphic Designer / Full-Stack Developer</dd></div>
+                    <div><dt>Based in</dt><dd>Lucena City, Philippines</dd></div>
+                    <div><dt>Focus</dt><dd>Brand &middot; UI/UX &middot; Code</dd></div>
+                    <div><dt>Status</dt><dd><b class="id-status-dot" aria-hidden="true"></b>Open to work &mdash; full-time or freelance</dd></div>
+                </dl>
+
+                <div class="id-barcode" aria-hidden="true">
+                    <span class="id-barcode-bars"></span>
+                    <span class="id-barcode-text">KA &middot; 001 &middot; LUC-PH</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ============ Toolbox ============
+         Two tapes crossing in an X, running in opposite directions (assets/js/about-tools.js).
+         Full-bleed: negative margins cancel <main>'s side padding and, from md, its 6rem nav margin too, so
+         the tapes run to the screen's left edge under the floating nav. Tools come from seiyann_tools(). -->
+    <?php
+    $tapes = array(
+        'ink'   => array( 'label' => 'Languages & frameworks', 'dir' => -1 ),
+        'paper' => array( 'label' => 'Tools & apps',           'dir' => 1 ),
+    );
+    ?>
+    <section class="tools -mx-6 sm:-mx-12 md:-mr-24 md:-ml-48 lg:-mr-36 lg:-ml-60" aria-label="Toolbox">
+        <div class="tools-stage" aria-hidden="true">
+            <?php foreach ( $tapes as $tape_key => $tape ) : ?>
+                <?php
+                // Printed edge text: repeat the label to ~600 characters so it spans the tape (120% of the
+                // screen) even on very wide displays, whatever the label's length.
+                $edge_text = str_repeat( $tape['label'] . ' — ', (int) ceil( 600 / ( mb_strlen( $tape['label'] ) + 3 ) ) );
+                ?>
+                <div class="tape tape--<?php echo esc_attr( $tape_key ); ?>" data-dir="<?php echo esc_attr( $tape['dir'] ); ?>">
+                    <span class="tape-edge tape-edge--top"><?php echo esc_html( $edge_text ); ?></span>
+                    <div class="tape-track">
+                        <div class="tape-set">
+                            <?php foreach ( $tools as $tool ) :
+                                if ( $tool['tape'] !== $tape_key ) { continue; }
+                            ?>
+                                <span class="tool" style="--brand: <?php echo esc_attr( $tool['hex'] ); ?>; --on-brand: <?php echo esc_attr( seiyann_on_color( $tool['hex'] ) ); ?>;">
+                                    <?php echo seiyann_tool_icon( $tool['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput -- trusted SVG files shipped with the theme ?>
+                                    <span class="tool-name"><?php echo esc_html( $tool['name'] ); ?></span>
+                                </span>
+                                <span class="tool-sep">&#10033;</span>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <span class="tape-edge tape-edge--bottom"><?php echo esc_html( $edge_text ); ?></span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- The tapes are decorative duplicates; this is the readable list -->
+        <ul class="sr-only">
+            <?php foreach ( $tools as $tool ) : ?>
+                <li><?php echo esc_html( $tool['name'] ); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </section>
+
+    <!-- ============ Stats: spec-sheet row (numbers count up in about-intro.js) ============ -->
+    <dl class="about-stats" id="about-stats">
+        <?php foreach ( $stats as $stat ) : ?>
+            <div class="about-stat">
+                <dt class="about-stat-label"><?php echo esc_html( $stat['label'] ); ?></dt>
+                <dd class="about-stat-value"><span class="about-stat-num" data-count="<?php echo esc_attr( $stat['value'] ); ?>"><?php echo esc_html( $stat['value'] ); ?></span><?php echo esc_html( $stat['suffix'] ); ?></dd>
+                <dd class="about-stat-desc"><?php echo esc_html( $stat['desc'] ); ?></dd>
             </div>
-        </div>
-    </div>
-
-    <!-- Bottom Metrics Grid (4 Columns) with compact wireframe sizing -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 mt-12 border-t border-gray-200/60 animate-page-load load-delay-2" style="font-family: 'Montserrat', sans-serif;">
-        <!-- Metric 1 -->
-        <div>
-            <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">5+</h4>
-            <p class="text-[9px] tracking-widest uppercase text-gray-400 font-semibold mb-1">Projects Completed</p>
-            <p class="text-[11px] text-gray-500 font-normal leading-relaxed" style="text-transform: none;">From brand identities to full-stack web applications.</p>
-        </div>
-
-        <!-- Metric 2 -->
-        <div>
-            <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">2+</h4>
-            <p class="text-[9px] tracking-widest uppercase text-gray-400 font-semibold mb-1">Years of Experience</p>
-            <p class="text-[11px] text-gray-500 font-normal leading-relaxed" style="text-transform: none;">In design, development, and digital product creation.</p>
-        </div>
-
-        <!-- Metric 3 -->
-        <div>
-            <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">15+</h4>
-            <p class="text-[9px] tracking-widest uppercase text-gray-400 font-semibold mb-1">Tech Stacks</p>
-            <p class="text-[11px] text-gray-500 font-normal leading-relaxed" style="text-transform: none;">Modern tools for design, development, and deployment.</p>
-        </div>
-
-        <!-- Metric 4 -->
-        <div>
-            <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">1</h4>
-            <p class="text-[9px] tracking-widest uppercase text-gray-400 font-semibold mb-1">Goal</p>
-            <p class="text-[11px] text-gray-500 font-normal leading-relaxed" style="text-transform: none;">To keep building, creating, and making an impact.</p>
-        </div>
-    </div>
+        <?php endforeach; ?>
+    </dl>
 </main>
 
-<style>
-    @keyframes pageLoadEntry {
-        from {
-            opacity: 0;
-            transform: translateY(16px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-page-load {
-        opacity: 0;
-        animation: pageLoadEntry 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .load-delay-1 { animation-delay: 0.1s; }
-    .load-delay-2 { animation-delay: 0.2s; }
-</style>
-
-<?php 
+<?php
 get_footer();
