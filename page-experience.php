@@ -2,7 +2,7 @@
 /**
  * Template Name: Experience Page
  *
- * "The Dossier", File No. 002: Service Record. Each role is a record card pulled from the file
+ * "The Dossier", File No. 004: Service Record. Each role is a record card pulled from the file
  * (taped, stamped CURRENT / COMPLETED, ID-card style fields), with a sticky year index on the left.
  *
  * Data: seiyann_experience() (functions.php). Styles: assets/css/experience.css.
@@ -40,7 +40,7 @@ $period = function ( $record ) {
     <header class="exp-hero" id="exp-hero">
         <div class="exp-eyebrow">
             <span class="exp-eyebrow-line"></span>
-            <span>Experience</span><span class="exp-eyebrow-sep">/</span><span>File No. 002</span>
+            <span>Experience</span><span class="exp-eyebrow-sep">/</span><span>File No. 004</span>
         </div>
 
         <h1 class="exp-title">

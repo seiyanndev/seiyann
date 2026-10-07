@@ -35,7 +35,7 @@ $stats = array(
         <div class="about-text">
             <div class="about-eyebrow">
                 <span class="about-eyebrow-line"></span>
-                <span>About</span><span class="about-eyebrow-sep">/</span><span>File No. 001</span>
+                <span>About</span><span class="about-eyebrow-sep">/</span><span>File No. 003</span>
             </div>
 
             <h1 class="about-title">
@@ -63,7 +63,7 @@ $stats = array(
         <!-- Right: ID card, taped to the page -->
         <div class="about-card-wrap">
             <article class="id-card" aria-label="Profile card">
-                <span class="id-tape" aria-hidden="true">File 001 &mdash; Do not bend</span>
+                <span class="id-tape" aria-hidden="true">File 003 &mdash; Do not bend</span>
 
                 <div class="id-photo">
                     <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/aboutimg.jpg' ); ?>" alt="Kurt Atoat" width="800" height="1000">
@@ -84,7 +84,7 @@ $stats = array(
 
                 <div class="id-barcode" aria-hidden="true">
                     <span class="id-barcode-bars"></span>
-                    <span class="id-barcode-text">KA &middot; 001 &middot; LUC-PH</span>
+                    <span class="id-barcode-text">KA &middot; 003 &middot; LUC-PH</span>
                 </div>
             </article>
         </div>

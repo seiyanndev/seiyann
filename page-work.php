@@ -1,9 +1,13 @@
 <?php
 /**
  * Template Name: Work Page
- * The template for displaying the Work page: a pinned, scroll-driven "Freefall" deck of projects.
- * Projects come from seiyann_projects() (functions.php); styles in assets/css/work.css,
- * motion in assets/js/work-freefall.js.
+ *
+ * "The Dossier", File No. 001: Case Files, shown as a filing cabinet. Each project is a manila
+ * folder standing in a drawer; tabs are staggered so they all show. Clicking a folder opens it in
+ * place into its case sheet (exhibit + fields); filter stamps dim folders outside a discipline.
+ *
+ * Data: seiyann_projects() (functions.php). Styles: assets/css/work.css. Motion: assets/js/work-cabinet.js.
+ * Deep links: /work/#project-05 opens case 05 (used by the Capabilities matrix).
  *
  * @package Seiyann
  */
@@ -12,126 +16,124 @@ get_header();
 
 $projects = seiyann_projects();
 $total    = count( $projects );
+
+// Discipline filters, matched against each project's category text.
+$filters = array(
+    'all'      => array( 'label' => 'All',      'match' => '' ),
+    'branding' => array( 'label' => 'Branding', 'match' => 'Branding' ),
+    'ui'       => array( 'label' => 'UI/UX',    'match' => 'UI-UX' ),
+    'web'      => array( 'label' => 'Web',      'match' => 'Web Development' ),
+);
+$filter_counts = array();
+foreach ( $filters as $key => $filter ) {
+    $filter_counts[ $key ] = '' === $filter['match'] ? $total : count( array_filter( $projects, function ( $p ) use ( $filter ) {
+        return false !== stripos( $p['category'], $filter['match'] );
+    } ) );
+}
+
+// Tabs step across the folder width so neighbouring tabs never sit on top of each other.
+// Unitless on purpose: work.css scales them (0 = left edge, 72 = right edge).
+$tab_positions = array( 0, 24, 48, 72 );
 ?>
 
-<main class="relative flex-1 md:ml-24">
-    <section id="freefall" class="ff-section" aria-label="Selected work">
-        <div class="ff-layout">
+<main class="cab flex-1 px-6 sm:px-12 md:px-24 lg:px-36 pt-12 pb-24 md:ml-24">
 
-            <!-- Left: intro -->
-            <div class="ff-intro">
-                <div class="ff-eyebrow">
-                    <span class="ff-eyebrow-line"></span>
-                    <span>Work</span><span class="ff-eyebrow-sep">/</span><span>File No. 005</span>
-                </div>
-                <h1 class="ff-title">
-                    <span class="ff-line"><span>Case files.</span></span>
-                    <span class="ff-line is-muted"><span>Selected work.</span></span>
-                </h1>
-                <p class="ff-lede">
-                    <?php echo esc_html( sprintf( '%d cases, one at a time. Scroll, and each file folds over the crest and drops into the pit.', $total ) ); ?>
-                </p>
+    <!-- ============ Header ============ -->
+    <header class="cab-hero" id="cab-hero">
+        <div class="cab-eyebrow">
+            <span class="cab-eyebrow-line"></span>
+            <span>Work</span><span class="cab-eyebrow-sep">/</span><span>File No. 001</span>
+        </div>
+        <h1 class="cab-title">
+            <span class="cab-line"><span>Case files.</span></span>
+            <span class="cab-line is-muted"><span>Selected work.</span></span>
+        </h1>
+        <p class="cab-lede"><?php echo esc_html( sprintf( '%d cases on file. Pull a folder from the drawer to open it.', $total ) ); ?></p>
 
-                <!-- Case summary: "In front" follows the deck (work-freefall.js) -->
-                <dl class="ff-summary">
-                    <div><dt>On file</dt><dd><?php echo esc_html( sprintf( '%02d', $total ) ); ?> cases</dd></div>
-                    <div><dt>In front</dt><dd><span id="ff-front-num">01</span> &middot; <span id="ff-front-tag"><?php echo esc_html( $projects[0]['tag'] ); ?></span></dd></div>
-                </dl>
-
-                <button type="button" class="ff-cta" id="ff-open">
-                    <span>Open case: <span class="ff-cta-title"><?php echo esc_html( $projects[0]['title'] ); ?></span></span>
-                    <span class="ff-cta-icon" aria-hidden="true">&rarr;</span>
+        <!-- Filter stamps: dim the folders outside a discipline -->
+        <div class="cab-filters" role="group" aria-label="Filter cases by discipline">
+            <?php foreach ( $filters as $key => $filter ) : ?>
+                <button type="button" class="cab-filter<?php echo 'all' === $key ? ' is-active' : ''; ?>" data-filter="<?php echo esc_attr( $key ); ?>" aria-pressed="<?php echo 'all' === $key ? 'true' : 'false'; ?>">
+                    <?php echo esc_html( $filter['label'] ); ?> <span><?php echo esc_html( sprintf( '%02d', $filter_counts[ $key ] ) ); ?></span>
                 </button>
-            </div>
+            <?php endforeach; ?>
+        </div>
+    </header>
 
-            <!-- Right: the deck. Cards are absolutely stacked; work-freefall.js places them from scroll progress. -->
-            <div class="ff-stage-wrap">
-                <div class="ff-stage" id="ff-stage">
-                    <?php foreach ( $projects as $i => $project ) :
-                        $image = seiyann_project_image_url( $project );
-                        list( $variant, $c1, $c2, $c3, $c4 ) = $project['art'];
-                        $art_style = sprintf( '--c1:%s;--c2:%s;--c3:%s;--c4:%s', $c1, $c2, $c3, $c4 );
-                        $number = sprintf( '%02d', $i + 1 );
-                    ?>
-                        <button type="button" class="ff-card" data-index="<?php echo esc_attr( $i ); ?>"
-                                data-title="<?php echo esc_attr( $project['title'] ); ?>"
-                                data-category="<?php echo esc_attr( $project['category'] ); ?>"
-                                data-desc="<?php echo esc_attr( $project['description'] ); ?>"
-                                data-image="<?php echo esc_url( $image ); ?>"
-                                data-number="<?php echo esc_attr( $number ); ?>"
-                                data-tag="<?php echo esc_attr( $project['tag'] ); ?>"
-                                aria-label="<?php echo esc_attr( sprintf( 'Case %d of %d: %s. Open case file', $i + 1, $total, $project['title'] ) ); ?>">
-                            <!-- Evidence-photo style: paper frame around the media, tape across the top -->
-                            <span class="ff-card-tape" aria-hidden="true">Case <?php echo esc_html( $number . ' / ' . sprintf( '%02d', $total ) ); ?></span>
-                            <span class="ff-card-media">
-                                <?php if ( $image ) : ?>
-                                    <img src="<?php echo esc_url( $image ); ?>" alt="" loading="<?php echo $i < 3 ? 'eager' : 'lazy'; ?>" decoding="async" draggable="false">
-                                <?php else : ?>
-                                    <span class="ff-art art-<?php echo esc_attr( $variant ); ?>" style="<?php echo esc_attr( $art_style ); ?>"></span>
-                                <?php endif; ?>
-                            </span>
-                            <span class="ff-card-scrim" aria-hidden="true"></span>
-                            <span class="ff-card-tag"><?php echo esc_html( $project['tag'] ); ?></span>
-                            <span class="ff-card-body">
-                                <span class="ff-card-eyebrow">Case <?php echo esc_html( $number ); ?></span>
-                                <span class="ff-card-title"><?php echo esc_html( $project['title'] ); ?></span>
-                                <span class="ff-card-caption"><?php echo esc_html( $project['summary'] ); ?></span>
-                            </span>
-                        </button>
-                    <?php endforeach; ?>
-                </div>
-            </div>
+    <!-- ============ The drawer ============ -->
+    <div class="cab-drawer" id="cab-drawer">
+        <div class="cab-drawer-label" aria-hidden="true">
+            <span>Drawer 01 &mdash; Selected work</span>
+            <span><?php echo esc_html( sprintf( '%02d', $total ) ); ?> folders</span>
         </div>
 
-        <!-- Right edge: progress rail -->
-        <aside class="ff-rail" aria-hidden="true">
-            <span class="ff-counter-label">Case</span>
-            <div class="ff-counter">
-                <span class="ff-counter-num" id="ff-counter">01</span><sup class="ff-counter-total">/<?php echo esc_html( $total ); ?></sup>
-            </div>
-            <div class="ff-track" id="ff-track">
-                <?php for ( $i = 0; $i < $total; $i++ ) : ?>
-                    <span class="ff-tick" style="top: <?php echo esc_attr( $total > 1 ? round( $i / ( $total - 1 ) * 100, 3 ) : 0 ); ?>%"></span>
-                <?php endfor; ?>
-                <span class="ff-track-fill" id="ff-fill"></span>
-                <span class="ff-track-dot" id="ff-dot"></span>
-            </div>
-            <span class="ff-rail-label">Scroll</span>
-        </aside>
-    </section>
-</main>
+        <ol class="cab-folders">
+            <?php foreach ( $projects as $i => $project ) :
+                $number = sprintf( '%02d', $i + 1 );
+                $image  = seiyann_project_image_url( $project );
+                list( $variant, $c1, $c2, $c3, $c4 ) = $project['art'];
+                $art_style = sprintf( '--c1:%s;--c2:%s;--c3:%s;--c4:%s', $c1, $c2, $c3, $c4 );
 
-<!-- Case file (project modal): filled in by work-freefall.js from the card's data attributes -->
-<div id="project-modal" class="case-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div id="modal-content-box" class="case-sheet">
-        <span class="case-tape" aria-hidden="true">Case <span id="modal-number">01</span> &mdash; File 005</span>
+                $keys = array();
+                foreach ( $filters as $key => $filter ) {
+                    if ( '' !== $filter['match'] && false !== stripos( $project['category'], $filter['match'] ) ) {
+                        $keys[] = $key;
+                    }
+                }
+            ?>
+                <li class="folder" id="project-<?php echo esc_attr( $number ); ?>" data-filters="<?php echo esc_attr( implode( ' ', $keys ) ); ?>"
+                    style="--tab-x: <?php echo esc_attr( $tab_positions[ $i % count( $tab_positions ) ] ); ?>; --z: <?php echo esc_attr( $i + 1 ); ?>;">
 
-        <button id="modal-close" class="case-close" aria-label="Close case file">&times;</button>
+                    <!-- Tab + front strip: the whole thing is the toggle -->
+                    <button type="button" class="folder-toggle" aria-expanded="false" aria-controls="case-<?php echo esc_attr( $number ); ?>">
+                        <span class="folder-tab"><b><?php echo esc_html( $number ); ?></b> &middot; <?php echo esc_html( $project['title'] ); ?></span>
+                        <span class="folder-front">
+                            <span class="folder-num"><?php echo esc_html( $number ); ?></span>
+                            <span class="folder-title"><?php echo esc_html( $project['title'] ); ?></span>
+                            <span class="folder-meta">
+                                <span class="folder-tag"><?php echo esc_html( $project['tag'] ); ?></span>
+                                <span class="folder-summary"><?php echo esc_html( $project['summary'] ); ?></span>
+                            </span>
+                            <span class="folder-action" aria-hidden="true"><span class="folder-action-open">Open</span><span class="folder-action-close">Close</span></span>
+                        </span>
+                    </button>
 
-        <header class="case-head">
-            <span class="case-eyebrow">Case <span id="modal-number-2">01</span> / <?php echo esc_html( sprintf( '%02d', $total ) ); ?></span>
-            <h2 id="modal-title" class="case-title"></h2>
-        </header>
+                    <!-- Case sheet, revealed when the folder opens -->
+                    <div class="folder-body" id="case-<?php echo esc_attr( $number ); ?>" role="region" aria-label="<?php echo esc_attr( $project['title'] . ' case file' ); ?>">
+                        <div class="folder-inner">
+                            <div class="case-sheet">
+                                <figure class="case-exhibit">
+                                    <?php if ( $image ) : ?>
+                                        <img src="<?php echo esc_url( $image ); ?>" alt="<?php echo esc_attr( $project['title'] . ' preview' ); ?>" loading="lazy" decoding="async">
+                                    <?php else : ?>
+                                        <span class="ff-art art-<?php echo esc_attr( $variant ); ?>" style="<?php echo esc_attr( $art_style ); ?>"></span>
+                                    <?php endif; ?>
+                                    <span class="case-tape" aria-hidden="true">Case <?php echo esc_html( $number . ' / ' . sprintf( '%02d', $total ) ); ?></span>
+                                    <figcaption class="case-fig">Fig. <?php echo esc_html( $number ); ?></figcaption>
+                                </figure>
 
-        <!-- Exhibit: the project screenshot, or the card's generated art if there is none -->
-        <figure id="modal-preview-box" class="case-exhibit">
-            <img id="modal-image" src="" alt="">
-            <div id="modal-art" class="case-art" hidden></div>
-            <figcaption class="case-exhibit-label">Fig. <span id="modal-number-3">01</span></figcaption>
-        </figure>
+                                <div class="case-info">
+                                    <dl class="case-fields">
+                                        <div><dt>Case</dt><dd><?php echo esc_html( $number . ' / ' . sprintf( '%02d', $total ) ); ?></dd></div>
+                                        <div><dt>Discipline</dt><dd><?php echo esc_html( $project['category'] ); ?></dd></div>
+                                        <div><dt>Type</dt><dd><?php echo esc_html( $project['tag'] ); ?></dd></div>
+                                        <div><dt>Overview</dt><dd class="case-desc"><?php echo esc_html( $project['description'] ); ?></dd></div>
+                                    </dl>
+                                    <div class="case-foot">
+                                        <span class="case-barcode" aria-hidden="true"></span>
+                                        <button type="button" class="case-close">Close file</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
 
-        <dl class="case-fields">
-            <div><dt>Discipline</dt><dd id="modal-category"></dd></div>
-            <div><dt>Type</dt><dd id="modal-tag"></dd></div>
-            <div><dt>Overview</dt><dd id="modal-desc"></dd></div>
-        </dl>
-
-        <footer class="case-foot">
-            <span class="case-barcode" aria-hidden="true"></span>
-            <button id="modal-close-btn" class="case-stamp">Close file</button>
-        </footer>
+        <div class="cab-drawer-base" aria-hidden="true"></div>
     </div>
-</div>
+</main>
 
 <?php
 get_footer();
