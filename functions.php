@@ -19,6 +19,9 @@ function seiyann_enqueue_styles() {
         $visual_js = get_template_directory() . '/assets/js/hero-visual.js';
         wp_enqueue_script( 'seiyann-hero-visual', get_template_directory_uri() . '/assets/js/hero-visual.js', array( 'gsap', 'gsap-scrolltrigger' ), filemtime( $visual_js ), true );
 
+        $cover_js = get_template_directory() . '/assets/js/home-cover.js';
+        wp_enqueue_script( 'seiyann-home-cover', get_template_directory_uri() . '/assets/js/home-cover.js', array( 'gsap', 'gsap-scrolltrigger' ), filemtime( $cover_js ), true );
+
         wp_enqueue_script( 'gsap-splittext', 'https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js', array( 'gsap' ), '3.15.0', true );
 
         $hero_js = get_template_directory() . '/assets/js/hero-headline.js';
@@ -37,13 +40,13 @@ function seiyann_enqueue_styles() {
         wp_enqueue_style( 'seiyann-glitch-fonts', 'https://fonts.googleapis.com/css2?' . $glitch_fonts . '&text=' . rawurlencode( $hero_glyphs ) . '&display=block', array(), null );
     }
 
-    // Work page: "Freefall" scroll-driven project deck
+    // Work page: "filing cabinet" of case folders
     if ( is_page( 'work' ) ) {
         $work_css = get_template_directory() . '/assets/css/work.css';
         wp_enqueue_style( 'seiyann-work', get_template_directory_uri() . '/assets/css/work.css', array(), filemtime( $work_css ) );
 
-        $work_js = get_template_directory() . '/assets/js/work-freefall.js';
-        wp_enqueue_script( 'seiyann-work-freefall', get_template_directory_uri() . '/assets/js/work-freefall.js', array( 'gsap', 'gsap-scrolltrigger' ), filemtime( $work_js ), true );
+        $work_js = get_template_directory() . '/assets/js/work-cabinet.js';
+        wp_enqueue_script( 'seiyann-work-cabinet', get_template_directory_uri() . '/assets/js/work-cabinet.js', array( 'gsap' ), filemtime( $work_js ), true );
     }
 
     // Capabilities page: scroll-driven "lens" section + proof matrix

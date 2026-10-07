@@ -39,7 +39,7 @@ foreach ( $projects as $project ) {
             <div class="lens-intro">
                 <div class="lens-eyebrow">
                     <span class="lens-eyebrow-line"></span>
-                    <span>Capabilities</span><span class="lens-eyebrow-sep">/</span><span>File No. 004</span>
+                    <span>Capabilities</span><span class="lens-eyebrow-sep">/</span><span>File No. 002</span>
                 </div>
                 <h1 class="lens-title">Design. Code. <span>Build.</span></h1>
                 <p class="lens-lede">One project, four lenses. Scroll to watch this site go from a sketch to a shipped product.</p>
@@ -225,7 +225,7 @@ foreach ( $projects as $project ) {
         </div>
         <div class="proof-foot" aria-hidden="true">
             <span class="proof-foot-bars"></span>
-            <span class="proof-foot-text">Source: project categories &middot; KA &middot; 004/B</span>
+            <span class="proof-foot-text">Source: project categories &middot; KA &middot; 002/B</span>
         </div>
         </div>
     </section>
