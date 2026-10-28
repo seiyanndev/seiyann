@@ -108,8 +108,10 @@ html.js .exp-records:not(.is-ready) .rec { visibility: hidden; }
     margin: 0 -24px 32px;
     padding: 10px 24px;
     overflow-x: auto;
+    scrollbar-width: none; /* swipeable strip: no scrollbar bar under the years */
     background-color: #faf9f5;
 }
+.exp-index::-webkit-scrollbar { display: none; }
 .exp-index ol { display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; }
 @media (min-width: 1024px) {
     .exp-index { top: 120px; margin: 0; padding: 0; overflow: visible; background: none; }

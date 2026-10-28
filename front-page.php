@@ -49,7 +49,7 @@ get_header();
 
         <!-- Status line: the same facts as the About page ID card -->
         <p class="cover-status opacity-0 animate-fade-up delay-200">
-            <b class="cover-status-dot" aria-hidden="true"></b>Open to work <span>&middot;</span> Lucena City, PH <span>&middot;</span> 3+ yrs
+            <span class="cover-status-item"><b class="cover-status-dot" aria-hidden="true"></b>Open to work</span> <span class="cover-status-sep">&middot;</span> <span class="cover-status-item">Lucena City, PH</span> <span class="cover-status-sep">&middot;</span> <span class="cover-status-item">3+ yrs</span>
         </p>
 
         <a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="cover-cta opacity-0 animate-fade-up delay-300">
