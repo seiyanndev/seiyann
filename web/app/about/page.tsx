@@ -75,7 +75,9 @@ export default function AboutPage() {
             <span className="id-tape" aria-hidden="true">File 003 &mdash; Do not bend</span>
 
             <div className="id-photo">
-              <Image src="/assets/aboutimg.jpg" alt="Kurt Atoat" width={800} height={1000} loading="eager" />
+              {/* unoptimized: the photo is cropped hard by object-fit: cover, and the resized, re-encoded copy
+                  looked visibly softer than the original file the WordPress theme served. */}
+              <Image src="/assets/aboutimg.jpg" alt="Kurt Atoat" width={800} height={1000} loading="eager" unoptimized />
               <span className="id-photo-tag" aria-hidden="true">Fig. 01</span>
             </div>
 
