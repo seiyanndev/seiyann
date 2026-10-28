@@ -12,8 +12,9 @@ get_header();
 <!-- Homepage: "The Dossier", File No. 000: Cover Sheet. Styles: assets/css/home.css.
      Motion: hero-headline.js (glitch), hero-visual.js (slideshow), home-cover.js (stamp + contents). -->
 
-<!-- Hero Section Container (a full screen: the contents index follows below) -->
-<main class="home-cover relative flex-1 min-h-[100svh] flex flex-col justify-between px-6 sm:px-12 md:px-24 lg:px-36 xl:pl-28 py-12 md:py-16 md:ml-24">
+<!-- Hero Section Container: a full screen from md up; on phones (no slideshow) it sizes to its content
+     so the contents index follows without a blank band. -->
+<main class="home-cover relative flex-1 md:min-h-[100svh] flex flex-col justify-between px-6 sm:px-12 md:px-24 lg:px-36 xl:pl-28 pt-12 pb-6 md:py-16 md:ml-24">
     <!-- Printer's crop marks framing the cover sheet -->
     <span class="cover-crop cover-crop--tl" aria-hidden="true"></span>
     <span class="cover-crop cover-crop--tr" aria-hidden="true"></span>
@@ -49,7 +50,7 @@ get_header();
 
         <!-- Status line: the same facts as the About page ID card -->
         <p class="cover-status opacity-0 animate-fade-up delay-200">
-            <span class="cover-status-item"><b class="cover-status-dot" aria-hidden="true"></b>Open to work</span> <span class="cover-status-sep">&middot;</span> <span class="cover-status-item">Lucena City, PH</span> <span class="cover-status-sep">&middot;</span> <span class="cover-status-item">3+ yrs</span>
+            <span class="cover-status-item"><b class="cover-status-dot" aria-hidden="true"></b>Open to work</span> <span class="cover-status-item"><span class="cover-status-sep">&middot;</span>Lucena City, PH</span> <span class="cover-status-item"><span class="cover-status-sep">&middot;</span>3+ yrs</span>
         </p>
 
         <a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="cover-cta opacity-0 animate-fade-up delay-300">
@@ -125,7 +126,7 @@ $contents = array(
     array( 'num' => '005', 'slug' => 'contact',      'page' => 'Contact',      'title' => 'Request form',   'detail' => 'Open to work' ),
 );
 ?>
-<section class="cover-index md:ml-24 px-6 sm:px-12 md:px-24 lg:px-36 xl:pl-28 pt-8 pb-24" id="contents" aria-labelledby="contents-title">
+<section class="cover-index md:ml-24 px-6 sm:px-12 md:px-24 lg:px-36 xl:pl-28 pt-8 pb-8 md:pb-24" id="contents" aria-labelledby="contents-title">
     <div class="contents-head">
         <div class="cover-eyebrow">
             <span class="cover-eyebrow-line"></span>
