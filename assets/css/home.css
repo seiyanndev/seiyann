@@ -38,6 +38,11 @@ html.js .hero-visual:not(.is-ready) { visibility: hidden; }
     aspect-ratio: 1 / 1;
     perspective: 1400px;
 }
+/* Phones: no slideshow. The hero is the headline, status and CTA; the photos are lazy-loaded,
+   so a hidden slideshow doesn't download them either. */
+@media (max-width: 767px) {
+    .hero-visual { display: none; }
+}
 
 /* "Fig. 0N" tape across the top of each evidence photo */
 .hero-card-tape {
@@ -82,6 +87,7 @@ html.js .hero-visual:not(.is-ready) { visibility: hidden; }
     cursor: pointer;
     will-change: transform;
 }
+.hero-card picture { display: contents; } /* layout-transparent: the img still sizes against the card */
 .hero-card img {
     display: block;
     width: 100%;
