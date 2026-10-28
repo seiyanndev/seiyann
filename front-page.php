@@ -80,9 +80,14 @@ get_header();
             <?php foreach ( $slides as $i => $slide ) : ?>
                 <figure class="hero-card" role="group" aria-roledescription="slide" aria-label="<?php echo esc_attr( sprintf( '%d of %d', $i + 1, count( $slides ) ) ); ?>"
                         data-place="<?php echo esc_attr( $slide['place'] ); ?>" data-photographer="<?php echo esc_attr( $slide['photographer'] ); ?>">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/hero/' . $slide['image'] ); ?>"
-                         alt="<?php echo esc_attr( $slide['alt'] ); ?>" width="900" height="1200" decoding="async"
-                         <?php echo 0 === $i ? 'fetchpriority="high"' : ''; ?> draggable="false">
+                    <?php /* Phones (under 768px) hide the slideshow; the <source> hands them a 1px placeholder
+                             so the real photos are never downloaded there. */ ?>
+                    <picture>
+                        <source media="(max-width: 767px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/hero/' . $slide['image'] ); ?>"
+                             alt="<?php echo esc_attr( $slide['alt'] ); ?>" width="900" height="1200" decoding="async"
+                             <?php echo 0 === $i ? 'fetchpriority="high"' : ''; ?> draggable="false">
+                    </picture>
                     <span class="hero-card-tape" aria-hidden="true">Fig. <?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
                     <span class="hero-card-veil" aria-hidden="true"></span>
                 </figure>
