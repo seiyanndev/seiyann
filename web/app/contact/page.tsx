@@ -72,8 +72,8 @@ export default function ContactPage() {
                 <a href={social.url} target="_blank" rel="noopener">
                   <span className="ct-channel-code" aria-hidden="true">{social.code}</span>
                   <span className="ct-channel-name">{social.name}</span>
-                  <span className="ct-channel-handle">@{social.handle}</span>
-                  <span className="ct-channel-arrow" aria-hidden="true">&nearr;</span>
+                  <span className="ct-channel-handle">{`@${social.handle}`}</span>
+                  <span className="ct-channel-arrow" aria-hidden="true">{"↗"}</span>
                 </a>
               </li>
             ))}

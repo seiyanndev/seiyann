@@ -126,14 +126,14 @@ export default function HomePage() {
                     <img src={`/assets/img/hero/${slide.image}`} alt={slide.alt} width="900" height="1200" decoding="async"
                       fetchPriority={i === 0 ? "high" : undefined} draggable="false" />
                   </picture>
-                  <span className="hero-card-tape" aria-hidden="true">Fig. {pad2(i + 1)}</span>
+                  <span className="hero-card-tape" aria-hidden="true">{`Fig. ${pad2(i + 1)}`}</span>
                   <span className="hero-card-veil" aria-hidden="true"></span>
                 </figure>
               ))}
 
               {/* Tilted to run along the front card's bottom edge (inside the stage so it moves with the cards) */}
               <p className="hero-caption">
-                <span className="hero-caption-index">01 / {pad2(heroSlides.length)}</span> &mdash;{" "}
+                <span className="hero-caption-index">{`01 / ${pad2(heroSlides.length)}`}</span>{" — "}
                 <span className="hero-caption-place">{heroSlides[0].place}</span><br />
                 Photo: <span className="hero-caption-credit">{heroSlides[0].photographer}</span> / Unsplash
               </p>
@@ -159,7 +159,7 @@ export default function HomePage() {
             <span className="cover-eyebrow-line"></span>
             <h2 id="contents-title">Contents</h2>
           </div>
-          <span className="contents-count">{contents.length} files</span>
+          <span className="contents-count">{`${contents.length} files`}</span>
         </div>
 
         <ol className="contents-list">
@@ -171,7 +171,7 @@ export default function HomePage() {
                 <span className="contents-title">{item.title}</span>
                 <span className="contents-detail">{item.detail}</span>
                 <span className="contents-tape" aria-hidden="true">Open file &rarr;</span>
-                <span className="contents-arrow" aria-hidden="true">&nearr;</span>
+                <span className="contents-arrow" aria-hidden="true">{"↗"}</span>
               </Link>
             </li>
           ))}

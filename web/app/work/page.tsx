@@ -56,7 +56,7 @@ export default function WorkPage() {
         <div className="cab-filters" role="group" aria-label="Filter cases by discipline">
           {FILTERS.map((filter, i) => (
             <button key={filter.key} type="button" className={`cab-filter${filter.key === "all" ? " is-active" : ""}`} data-filter={filter.key} aria-pressed={filter.key === "all" ? "true" : "false"}>
-              {filter.label} <span>{pad2(filterCounts[i])}</span>
+              {`${filter.label} `}<span>{pad2(filterCounts[i])}</span>
             </button>
           ))}
         </div>
@@ -66,7 +66,7 @@ export default function WorkPage() {
       <div className="cab-drawer" id="cab-drawer">
         <div className="cab-drawer-label" aria-hidden="true">
           <span>Drawer 01 &mdash; Selected work</span>
-          <span>{pad2(total)} folders</span>
+          <span>{`${pad2(total)} folders`}</span>
         </div>
 
         <ol className="cab-folders">
@@ -82,7 +82,7 @@ export default function WorkPage() {
 
                 {/* Tab + front strip: the whole thing is the toggle */}
                 <button type="button" className="folder-toggle" aria-expanded="false" aria-controls={`case-${number}`}>
-                  <span className="folder-tab"><b>{number}</b> &middot; {project.title}</span>
+                  <span className="folder-tab"><b>{number}</b>{` · ${project.title}`}</span>
                   <span className="folder-front">
                     <span className="folder-num">{number}</span>
                     <span className="folder-title">{project.title}</span>
@@ -106,8 +106,8 @@ export default function WorkPage() {
                         ) : (
                           <span className={`ff-art art-${variant}`} style={artStyle}></span>
                         )}
-                        <span className="case-tape" aria-hidden="true">Case {`${number} / ${pad2(total)}`}</span>
-                        <figcaption className="case-fig">Fig. {number}</figcaption>
+                        <span className="case-tape" aria-hidden="true">{`Case ${number} / ${pad2(total)}`}</span>
+                        <figcaption className="case-fig">{`Fig. ${number}`}</figcaption>
                       </figure>
 
                       <div className="case-info">

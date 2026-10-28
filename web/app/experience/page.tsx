@@ -78,14 +78,14 @@ export default function ExperiencePage() {
 
             return (
               <article key={i} className="rec" id={`record-${num}`} data-index={i} aria-labelledby={`rec-role-${num}`}>
-                <span className="rec-tape" aria-hidden="true">Record {num} &mdash; {record.start}</span>
+                <span className="rec-tape" aria-hidden="true">{`Record ${num} — ${record.start}`}</span>
 
                 <header className="rec-head">
-                  <span className="rec-num">Record {num}</span>
+                  <span className="rec-num">{`Record ${num}`}</span>
                   <h2 className="rec-role" id={`rec-role-${num}`}>{record.role}</h2>
                   <p className="rec-org">
-                    {record.org}
-                    {meta.length > 0 && <>{" "}<span>&middot; {meta.join(" · ")}</span></>}
+                    {meta.length > 0 ? `${record.org} ` : record.org}
+                    {meta.length > 0 && <span>{`· ${meta.join(" · ")}`}</span>}
                   </p>
                   <span className={`rec-stamp${isCurrent ? " is-current" : ""}`}>{isCurrent ? "Current" : "Completed"}</span>
                 </header>
@@ -127,7 +127,7 @@ export default function ExperiencePage() {
                       <dd className="rec-proof">
                         {record.projects.map((title) => {
                           const href = projectLinks.get(title);
-                          return href ? <Link key={title} href={href}>{title} &rarr;</Link> : null;
+                          return href ? <Link key={title} href={href}>{`${title} →`}</Link> : null;
                         })}
                       </dd>
                     </div>
@@ -136,7 +136,7 @@ export default function ExperiencePage() {
 
                 <footer className="rec-foot" aria-hidden="true">
                   <span className="rec-barcode"></span>
-                  <span className="rec-code">REC-{num} &middot; {record.start}</span>
+                  <span className="rec-code">{`REC-${num} · ${record.start}`}</span>
                 </footer>
               </article>
             );
