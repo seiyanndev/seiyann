@@ -250,7 +250,7 @@ html.js .cover-stamp:not(.is-in) { visibility: hidden; }
     text-transform: uppercase;
     color: #374151;
 }
-.cover-status-sep { margin: 0 6px; color: #a1a1aa; }
+.cover-status-sep { margin-right: 6px; color: #a1a1aa; } /* sits inside the fact it introduces, so a "·" never dangles at a line end */
 .cover-status-item { white-space: nowrap; } /* each fact wraps as a whole, never "3+" / "yrs" apart */
 .cover-status-dot {
     display: inline-block;
