@@ -1,0 +1,472 @@
+/*
+ * Work page: "The Dossier", File No. 001: Case Files, a filing cabinet (page-work.php).
+ * Projects are manila folders standing in a drawer. Each <li> is a folder: a staggered tab, a front
+ * strip (the toggle) and a body that opens in place into the case sheet. Later folders overlap the
+ * bottom of earlier ones, like folders seen from above in a drawer.
+ * Motion: assets/js/work-cabinet.js. The generated project art (.ff-art) is at the end of this file.
+ */
+
+:root {
+    --manila: #efe7d3;
+    --manila-alt: #e9dfc8;
+    --ink: #0a0a0a;
+    --tab-h: 30px;     /* folder tab height */
+    --overlap: 22px;   /* how much each folder covers the bottom of the one before */
+}
+
+/* Hidden until work-cabinet.js has set the intro's starting states. */
+html.js .cab:not(.is-ready) .cab-hero,
+html.js .cab:not(.is-ready) .cab-drawer { visibility: hidden; }
+
+/* ================= Header ================= */
+.cab-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+.cab-eyebrow-line { width: 40px; height: 1px; margin-right: 2px; background-color: #a1a1aa; }
+.cab-eyebrow-sep { color: #d1d5db; }
+
+.cab-title {
+    margin: 0 0 20px;
+    font-size: clamp(2.6rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+}
+.cab-line { display: block; overflow: hidden; padding-bottom: 0.06em; }
+.cab-line > span { display: block; }
+.cab-line.is-muted { color: #80868f; }
+
+.cab-lede { max-width: 30rem; margin: 0 0 28px; font-size: 16px; line-height: 1.6; color: #4b5563; }
+
+/* Filter stamps */
+.cab-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.cab-filter {
+    padding: 8px 14px;
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    background: transparent;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.cab-filter span { margin-left: 4px; opacity: 0.55; }
+.cab-filter:hover { transform: rotate(-1.5deg); }
+.cab-filter.is-active { background-color: var(--ink); color: #ffffff; transform: rotate(-2deg); }
+.cab-filter:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* ================= The drawer ================= */
+.cab-drawer { margin-top: 56px; }
+
+.cab-drawer-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 2px 14px;
+    border-top: 3px solid var(--ink); /* the drawer's front lip */
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+.cab-folders { margin: 0; padding: 0; list-style: none; }
+
+.folder {
+    position: relative;
+    z-index: var(--z);
+    padding-top: var(--tab-h);
+    /* No CSS transitions here: GSAP animates the folder itself in the intro. Hover/dim act on the toggle. */
+    scroll-margin-top: 24px;
+}
+.folder + .folder { margin-top: calc(var(--overlap) * -1); }
+.folder { --folder-bg: var(--manila); }
+.folder:nth-child(even) { --folder-bg: var(--manila-alt); }
+
+/* Pull a folder up a little on hover (closed folders only). On the toggle, not the <li>, so it never fights GSAP. */
+.folder-toggle { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, filter 0.3s ease; }
+.folder:not(.is-open) .folder-toggle:hover { transform: translateY(-10px); }
+
+.folder.is-dimmed .folder-toggle { opacity: 0.32; filter: grayscale(1); }
+.folder.is-dimmed .folder-toggle:hover { opacity: 0.6; }
+
+.folder-toggle {
+    position: relative; /* the tab is positioned against this, so the hover lift moves both together */
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+.folder-toggle:focus-visible { outline: none; }
+.folder-toggle:focus-visible .folder-front { box-shadow: inset 0 0 0 2px var(--ink); }
+
+/* The tab: steps across the width (--tab-x is 0, 24, 48 or 72) so neighbours never collide */
+.folder-tab {
+    position: absolute;
+    top: calc(var(--tab-h) * -1); /* sits on top of the front, in the <li>'s padding */
+    left: calc((100% - var(--tab-w, 220px)) * var(--tab-x) / 72);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    width: var(--tab-w, 220px);
+    height: calc(var(--tab-h) + 1px); /* +1px covers the front's top border under the tab */
+    padding: 0 14px;
+    overflow: hidden;
+    border: 1px solid var(--ink);
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+    background-color: var(--folder-bg);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #3f3f46;
+}
+.folder-tab b { margin-right: 2px; color: var(--ink); }
+
+/* The front strip of the folder */
+.folder-front {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1.1fr) auto;
+    gap: 20px;
+    align-items: center;
+    min-height: 92px;
+    padding: 18px 24px calc(14px + var(--overlap));
+    border: 1px solid var(--ink);
+    border-radius: 0 8px 0 0;
+    background-color: var(--folder-bg);
+}
+.folder-num {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: #80868f;
+}
+.folder-title {
+    overflow: hidden;
+    font-size: clamp(24px, 2.8vw, 38px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--ink);
+}
+.folder-meta { display: grid; gap: 4px; min-width: 0; }
+.folder-tag {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #3f3f46;
+}
+.folder-summary {
+    overflow: hidden;
+    font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #52525b;
+}
+.folder-action {
+    padding: 6px 12px;
+    border: 1px solid var(--ink);
+    border-radius: 9999px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.folder-action-close { display: none; }
+.folder-toggle:hover .folder-action { background-color: var(--ink); color: #ffffff; }
+.folder.is-open .folder-action-open { display: none; }
+.folder.is-open .folder-action-close { display: inline; }
+
+/* The body: opens in place (0fr → 1fr) into the case sheet */
+.folder-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    border: 0 solid var(--ink); /* sides + bottom only once open, so a closed folder shows no stray line */
+    border-top: 0;
+    background-color: var(--folder-bg);
+    transition: grid-template-rows 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.folder-inner { min-height: 0; overflow: hidden; }
+.folder.is-open .folder-body { grid-template-rows: 1fr; }
+.folder.is-open .folder-front { border-bottom: 1px dashed rgba(10, 10, 10, 0.35); padding-bottom: 18px; }
+.folder.is-open .folder-body { border-width: 0 1px 1px; }
+
+/* ---------- Case sheet: a page inside the folder ---------- */
+.case-sheet {
+    display: grid;
+    gap: 28px;
+    margin: 18px 24px calc(30px + var(--overlap));
+    padding: 22px;
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 8px 8px 0 var(--ink);
+    transform: rotate(-0.4deg);
+}
+@media (min-width: 1024px) {
+    .case-sheet { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; }
+}
+
+.case-exhibit {
+    position: relative;
+    margin: 0;
+    padding: 8px;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--ink);
+    background-color: #fbfaf6;
+}
+.case-exhibit img,
+.case-exhibit .ff-art {
+    position: absolute;
+    inset: 8px;
+    display: block;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    object-fit: cover;
+}
+.case-tape {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    z-index: 2;
+    padding: 7px 18px;
+    background-color: rgba(239, 237, 230, 0.95);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+    clip-path: polygon(0 8%, 4% 0, 9% 10%, 14% 0, 86% 0, 91% 9%, 96% 0, 100% 10%, 100% 92%, 95% 100%, 90% 90%, 85% 100%, 15% 100%, 10% 91%, 5% 100%, 0 90%);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #3f3f46;
+    transform: translateX(-50%) rotate(-2deg);
+}
+.case-fig {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    padding: 4px 8px;
+    background-color: var(--ink);
+    color: #ffffff;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.case-fields { margin: 0; }
+.case-fields > div {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 14px;
+    align-items: baseline;
+    padding: 11px 0;
+    border-top: 1px dashed #d4d4d8;
+}
+.case-fields > div:first-child { border-top: 1px solid var(--ink); }
+@media (max-width: 639px) { .case-fields > div { grid-template-columns: 1fr; gap: 4px; } }
+.case-fields dt {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9ca3af;
+}
+.case-fields dd { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.55; color: var(--ink); }
+.case-fields .case-desc { font-weight: 500; color: #374151; }
+
+.case-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--ink);
+}
+.case-barcode {
+    width: 130px;
+    height: 24px;
+    background: repeating-linear-gradient(90deg,
+        #0a0a0a 0 2px, transparent 2px 4px, #0a0a0a 4px 5px, transparent 5px 8px,
+        #0a0a0a 8px 11px, transparent 11px 12px, #0a0a0a 12px 13px, transparent 13px 16px);
+}
+.case-close {
+    padding: 10px 18px;
+    border: 4px double var(--ink);
+    border-radius: 6px;
+    background: transparent;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--ink);
+    cursor: pointer;
+    transform: rotate(-4deg);
+    transition: transform 0.2s ease;
+}
+.case-close:hover { transform: rotate(-2deg) scale(1.04); }
+.case-close:active { transform: rotate(-4deg) scale(0.94); }
+.case-close:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+
+/* Bottom of the drawer */
+.cab-drawer-base {
+    height: 16px;
+    margin-top: -1px;
+    border: 1px solid var(--ink);
+    border-top: 0;
+    background: repeating-linear-gradient(90deg, rgba(10, 10, 10, 0.18) 0 1px, transparent 1px 14px);
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 767px) {
+    :root { --tab-h: 28px; --overlap: 18px; }
+    .folder { --tab-w: 160px; }
+    .folder-front {
+        grid-template-columns: 30px minmax(0, 1fr) auto;
+        grid-template-areas: "num title action" ". meta meta";
+        gap: 6px 12px;
+        padding: 14px 16px calc(12px + var(--overlap));
+    }
+    .folder-num { grid-area: num; }
+    .folder-title { grid-area: title; }
+    .folder-meta { grid-area: meta; }
+    .folder-action { grid-area: action; }
+    .case-sheet { margin: 14px 12px calc(22px + var(--overlap)); padding: 16px; box-shadow: 5px 5px 0 var(--ink); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .folder-toggle,
+    .folder-body { transition: none; }
+    .folder:not(.is-open) .folder-toggle:hover { transform: none; }
+}
+
+/* ================= Dark mode ================= */
+html.dark {
+    --manila: #23211c;
+    --manila-alt: #1e1c18;
+    --ink: #e4e4e7;
+}
+html.dark .cab-eyebrow { color: #a1a1aa; }
+html.dark .cab-eyebrow-line { background-color: #52525b; }
+html.dark .cab-eyebrow-sep { color: #3f3f46; }
+html.dark .cab-title { color: #f4f4f5; }
+html.dark .cab-line.is-muted { color: #8b8b94; }
+html.dark .cab-lede { color: #a1a1aa; }
+html.dark .cab-filter.is-active { color: #0a0a0a; }
+html.dark .folder-tab { color: #d4d4d8; }
+html.dark .folder-tag { color: #d4d4d8; }
+html.dark .folder-summary { color: #a1a1aa; }
+html.dark .folder-toggle:hover .folder-action { color: #0a0a0a; }
+html.dark .folder.is-open .folder-front { border-bottom-color: rgba(228, 228, 231, 0.3); }
+html.dark .case-sheet { background-color: #18181b; box-shadow: 8px 8px 0 #3f3f46; }
+html.dark .case-exhibit { background-color: #0f0f10; }
+html.dark .case-tape { background-color: rgba(63, 63, 70, 0.95); color: #e4e4e7; }
+html.dark .case-fig { color: #0a0a0a; }
+html.dark .case-fields > div { border-top-color: #3f3f46; }
+html.dark .case-fields .case-desc { color: #d4d4d8; }
+html.dark .case-barcode {
+    background: repeating-linear-gradient(90deg,
+        #f4f4f5 0 2px, transparent 2px 4px, #f4f4f5 4px 5px, transparent 5px 8px,
+        #f4f4f5 8px 11px, transparent 11px 12px, #f4f4f5 12px 13px, transparent 13px 16px);
+}
+html.dark .cab-drawer-base { background: repeating-linear-gradient(90deg, rgba(228, 228, 231, 0.18) 0 1px, transparent 1px 14px); }
+
+/* ---------- Generated abstract art (cards without a screenshot) ----------
+ * Each variant layers gradients from four colours (--c1..--c4); ::after adds film grain.
+ */
+.ff-art {
+    position: absolute;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+    background-color: var(--c4);
+}
+.ff-art::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+}
+.ff-art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.4;
+}
+
+/* Fluid marble: soft overlapping blobs */
+.art-marble::before {
+    background:
+        radial-gradient(38% 32% at 22% 28%, var(--c2), transparent 70%),
+        radial-gradient(42% 36% at 76% 24%, var(--c3), transparent 70%),
+        radial-gradient(48% 42% at 58% 74%, var(--c1), transparent 72%),
+        radial-gradient(34% 30% at 24% 80%, var(--c3), transparent 70%),
+        radial-gradient(30% 26% at 86% 70%, var(--c2), transparent 70%),
+        var(--c4);
+    filter: blur(14px) saturate(1.25);
+}
+
+/* Light-speed streaks: rays from a bright core */
+.art-streaks::before {
+    background:
+        radial-gradient(circle at 50% 58%, var(--c4) 0 3%, transparent 20%),
+        repeating-conic-gradient(from 0deg at 50% 58%, var(--c1) 0deg 3deg, var(--c2) 4deg 7deg, var(--c1) 8deg 10deg, var(--c3) 11deg 13deg, var(--c1) 14deg 17deg);
+    filter: blur(1.2px) saturate(1.2);
+}
+
+/* Folded paper: hard-edged planes with fold highlights and shadows */
+.art-folds::before {
+    background:
+        linear-gradient(118deg, rgba(0, 0, 0, 0.28) 0 18%, transparent 18%),
+        linear-gradient(64deg, transparent 0 46%, rgba(255, 255, 255, 0.35) 46% 47%, rgba(0, 0, 0, 0.12) 47% 62%, transparent 62%),
+        linear-gradient(160deg, transparent 0 58%, rgba(255, 255, 255, 0.25) 58% 59%, transparent 59%),
+        linear-gradient(140deg, var(--c1) 0 30%, var(--c2) 30% 52%, var(--c3) 52% 76%, var(--c4) 76%);
+}
+
+/* Silk ribbons: blurred colour sweep with soft sheen bands */
+.art-silk::before {
+    background:
+        repeating-linear-gradient(115deg, transparent 0 22px, rgba(255, 255, 255, 0.4) 28px, transparent 38px),
+        conic-gradient(from 210deg at 38% 55%, var(--c1), var(--c2), var(--c3), var(--c4), var(--c1));
+    filter: blur(9px) saturate(1.2);
+}
+
+/* Acrylic pour: rippled cells */
+.art-pour::before {
+    background:
+        radial-gradient(30% 26% at 70% 30%, var(--c4), transparent 70%),
+        repeating-radial-gradient(circle at 32% 42%, var(--c1) 0 10px, var(--c2) 13px 19px, var(--c3) 22px 27px, var(--c4) 30px 34px, var(--c1) 37px 44px);
+    filter: blur(1.5px) saturate(1.2);
+    transform: rotate(-12deg) scale(1.15);
+}
+

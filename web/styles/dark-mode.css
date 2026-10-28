@@ -1,0 +1,153 @@
+/*
+ * Site-wide dark mode.
+ *
+ * Templates are authored in light-mode Tailwind utilities. When <html> has the
+ * `dark` class (set in header.php before first paint), the rules below remap
+ * those utilities to a dark palette. Each selector is prefixed with `html.dark`
+ * so it out-specifies Tailwind's own single-class rules without !important.
+ *
+ * If you add a new colour utility to a template, add its dark counterpart here.
+ */
+
+html.dark {
+    color-scheme: dark;
+}
+
+html.dark ::selection {
+    background-color: #fafafa;
+    color: #0a0a0a;
+}
+
+/* ---------- Theme switch animation ---------- */
+
+/* Circular reveal: header.php animates the clip-path of the new snapshot, so
+   switch off the browser's default cross-fade and keep the new view on top. */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+::view-transition-new(root) { z-index: 2; }
+::view-transition-old(root) { z-index: 1; }
+
+/* Fallback cross-fade (no View Transitions support, or reduced motion). */
+html.theme-fading,
+html.theme-fading *,
+html.theme-fading *::before,
+html.theme-fading *::after {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease !important;
+}
+
+/* Sun/moon swap: the outgoing icon spins away while the incoming one spins in. */
+.theme-icon {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+#theme-icon-moon                { opacity: 1; transform: rotate(0deg) scale(1); }
+#theme-icon-sun                 { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+html.dark #theme-icon-moon      { opacity: 0; transform: rotate(90deg) scale(0.4); }
+html.dark #theme-icon-sun       { opacity: 1; transform: rotate(0deg) scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-icon { transition: opacity 0.2s ease; }
+}
+
+/* ---------- Floating nav (light) ----------
+ * #nav-indicator is the one highlight circle; header.php slides it between items.
+ * Item colours transition so the icon/label fade as the circle arrives.
+ */
+#nav-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    background-color: #000000;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform;
+    transition: opacity 0.2s ease, background-color 0.3s ease;
+}
+#nav-indicator.is-ready { opacity: 1; }
+#floating-nav { position: relative; z-index: 1; }
+
+.nav-item { color: #9ca3af; transition: color 0.35s ease; }
+.nav-item .nav-icon-box { transition: color 0.35s ease, background-color 0.2s ease, transform 0.2s ease; }
+.nav-item:not(.active-page):hover { color: #000000; }
+.nav-item:not(.active-page):hover .nav-icon-box { background-color: #f3f4f6; }
+.nav-item.active-page { color: #111827; }
+.nav-item.active-page .nav-icon-box { color: #ffffff; }
+/* The circle doesn't scale on hover, so keep the active icon still to stay centred in it. */
+html .nav-item.active-page .nav-icon-box { transform: none; }
+
+#theme-toggle { color: #9ca3af; }
+#theme-toggle:hover { background-color: #f3f4f6; color: #000000; }
+
+/* ---------- Page & surface backgrounds ---------- */
+html.dark .bg-\[\#faf9f5\] { background-color: #0f0f10; }
+html.dark .bg-\[\#fcfcfa\] { background-color: #18181b; }
+html.dark .bg-\[\#f3f3f1\] { background-color: #27272a; }
+
+html.dark .bg-white       { background-color: #18181b; }
+html.dark .bg-white\/90   { background-color: rgba(24, 24, 27, 0.9); }
+html.dark .bg-white\/80   { background-color: rgba(24, 24, 27, 0.8); }
+html.dark .bg-white\/50   { background-color: rgba(24, 24, 27, 0.5); }
+html.dark .bg-white\/10   { background-color: rgba(0, 0, 0, 0.08); }
+
+html.dark .bg-gray-100    { background-color: #27272a; }
+html.dark .bg-gray-100\/80 { background-color: rgba(39, 39, 42, 0.8); }
+html.dark .bg-gray-200    { background-color: #3f3f46; }
+html.dark .bg-gray-300    { background-color: #52525b; }
+
+/* Placeholder image boxes are already dark; lift them off the dark cards. */
+html.dark .bg-gray-900,
+html.dark .bg-zinc-900    { background-color: #27272a; }
+html.dark #carousel-progress-bar { background-color: #fafafa; }
+
+/* ---------- Inverted (black) buttons, dots and chips become white ---------- */
+html.dark .bg-black                         { background-color: #fafafa; }
+html.dark .bg-black.text-white              { color: #0a0a0a; }
+html.dark .hover\:bg-gray-800:hover         { background-color: #d4d4d8; }
+html.dark .hover\:bg-black:hover            { background-color: #fafafa; }
+html.dark .hover\:text-white:hover          { color: #0a0a0a; }
+html.dark .group:hover .group-hover\:bg-black    { background-color: #fafafa; }
+html.dark .group:hover .group-hover\:bg-gray-800 { background-color: #d4d4d8; }
+
+/* ---------- Text ---------- */
+html.dark .text-black,
+html.dark .text-gray-950  { color: #fafafa; }
+html.dark .text-gray-900  { color: #f4f4f5; }
+html.dark .text-gray-800  { color: #e4e4e7; }
+html.dark .text-gray-700  { color: #d4d4d8; }
+html.dark .text-gray-600,
+html.dark .text-gray-500  { color: #a1a1aa; }
+html.dark .text-gray-400  { color: #8b8b94; }
+
+html.dark .hover\:text-black:hover               { color: #fafafa; }
+html.dark .group:hover .group-hover\:text-black    { color: #fafafa; }
+html.dark .group:hover .group-hover\:text-gray-600 { color: #a1a1aa; }
+html.dark .placeholder\:text-gray-300::placeholder { color: #52525b; }
+
+/* ---------- Borders ---------- */
+html.dark .border-gray-100      { border-color: #27272a; }
+html.dark .border-gray-100\/80  { border-color: rgba(39, 39, 42, 0.8); }
+html.dark .border-gray-200\/80  { border-color: rgba(63, 63, 70, 0.8); }
+html.dark .border-gray-200\/60  { border-color: rgba(63, 63, 70, 0.6); }
+html.dark .border-gray-300      { border-color: #3f3f46; }
+html.dark .border-gray-400      { border-color: #52525b; }
+html.dark .border-black         { border-color: #fafafa; }
+html.dark .hover\:border-black\/80:hover { border-color: rgba(250, 250, 250, 0.8); }
+html.dark .hover\:border-black\/85:hover { border-color: rgba(250, 250, 250, 0.85); }
+html.dark .focus\:border-black:focus     { border-color: #fafafa; }
+
+/* ---------- Floating nav ---------- */
+html.dark #floating-nav-bar { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); }
+html.dark #nav-indicator { background-color: #fafafa; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); }
+html.dark .nav-item { color: #8b8b94; }
+html.dark .nav-item:not(.active-page):hover { color: #ffffff; }
+html.dark .nav-item:not(.active-page):hover .nav-icon-box { background-color: #27272a; }
+html.dark .nav-item.active-page { color: #ffffff; }
+html.dark .nav-item.active-page .nav-icon-box { color: #0a0a0a; }
+html.dark #theme-toggle { color: #8b8b94; }
+html.dark #theme-toggle:hover { background-color: #27272a; color: #ffffff; }
