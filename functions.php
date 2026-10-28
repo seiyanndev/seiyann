@@ -11,6 +11,12 @@ function seiyann_enqueue_styles() {
     wp_enqueue_script( 'gsap-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js', array( 'gsap' ), '3.15.0', true );
     wp_add_inline_script( 'gsap-scrolltrigger', 'gsap.registerPlugin(ScrollTrigger);' );
 
+    // Site-wide "registration mark" cursor (mouse/trackpad only; see assets/js/cursor.js)
+    $cursor_css = get_template_directory() . '/assets/css/cursor.css';
+    wp_enqueue_style( 'seiyann-cursor', get_template_directory_uri() . '/assets/css/cursor.css', array(), filemtime( $cursor_css ) );
+    $cursor_js = get_template_directory() . '/assets/js/cursor.js';
+    wp_enqueue_script( 'seiyann-cursor', get_template_directory_uri() . '/assets/js/cursor.js', array( 'gsap' ), filemtime( $cursor_js ), true );
+
     // Homepage: styles, headline font-glitch (assets/js/hero-headline.js) and hero slideshow (assets/js/hero-visual.js)
     if ( is_front_page() ) {
         $home_css = get_template_directory() . '/assets/css/home.css';

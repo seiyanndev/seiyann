@@ -1,0 +1,16 @@
+# Secrets: API keys, SMTP passwords and other credentials live in env files / Vercel env vars, never in git
+.env
+.env.*
+!.env.example
+
+# Tooling
+.vercel/
+node_modules/
+*.log
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
