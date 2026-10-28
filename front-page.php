@@ -27,7 +27,8 @@ get_header();
             <span class="cover-eyebrow-line"></span>
             <span>Cover sheet</span><span class="cover-eyebrow-sep">/</span><span>File No. 000</span>
         </div>
-        <span class="cover-stamp" id="cover-stamp">Open to work</span>
+        <!-- Desktop/tablet stamp (top right). On phones a second stamp sits beside "Open the file" instead. -->
+        <span class="cover-stamp cover-stamp--top">Open to work</span>
     </div>
 
     <!-- Hero row: text, then the visual. Stacked below xl; from xl a flex row where the visual
@@ -50,13 +51,18 @@ get_header();
 
         <!-- Status line: the same facts as the About page ID card -->
         <p class="cover-status opacity-0 animate-fade-up delay-200">
-            <span class="cover-status-item"><b class="cover-status-dot" aria-hidden="true"></b>Open to work</span> <span class="cover-status-item"><span class="cover-status-sep">&middot;</span>Lucena City, PH</span> <span class="cover-status-item"><span class="cover-status-sep">&middot;</span>3+ yrs</span>
+            <span class="cover-status-item cover-status-open"><b class="cover-status-dot" aria-hidden="true"></b>Open to work</span> <span class="cover-status-item"><span class="cover-status-sep">&middot;</span>Lucena City, PH</span> <span class="cover-status-item"><span class="cover-status-sep">&middot;</span>3+ yrs</span>
         </p>
 
-        <a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="cover-cta opacity-0 animate-fade-up delay-300">
-            <span>Open the file</span>
-            <span class="cover-cta-icon" aria-hidden="true">&rarr;</span>
-        </a>
+        <!-- CTA row. On phones the "Open to work" stamp sits here, beside the button
+             (and the status line drops its own "Open to work", which the stamp now says). -->
+        <div class="cover-actions opacity-0 animate-fade-up delay-300">
+            <a href="<?php echo esc_url( home_url( '/work/' ) ); ?>" class="cover-cta">
+                <span>Open the file</span>
+                <span class="cover-cta-icon" aria-hidden="true">&rarr;</span>
+            </a>
+            <span class="cover-stamp cover-stamp--inline">Open to work</span>
+        </div>
     </div>
 
     <!-- Hero visual: construction lines + auto-playing brutalist slideshow (assets/js/hero-visual.js).

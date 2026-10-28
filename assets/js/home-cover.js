@@ -6,22 +6,23 @@
  * Reduced motion (or no GSAP): the stamp just appears; rows are shown as-is.
  */
 (function () {
-    const stamp = document.getElementById("cover-stamp");
+    // Two copies of the stamp: top right (tablet/desktop) and beside the CTA (phones). CSS shows one.
+    const stamps = Array.from(document.querySelectorAll(".cover-stamp"));
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (!window.gsap || reduceMotion) {
-        if (stamp) stamp.classList.add("is-in");
+        stamps.forEach(s => s.classList.add("is-in"));
         return;
     }
 
     /* ---------- Stamp ---------- */
-    if (stamp) {
-        gsap.set(stamp, { autoAlpha: 0, scale: 2.4, rotation: -2 });
-        stamp.classList.add("is-in");
+    if (stamps.length) {
+        gsap.set(stamps, { autoAlpha: 0, scale: 2.4, rotation: -2 });
+        stamps.forEach(s => s.classList.add("is-in"));
         gsap.timeline({ delay: 1.1 })
-            .to(stamp, { autoAlpha: 0.9, scale: 1, rotation: -8, duration: 0.22, ease: "power4.in" })
-            .to(stamp, { x: 2, duration: 0.05, repeat: 3, yoyo: true, ease: "power1.inOut" })
-            .set(stamp, { x: 0 });
+            .to(stamps, { autoAlpha: 0.9, scale: 1, rotation: -8, duration: 0.22, ease: "power4.in" })
+            .to(stamps, { x: 2, duration: 0.05, repeat: 3, yoyo: true, ease: "power1.inOut" })
+            .set(stamps, { x: 0 });
     }
 
     /* ---------- Contents rows ---------- */

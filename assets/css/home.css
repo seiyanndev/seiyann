@@ -238,8 +238,28 @@ html.dark .hero-caption-place { color: #f4f4f5; }
     -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.75'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
     mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.75'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
-@media (max-width: 639px) { .cover-stamp { font-size: 11px; padding: 7px 12px; } }
 html.js .cover-stamp:not(.is-in) { visibility: hidden; }
+
+/* Where the stamp lives: top right from md up; beside "Open the file" on phones. */
+.cover-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; }
+.cover-stamp--inline { display: none; }
+@media (max-width: 767px) {
+    .cover-actions { gap: 12px 12px; }
+    /* Compact button + stamp so the pair fits side by side down to 360px-wide phones */
+    .cover-actions .cover-cta { gap: 10px; padding: 12px 12px 12px 18px; font-size: 11px; letter-spacing: 0.1em; }
+    .cover-actions .cover-cta-icon { width: 26px; height: 26px; }
+    .cover-stamp--top { display: none; }
+    .cover-stamp--inline {
+        display: inline-block;
+        padding: 6px 8px;
+        border-width: 3px;
+        font-size: 9.5px;
+        letter-spacing: 0.1em;
+    }
+    /* The stamp says "Open to work" now, so the status line starts at the location */
+    .cover-status-open { display: none; }
+    .cover-status-open + .cover-status-item .cover-status-sep { display: none; }
+}
 
 /* Status line under the intro (same facts as the About page ID card) */
 .cover-status {
