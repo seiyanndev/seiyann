@@ -398,7 +398,7 @@ html.js .contact:not(.is-ready) .ct-body { visibility: hidden; }
 .req-result-text { margin: 0; font-size: 14px; line-height: 1.55; color: #4b5563; }
 .req-result-text a,
 .req-result-link { color: #0a0a0a; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-.req-result-link { display: inline-block; margin-top: 12px; font-size: 13px; }
+.req-result-link { display: inline-block; margin-top: 12px; padding: 0; border: 0; background: none; font: inherit; font-size: 13px; cursor: pointer; } /* also used as a <button> by contact.js */
 
 /* ================= Sign-off tape ================= */
 .ct-signoff {

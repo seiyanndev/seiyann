@@ -3,8 +3,11 @@
  *
  *  - Live local time in Lucena (Asia/Manila), updated every minute.
  *  - Copy-email button: copies the address and flashes "Copied".
- *  - Stamp submit: once the browser's required-field checks pass, the stamp presses down,
- *    then the form submits normally to the existing mail handler.
+ *  - Stamp submit: once the browser's required-field checks pass, the stamp presses down, then:
+ *      · with a Web3Forms key (data-web3forms-key, set in seiyann_contact()): the form is sent in the
+ *        background and a RECEIVED / RETURNED stamp lands on the form, no page reload. This is what
+ *        the static seiyann.dev site uses, since it has no PHP.
+ *      · without a key (local WordPress): the form submits normally to the WordPress mail handler.
  *  - Intro: title lines rise, the card and form sheet drop in, the form's tape slaps on.
  * Reduced motion (or no GSAP): no intro; everything else still works.
  */
@@ -52,20 +55,117 @@
     /* ---------- Stamp submit ---------- */
     const form = main.querySelector("#req-form");
     const stamp = main.querySelector("#req-submit");
-    if (form && stamp && hasGsap && !reduceMotion) {
+    const live = main.querySelector("#req-live");
+    const web3formsKey = () => (form ? form.dataset.web3formsKey : ""); // read at submit time
+    const ownerEmail = form ? form.dataset.email : "";
+
+    // Press the stamp (skipped with reduced motion / no GSAP), then run `next`.
+    function pressStamp(next) {
+        if (!hasGsap || reduceMotion) { next(); return; }
+        gsap.timeline({ onComplete: next })
+            .to(stamp, { scale: 0.86, rotation: -6, duration: 0.12, ease: "power4.in" })
+            .to(stamp, { scale: 1, rotation: -4, duration: 0.25, ease: "back.out(3)" });
+    }
+
+    // RECEIVED / RETURNED panel, same markup and styles as the server-rendered one.
+    function showResult(ok, detail) {
+        const panel = document.createElement("div");
+        panel.className = "req-result " + (ok ? "is-received" : "is-returned");
+        panel.setAttribute("role", ok ? "status" : "alert");
+
+        const stampEl = document.createElement("span");
+        stampEl.className = "req-result-stamp";
+        stampEl.textContent = ok ? "Received" : "Returned";
+
+        const title = document.createElement("p");
+        title.className = "req-result-title";
+        title.textContent = ok ? "Your request is on file." : "Your request couldn't be sent.";
+
+        const text = document.createElement("p");
+        text.className = "req-result-text";
+        if (ok) {
+            text.textContent = "Thanks for reaching out — I'll get back to you by email soon.";
+        } else {
+            text.append(document.createTextNode((detail ? detail + " " : "") + "Please try again, or email me directly at "));
+            const mail = document.createElement("a");
+            mail.href = "mailto:" + ownerEmail;
+            mail.textContent = ownerEmail;
+            text.append(mail, document.createTextNode("."));
+        }
+        panel.append(stampEl, title, text);
+
+        if (ok) {
+            const again = document.createElement("button");
+            again.type = "button";
+            again.className = "req-result-link";
+            again.textContent = "File another request →";
+            again.addEventListener("click", () => {
+                live.innerHTML = "";
+                form.reset();
+                form.hidden = false;
+                form.querySelector("input:not([type=hidden]):not([name=botcheck])").focus();
+            });
+            panel.append(again);
+            form.hidden = true;
+        }
+
+        live.innerHTML = "";
+        live.append(panel);
+        if (hasGsap && !reduceMotion) {
+            gsap.fromTo(stampEl, { autoAlpha: 0, scale: 2.2 }, { autoAlpha: 1, scale: 1, duration: 0.22, ease: "power4.in" });
+        }
+        panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+    }
+
+    async function sendWithWeb3Forms() {
+        const data = new FormData(form);
+        const regarding = data.get("contact_subject") || "General Inquiry";
+
+        // Honeypot ticked: a bot. Pretend it worked and send nothing.
+        if (data.get("botcheck")) { showResult(true); return; }
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({
+                    access_key: web3formsKey(),
+                    subject: "New Portfolio Message: " + regarding, // same subject line as the WordPress handler
+                    from_name: "seiyann.dev contact form",
+                    name: data.get("contact_name"),
+                    email: data.get("contact_email"),                // Web3Forms uses this as the reply-to
+                    regarding: regarding,
+                    message: data.get("contact_message"),
+                    botcheck: false,
+                }),
+            });
+            const result = await response.json().catch(() => ({}));
+            showResult(response.ok && result.success === true);
+        } catch (err) {
+            showResult(false, "The connection failed.");
+        } finally {
+            stamp.disabled = false;
+        }
+    }
+
+    if (form && stamp) {
         form.addEventListener("submit", e => {
-            if (form.dataset.stamped) return; // second pass: let it submit
+            if (web3formsKey()) {
+                // Background send (static site). The browser has already checked required fields.
+                e.preventDefault();
+                stamp.disabled = true;
+                pressStamp(sendWithWeb3Forms);
+                return;
+            }
+            // No key: normal POST to WordPress, after the stamp press.
+            if (form.dataset.stamped || !hasGsap || reduceMotion) return;
             e.preventDefault();
             stamp.disabled = true;
-            gsap.timeline({
-                onComplete: () => {
-                    form.dataset.stamped = "1";
-                    // requestSubmit keeps the native submit path; fall back to submit() in older browsers.
-                    if (form.requestSubmit) form.requestSubmit(); else form.submit();
-                },
-            })
-                .to(stamp, { scale: 0.86, rotation: -6, duration: 0.12, ease: "power4.in" })
-                .to(stamp, { scale: 1, rotation: -4, duration: 0.25, ease: "back.out(3)" });
+            pressStamp(() => {
+                form.dataset.stamped = "1";
+                // requestSubmit keeps the native submit path; fall back to submit() in older browsers.
+                if (form.requestSubmit) form.requestSubmit(); else form.submit();
+            });
         });
     }
 
