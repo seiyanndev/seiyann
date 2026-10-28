@@ -339,8 +339,11 @@ add_action('after_setup_theme', 'seiyann_theme_setup');
 function seiyann_contact() {
     return array(
         'email'     => 'kurtcyrsfa@gmail.com',
-        'phone'     => '0994 202 5107',   // shown on the page
-        'phone_tel' => '+639942025107',   // dialled (international format works from abroad)
+        // Web3Forms access key (free, emailed to you at https://web3forms.com). Public by design: it only
+        // lets a form send to your inbox, so it is safe in the repo. Restrict it to seiyann.dev in the
+        // Web3Forms dashboard. Empty = the form uses the WordPress handler below (fine locally, but a
+        // static export on Vercel has no PHP, so set this before deploying).
+        'web3forms_key' => '',
         'location'  => 'Lucena City, Philippines',
         'timezone'  => 'Asia/Manila',     // for the live local-time clock
         'socials'   => array(
@@ -367,8 +370,8 @@ function handle_portfolio_contact_form() {
     // Drop the result of any earlier submission so only this one's shows.
     $redirect_url = remove_query_arg( array( 'contact_sent', 'contact_error' ), strtok( $redirect_url, '#' ) );
 
-    // Honeypot: a hidden field people never see. Bots that fill it get a fake success, and no email.
-    if ( ! empty( $_POST['contact_website'] ) ) {
+    // Honeypot: a hidden checkbox people never see. Bots that tick it get a fake success, and no email.
+    if ( ! empty( $_POST['botcheck'] ) ) {
         wp_safe_redirect( add_query_arg( 'contact_sent', '1', $redirect_url ) . '#request' );
         exit;
     }

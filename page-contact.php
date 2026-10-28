@@ -2,7 +2,7 @@
 /**
  * Template Name: Contact Page
  *
- * "The Dossier", File No. 005: Request Form. A "direct lines" card (email, phone, local time,
+ * "The Dossier", File No. 005: Request Form. A "direct lines" card (email, local time,
  * channels) beside a printed request form with a rubber-stamp submit button.
  *
  * The form posts to admin-post.php → handle_portfolio_contact_form() (functions.php), which emails it
@@ -52,10 +52,6 @@ $error = isset( $_GET['contact_error'] ) ? sanitize_key( wp_unslash( $_GET['cont
                             <span class="ct-copy-label">Copy</span>
                         </button>
                     </dd>
-                </div>
-                <div>
-                    <dt>Phone</dt>
-                    <dd><a href="tel:<?php echo esc_attr( $contact['phone_tel'] ); ?>"><?php echo esc_html( $contact['phone'] ); ?></a></dd>
                 </div>
                 <div>
                     <dt>Based in</dt>
@@ -125,13 +121,21 @@ $error = isset( $_GET['contact_error'] ) ? sanitize_key( wp_unslash( $_GET['cont
                     </div>
                 <?php endif; ?>
 
-                <form class="req-form" id="req-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="POST">
+                <!-- Result of a background (Web3Forms) submission is shown here by contact.js -->
+                <div class="req-live" id="req-live"></div>
+
+                <!-- Sends via Web3Forms when an access key is set in seiyann_contact() (needed on the static
+                     seiyann.dev site); otherwise posts to the WordPress handler below (local site). -->
+                <form class="req-form" id="req-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="POST"
+                      data-web3forms-key="<?php echo esc_attr( $contact['web3forms_key'] ); ?>"
+                      data-email="<?php echo esc_attr( $contact['email'] ); ?>">
                     <input type="hidden" name="action" value="submit_portfolio_contact">
                     <?php wp_nonce_field( 'portfolio_contact_verify', 'portfolio_contact_nonce' ); ?>
 
-                    <!-- Honeypot: hidden from people; bots that fill it are ignored by the handler -->
+                    <!-- Honeypot: hidden from people. Bots that tick it are ignored (Web3Forms' "botcheck" field,
+                         also checked by the WordPress handler). -->
                     <div class="req-hp" aria-hidden="true">
-                        <label>Website <input type="text" name="contact_website" tabindex="-1" autocomplete="off"></label>
+                        <label>Not for people <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"></label>
                     </div>
 
                     <div class="req-row">
