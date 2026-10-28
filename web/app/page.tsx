@@ -123,7 +123,6 @@ export default function HomePage() {
                       phones from downloading these, and the files are already sized, greyscaled WebPs. */}
                   <picture>
                     <source media="(max-width: 767px)" srcSet={BLANK_GIF} />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={`/assets/img/hero/${slide.image}`} alt={slide.alt} width="900" height="1200" decoding="async"
                       fetchPriority={i === 0 ? "high" : undefined} draggable="false" />
                   </picture>
