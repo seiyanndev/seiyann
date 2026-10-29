@@ -6,9 +6,9 @@ import ContactMotion from "@/components/contact/ContactMotion";
 export const metadata: Metadata = pageMetadata({
   path: "/contact/",
   og: "contact",
-  title: "Contact: Request Form",
+  title: "Hire Kurt Atoat – Freelance & Full-Time Web Developer",
   description:
-    "Request form: contact Kurt Atoat about a new project, a full-time role or a collaboration. Email, local time in Lucena City and social channels.",
+    "Hire Kurt Atoat for a project, a full-time role or a collaboration. Freelance and full-time web developer and graphic designer based in Lucena City, PH.",
 });
 
 const SUBJECTS = ["New project", "Full-time role", "Collaboration", "Just saying hi"];

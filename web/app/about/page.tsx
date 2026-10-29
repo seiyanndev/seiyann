@@ -12,9 +12,9 @@ import AboutTools from "@/components/about/AboutTools";
 export const metadata: Metadata = pageMetadata({
   path: "/about/",
   og: "about",
-  title: "About: Personnel File",
+  title: "About Kurt Atoat – Designer & Developer from Lucena City",
   description:
-    "Personnel file: Kurt Atoat, graphic designer and full-stack developer in Lucena City, Philippines. Bio, approach, toolbox and numbers.",
+    "Meet Kurt Atoat, a graphic designer and full-stack developer from Lucena City, Philippines, with 5+ years in design, development and digital products.",
 });
 
 // Stats: projects and tools are counted from the real data so they never drift.

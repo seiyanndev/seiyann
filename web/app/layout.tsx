@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Cursor from "@/components/Cursor";
 import { siteName } from "@/content/site";
-import { siteUrl } from "@/lib/metadata";
+import { siteUrl, siteKeywords } from "@/lib/metadata";
 
 // The theme's stylesheets, unchanged and in the order WordPress printed them. Every page's CSS is
 // loaded site-wide: their selectors are namespaced per page, and client-side navigation keeps
@@ -22,6 +22,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  keywords: siteKeywords,
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
   // "KA" mark, rendered by app/icon.png/ and app/apple-icon.png/.
   icons: {
     icon: [{ url: "/icon.png", type: "image/png", sizes: "32x32" }],

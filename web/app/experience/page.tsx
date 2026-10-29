@@ -10,9 +10,9 @@ import ExperienceMotion from "@/components/experience/ExperienceMotion";
 export const metadata: Metadata = pageMetadata({
   path: "/experience/",
   og: "experience",
-  title: "Experience: Service Record",
+  title: "Experience – Full Stack Developer at Pixel Hive – Kurt Atoat",
   description:
-    "Service record: Kurt Atoat's roles in design, development and real-world projects, with the tools used and the work behind each one.",
+    "Kurt Atoat's experience: Full Stack Developer at Pixel Hive, plus freelance web development, graphic design and open source work since 2021.",
 });
 
 // Lookups for a record's tools (with logos) and related projects (linked into the Work cabinet).

@@ -8,9 +8,9 @@ import WorkCabinet from "@/components/work/WorkCabinet";
 export const metadata: Metadata = pageMetadata({
   path: "/work/",
   og: "work",
-  title: "Work: Case Files",
+  title: "Web Development & Branding Projects – Kurt Atoat",
   description:
-    "Case files: selected brand identity, UI/UX and web development work by Kurt Atoat, from farm-to-table marketplaces to point-of-sale systems.",
+    "Selected projects by Kurt Atoat: web apps, branding and UI/UX work, from a farm-to-table marketplace and barangay records system to POS and travel apps.",
 });
 
 // Discipline filters, matched against each project's category text.
