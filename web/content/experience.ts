@@ -29,7 +29,7 @@ export const experience: ExperienceRecord[] = [
     tools: [], projects: [],
   },
   {
-    role: "Organization Experience", org: "University / Student Organization",
+    role: "Organization Experience", org: "IT Paradigm / ELITE",
     start: "2024", end: "2025", type: "", location: "",
     duties: ["Led and participated in various projects and initiatives.", "Organized events, workshops, and community activities.", "Collaborated with teams and stakeholders to achieve goals."],
     tools: [], projects: [],
