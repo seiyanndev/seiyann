@@ -8,9 +8,9 @@ import CapabilitiesMotion from "@/components/capabilities/CapabilitiesMotion";
 export const metadata: Metadata = pageMetadata({
   path: "/capabilities/",
   og: "capabilities",
-  title: "Capabilities: Exhibit A",
+  title: "Brand Identity, UI/UX Design & Web Development – Kurt Atoat",
   description:
-    "Exhibit A: brand identity, UI/UX design, web development and end-to-end delivery, each backed by real projects in a cross-reference index.",
+    "Brand identity, UI/UX design, web development and end-to-end delivery by Kurt Atoat, each backed by real projects. Laravel, React, WordPress and more.",
 });
 
 // The markup behind the frame, typed out line by line (static, trusted HTML).

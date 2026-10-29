@@ -12,8 +12,9 @@ import HomeCover from "@/components/home/HomeCover";
 export const metadata: Metadata = pageMetadata({
   path: "/",
   og: "home",
+  title: "Kurt Atoat – Graphic Designer & Full-Stack Developer in Lucena City, Philippines",
   description:
-    "Cover sheet: Kurt Atoat designs visual identities, builds digital products and turns ideas into real solutions. Open to work, based in Lucena City, PH.",
+    "Kurt Atoat is a graphic designer and full-stack developer in Lucena City, Philippines, building brand identities, UI/UX designs and web apps. Open to work.",
 });
 
 // Glitch typefaces, subset to only the headline's characters so each file is a few KB.
