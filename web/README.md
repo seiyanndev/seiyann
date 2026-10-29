@@ -58,6 +58,10 @@ so don't commit it. Only `.env.example` (no value) is committed.
 - `styles/`: the theme's CSS files, unchanged. Tailwind (v3, same config as the old Play CDN) is compiled at
   build time from `app/globals.css`.
 - `public/assets/`: images, at the same paths as the theme's `assets/` folder.
+- Link previews: each page's preview image (`/og/<page>.png`) is drawn by `lib/og.tsx` from the text in
+  `content/og.ts`; titles and descriptions come from `lib/metadata.ts` and the `metadata` export at the top of
+  each page. The tab icon (`/icon.png`) is drawn by `lib/icon.tsx`. All are rendered at build time.
+- `app/not-found.tsx`: the "File not found" page shown for any unknown URL.
 
 ## Launch checklist
 
@@ -67,7 +71,9 @@ so don't commit it. Only `.env.example` (no value) is committed.
 - [ ] Add the `seiyann.dev` domain in Vercel (Project → Settings → Domains) and update DNS as Vercel shows.
 - [ ] Replace the placeholder roles in `content/experience.ts` with your real history.
 - [ ] Review the page titles and meta descriptions (the `metadata` export at the top of each `app/*/page.tsx`).
-- [ ] Optional: add a favicon. The WordPress site had none; drop an `icon.png` into `app/` and Next.js serves it.
+- [ ] After the domain is live, paste a page link into https://www.opengraph.xyz or LinkedIn's Post Inspector to
+      check the preview card. (Preview images point at `https://seiyann.dev`, so they only work once the
+      domain is connected.)
 - [ ] Click through every page on a real phone: the bottom nav, tapping a headline word, opening folders,
       and the form.
 - [ ] Check the dark-mode toggle in Safari and Firefox (the circle reveal needs the View Transitions API;

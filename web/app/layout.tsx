@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Cursor from "@/components/Cursor";
 import { siteName } from "@/content/site";
+import { siteUrl } from "@/lib/metadata";
 
 // The theme's stylesheets, unchanged and in the order WordPress printed them. Every page's CSS is
 // loaded site-wide: their selectors are namespaced per page, and client-side navigation keeps
@@ -15,10 +16,17 @@ import "@/styles/capabilities.css";
 import "@/styles/about.css";
 import "@/styles/experience.css";
 import "@/styles/contact.css";
+import "@/styles/not-found.css";
 // Tailwind last, where the Play CDN put it (appended to the end of <head>).
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  // "KA" mark, rendered by app/icon.png/ and app/apple-icon.png/.
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png", sizes: "32x32" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+  },
   title: {
     default: `${siteName} – Graphic Designer & Full-Stack Developer`,
     template: `%s – ${siteName}`,

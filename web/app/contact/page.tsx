@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { contact } from "@/content/site";
 import ContactMotion from "@/components/contact/ContactMotion";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/contact/",
+  og: "contact",
   title: "Contact: Request Form",
   description:
     "Request form: contact Kurt Atoat about a new project, a full-time role or a collaboration. Email, local time in Lucena City and social channels.",
-};
+});
 
 const SUBJECTS = ["New project", "Full-time role", "Collaboration", "Just saying hi"];
 
