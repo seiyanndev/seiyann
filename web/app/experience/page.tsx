@@ -46,7 +46,7 @@ export default function ExperiencePage() {
 
         {/* Record summary: same facts as the About page ID card */}
         <dl className="exp-summary">
-          <div><dt>Experience</dt><dd>3+ years</dd></div>
+          <div><dt>Experience</dt><dd>5+ years</dd></div>
           <div><dt>Roles on file</dt><dd>{pad2(records.length)}</dd></div>
           <div><dt>Status</dt><dd><b className="exp-status-dot" aria-hidden="true"></b>Open to work</dd></div>
           <div><dt>Based in</dt><dd>Lucena City, PH</dd></div>

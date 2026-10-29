@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 // Stats: projects and tools are counted from the real data so they never drift.
 const stats = [
   { value: projects.length, suffix: "", label: "Projects completed", desc: "From brand identities to full-stack web applications." },
-  { value: 3, suffix: "+", label: "Years of experience", desc: "In design, development, and digital product creation." },
+  { value: 5, suffix: "+", label: "Years of experience", desc: "In design, development, and digital product creation." },
   { value: tools.length, suffix: "", label: "Tools in the box", desc: "Languages, frameworks and apps I build with every day." },
   { value: 1, suffix: "", label: "Goal", desc: "To keep building, creating, and making an impact." },
 ];

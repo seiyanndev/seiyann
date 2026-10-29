@@ -84,7 +84,7 @@ export default function HomePage() {
             <p className="cover-status opacity-0 animate-fade-up delay-200">
               <span className="cover-status-item cover-status-open"><b className="cover-status-dot" aria-hidden="true"></b>Open to work</span>{" "}
               <span className="cover-status-item"><span className="cover-status-sep">&middot;</span>Lucena City, PH</span>{" "}
-              <span className="cover-status-item"><span className="cover-status-sep">&middot;</span>3+ yrs</span>
+              <span className="cover-status-item"><span className="cover-status-sep">&middot;</span>5+ yrs</span>
             </p>
 
             {/* CTA row. On phones the "Open to work" stamp sits here, beside the button
