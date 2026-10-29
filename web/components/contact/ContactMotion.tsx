@@ -155,7 +155,7 @@ export default function ContactMotion() {
           body: JSON.stringify({
             access_key: accessKey,
             subject: "New Portfolio Message: " + regarding,
-            from_name: "seiyann.dev contact form",
+            from_name: "Portfolio contact form",
             name: data.get("contact_name"),
             email: data.get("contact_email"), // Web3Forms uses this as the reply-to
             regarding: regarding,

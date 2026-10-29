@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { siteName } from "@/content/site";
 import { ogPages, type OgPage } from "@/content/og";
 
-// The live domain: link previews (Open Graph) and canonical URLs need absolute addresses.
-export const siteUrl = "https://seiyann.dev";
+// The live address: link previews (Open Graph), canonical URLs and the sitemap need absolute addresses.
+// If a custom domain is added later, change it here.
+export const siteUrl = "https://seiyannn.vercel.app";
 
 const homeTitle = `${siteName} – Graphic Designer & Full-Stack Developer`;
 
