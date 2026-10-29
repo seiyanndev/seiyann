@@ -95,16 +95,18 @@ export default function ExperiencePage() {
                     <dt>Period</dt>
                     <dd>{period(record)}</dd>
                   </div>
-                  <div>
-                    <dt>Duties</dt>
-                    <dd>
-                      <ol className="rec-duties">
-                        {record.duties.map((duty, d) => (
-                          <li key={d}><span className="rec-duty-num">{pad2(d + 1)}</span><span className="rec-duty-text">{duty}</span></li>
-                        ))}
-                      </ol>
-                    </dd>
-                  </div>
+                  {record.duties.length > 0 && (
+                    <div>
+                      <dt>Duties</dt>
+                      <dd>
+                        <ol className="rec-duties">
+                          {record.duties.map((duty, d) => (
+                            <li key={d}><span className="rec-duty-num">{pad2(d + 1)}</span><span className="rec-duty-text">{duty}</span></li>
+                          ))}
+                        </ol>
+                      </dd>
+                    </div>
+                  )}
                   {record.tools.length > 0 && (
                     <div>
                       <dt>Tools</dt>
