@@ -95,7 +95,7 @@ export async function renderOgImage({ section, fileNo, lines }: { section: strin
                 BARS.map((w, i) => <div key={`${r}-${i}`} style={{ width: w * 2, height: 30, backgroundColor: i % 2 === 0 ? INK : "transparent" }} />)
               )}
             </div>
-            <div style={{ display: "flex", fontFamily: "Space Mono", fontSize: 15, letterSpacing: 3, color: "#6b7280", marginTop: 8 }}>{`KA · ${fileNo} · SEIYANN.DEV`}</div>
+            <div style={{ display: "flex", fontFamily: "Space Mono", fontSize: 15, letterSpacing: 3, color: "#6b7280", marginTop: 8 }}>{`KA · ${fileNo} · SEIYANNN.VERCEL.APP`}</div>
           </div>
         </div>
       </div>

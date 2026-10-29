@@ -1,4 +1,4 @@
-# seiyann.dev (Next.js)
+# seiyannn.vercel.app (Next.js)
 
 Kurt Atoat's portfolio, ported from the WordPress theme in the repository root. It renders the same pages,
 at the same URLs, with the same CSS and animations.
@@ -67,13 +67,13 @@ so don't commit it. Only `.env.example` (no value) is committed.
 
 - [ ] Get a Web3Forms access key and add `NEXT_PUBLIC_WEB3FORMS_KEY` in Vercel, then redeploy.
 - [ ] Send a real message from the live contact form and confirm it reaches your inbox (check spam too).
-- [ ] Restrict the Web3Forms key to `seiyann.dev` in the Web3Forms dashboard.
-- [ ] Add the `seiyann.dev` domain in Vercel (Project → Settings → Domains) and update DNS as Vercel shows.
-- [ ] Replace the placeholder roles in `content/experience.ts` with your real history.
+- [ ] Restrict the Web3Forms key to `seiyannn.vercel.app` in the Web3Forms dashboard.
+- [ ] Add `https://seiyannn.vercel.app` to Google Search Console (URL-prefix property) and submit
+      `https://seiyannn.vercel.app/sitemap.xml`.
 - [ ] Review the page titles and meta descriptions (the `metadata` export at the top of each `app/*/page.tsx`).
-- [ ] After the domain is live, paste a page link into https://www.opengraph.xyz or LinkedIn's Post Inspector to
-      check the preview card. (Preview images point at `https://seiyann.dev`, so they only work once the
-      domain is connected.)
+- [ ] Paste a page link into https://www.opengraph.xyz or LinkedIn's Post Inspector to check the preview card.
+- [ ] If you add a custom domain later: add it in Vercel (Project → Settings → Domains) and change `siteUrl`
+      in `lib/metadata.ts`.
 - [ ] Click through every page on a real phone: the bottom nav, tapping a headline word, opening folders,
       and the form.
 - [ ] Check the dark-mode toggle in Safari and Firefox (the circle reveal needs the View Transitions API;
