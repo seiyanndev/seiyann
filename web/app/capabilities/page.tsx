@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { capabilities, projectCaps } from "@/content/capabilities";
 import { projects, pad2, projectHref } from "@/content/projects";
 import CapabilitiesMotion from "@/components/capabilities/CapabilitiesMotion";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/capabilities/",
+  og: "capabilities",
   title: "Capabilities: Exhibit A",
   description:
     "Exhibit A: brand identity, UI/UX design, web development and end-to-end delivery, each backed by real projects in a cross-reference index.",
-};
+});
 
 // The markup behind the frame, typed out line by line (static, trusted HTML).
 const CODE_LINES = [

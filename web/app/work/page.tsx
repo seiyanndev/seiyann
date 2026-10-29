@@ -1,14 +1,17 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { projects, pad2 } from "@/content/projects";
 import WorkCabinet from "@/components/work/WorkCabinet";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/work/",
+  og: "work",
   title: "Work: Case Files",
   description:
     "Case files: selected brand identity, UI/UX and web development work by Kurt Atoat, from farm-to-table marketplaces to point-of-sale systems.",
-};
+});
 
 // Discipline filters, matched against each project's category text.
 const FILTERS = [

@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/content/projects";
@@ -8,11 +9,13 @@ import ToolIcon from "@/components/ToolIcon";
 import AboutIntro from "@/components/about/AboutIntro";
 import AboutTools from "@/components/about/AboutTools";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/about/",
+  og: "about",
   title: "About: Personnel File",
   description:
     "Personnel file: Kurt Atoat, graphic designer and full-stack developer in Lucena City, Philippines. Bio, approach, toolbox and numbers.",
-};
+});
 
 // Stats: projects and tools are counted from the real data so they never drift.
 const stats = [

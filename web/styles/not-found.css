@@ -1,0 +1,25 @@
+/* 404 page (app/not-found.tsx). Title and index reuse experience.css / home.css; this adds the
+   eyebrow row and the red MISSING stamp (the homepage "Open to work" stamp, in red). */
+
+.nf-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-bottom: 40px; }
+
+.nf-stamp {
+    margin-right: 8px;
+    padding: 9px 16px;
+    border: 4px double #b91c1c;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #b91c1c;
+    opacity: 0.9;
+    transform: rotate(-8deg);
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.75'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.75'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.nf-index { margin-top: 72px; }
+
+html.dark .nf-stamp { border-color: #f87171; color: #f87171; }

@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { heroLines, heroSlides, siteName } from "@/content/site";
-import { projects, pad2 } from "@/content/projects";
-import { capabilities } from "@/content/capabilities";
-import { experience } from "@/content/experience";
+import { heroLines, heroSlides } from "@/content/site";
+import { pad2 } from "@/content/projects";
+import { contents } from "@/content/contents";
+import { pageMetadata } from "@/lib/metadata";
+import ContentsList from "@/components/ContentsList";
 import HeroHeadline from "@/components/home/HeroHeadline";
 import HeroVisual from "@/components/home/HeroVisual";
 import HomeCover from "@/components/home/HomeCover";
 
-export const metadata: Metadata = {
-  title: { absolute: `${siteName} – Graphic Designer & Full-Stack Developer` },
+export const metadata: Metadata = pageMetadata({
+  path: "/",
+  og: "home",
   description:
     "Cover sheet: Kurt Atoat designs visual identities, builds digital products and turns ideas into real solutions. Open to work, based in Lucena City, PH.",
-};
+});
 
 // Glitch typefaces, subset to only the headline's characters so each file is a few KB.
 const heroGlyphs = Array.from(new Set(heroLines.map((line) => line.text).join("")))
@@ -26,15 +28,6 @@ const glitchFontsHref =
 // Phones (under 768px) hide the slideshow; the <source> hands them a 1px placeholder
 // so the real photos are never downloaded there.
 const BLANK_GIF = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-
-// Contents: the folder's index, one row per file.
-const contents = [
-  { num: "001", href: "/work/", page: "Work", title: "Case files", detail: `${pad2(projects.length)} cases` },
-  { num: "002", href: "/capabilities/", page: "Capabilities", title: "Exhibit A", detail: `${capabilities.length} disciplines` },
-  { num: "003", href: "/about/", page: "About", title: "Personnel file", detail: "Kurt Atoat" },
-  { num: "004", href: "/experience/", page: "Experience", title: "Service record", detail: `${pad2(experience.length)} roles` },
-  { num: "005", href: "/contact/", page: "Contact", title: "Request form", detail: "Open to work" },
-];
 
 // Homepage: "The Dossier", File No. 000: Cover Sheet. Styles: styles/home.css.
 // Motion: HeroHeadline (glitch), HeroVisual (slideshow), HomeCover (stamp + contents).
@@ -162,20 +155,7 @@ export default function HomePage() {
           <span className="contents-count">{`${contents.length} files`}</span>
         </div>
 
-        <ol className="contents-list">
-          {contents.map((item) => (
-            <li key={item.num}>
-              <Link className="contents-row" href={item.href}>
-                <span className="contents-num">{item.num}</span>
-                <span className="contents-page">{item.page}</span>
-                <span className="contents-title">{item.title}</span>
-                <span className="contents-detail">{item.detail}</span>
-                <span className="contents-tape" aria-hidden="true">Open file &rarr;</span>
-                <span className="contents-arrow" aria-hidden="true">{"↗"}</span>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        <ContentsList />
 
         <div className="contents-foot" aria-hidden="true">
           <span className="contents-bars"></span>

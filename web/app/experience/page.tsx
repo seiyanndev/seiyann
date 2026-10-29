@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { experience, type ExperienceRecord } from "@/content/experience";
 import { projects, pad2, projectHref } from "@/content/projects";
@@ -6,11 +7,13 @@ import { tools } from "@/content/tools";
 import ToolIcon from "@/components/ToolIcon";
 import ExperienceMotion from "@/components/experience/ExperienceMotion";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/experience/",
+  og: "experience",
   title: "Experience: Service Record",
   description:
     "Service record: Kurt Atoat's roles in design, development and real-world projects, with the tools used and the work behind each one.",
-};
+});
 
 // Lookups for a record's tools (with logos) and related projects (linked into the Work cabinet).
 const toolsByName = new Map(tools.map((tool) => [tool.name, tool]));
