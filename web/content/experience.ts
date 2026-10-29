@@ -20,7 +20,7 @@ export const experience: ExperienceRecord[] = [
     role: "Full Stack Developer", org: "Pixel Hive",
     start: "2026", end: "", type: "", location: "",
     duties: ["Build and maintain client websites and web applications, from frontend interfaces to backend logic and databases.", "Turn UI/UX designs into responsive, accessible, production-ready pages.", "Work with the team on deployments, performance tuning, and ongoing site maintenance."],
-    tools: ["PHP", "Laravel", "WordPress", "JavaScript"], projects: [],
+    tools: ["HTML", "CSS", "JavaScript", "Tailwind CSS", "React", "PHP", "Laravel", "Python", "WordPress", "SQL", "Supabase", "Git", "GitHub"], projects: [],
   },
   {
     role: "Web Developer", org: "Self-Employed",
