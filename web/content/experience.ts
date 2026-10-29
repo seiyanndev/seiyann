@@ -19,14 +19,14 @@ export const experience: ExperienceRecord[] = [
   {
     role: "Full Stack Developer", org: "Pixel Hive",
     start: "2026", end: "", type: "", location: "",
-    duties: [],
-    tools: [], projects: [],
+    duties: ["Build and maintain client websites and web applications, from frontend interfaces to backend logic and databases.", "Turn UI/UX designs into responsive, accessible, production-ready pages.", "Work with the team on deployments, performance tuning, and ongoing site maintenance."],
+    tools: ["PHP", "Laravel", "WordPress", "JavaScript"], projects: [],
   },
   {
     role: "Web Developer", org: "Self-Employed",
     start: "2025", end: "2026", type: "", location: "",
-    duties: [],
-    tools: [], projects: [],
+    duties: ["Designed and developed custom web applications for clients, from planning to deployment.", "Built full-stack features including databases, user accounts, and admin dashboards.", "Handled hosting, deployment, and post-launch support for each project."],
+    tools: ["React", "Laravel", "Supabase"], projects: [],
   },
   {
     role: "Organization Experience", org: "IT Paradigm / ELITE",
@@ -37,8 +37,8 @@ export const experience: ExperienceRecord[] = [
   {
     role: "Freelance Graphic Designer", org: "Self-Employed",
     start: "2023", end: "2024", type: "Freelance", location: "",
-    duties: [],
-    tools: [], projects: [],
+    duties: ["Designed logos, brand identities, and visual guidelines for small businesses.", "Created social media graphics, print materials, and marketing collateral.", "Worked directly with clients through concepts, revisions, and final file delivery."],
+    tools: ["Figma"], projects: [],
   },
   {
     role: "Freelance Web Developer", org: "Self-Employed",
