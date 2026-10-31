@@ -29,9 +29,15 @@ export const experience: ExperienceRecord[] = [
     tools: ["React", "Laravel", "Supabase"], projects: [],
   },
   {
-    role: "Organization Experience", org: "IT Paradigm / ELITE",
-    start: "2024", end: "2025", type: "", location: "",
-    duties: ["Led and participated in various projects and initiatives.", "Organized events, workshops, and community activities.", "Collaborated with teams and stakeholders to achieve goals."],
+    role: "Vice President", org: "DLL ELITE (Elevating Leaders Innovatively Through Trainings and Excellence)",
+    start: "2024", end: "2026", type: "Student Organization", location: "",
+    duties: ["Supported the president in leading the organization's officers and members across two terms.", "Planned and ran leadership trainings, workshops, and student events.", "Coordinated programs with faculty, partner organizations, and other student groups."],
+    tools: [], projects: [],
+  },
+  {
+    role: "President", org: "IT Paradigm",
+    start: "2023", end: "2026", type: "Student Organization", location: "",
+    duties: ["Led the BSIT student organization for three consecutive terms, guiding its officers and members.", "Organized tech events, workshops, and community activities for IT students.", "Represented the department's students and worked with faculty and partner organizations on programs and initiatives."],
     tools: [], projects: [],
   },
   {
