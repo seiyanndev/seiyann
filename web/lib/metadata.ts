@@ -3,8 +3,8 @@ import { siteName } from "@/content/site";
 import { ogPages, type OgPage } from "@/content/og";
 
 // The live address: link previews (Open Graph), canonical URLs and the sitemap need absolute addresses.
-// If a custom domain is added later, change it here.
-export const siteUrl = "https://seiyannn.vercel.app";
+// seiyannn.site and seiyannn.vercel.app redirect here (set up in Vercel → Domains).
+export const siteUrl = "https://www.seiyannn.site";
 
 // Search terms for the keywords tag. Google ignores this tag for ranking (titles, descriptions and page
 // text are what count); it's here for the few tools that still read it.
