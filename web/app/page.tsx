@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { heroLines, heroSlides } from "@/content/site";
+import { heroLines, heroSlides, contact, siteName } from "@/content/site";
 import { pad2 } from "@/content/projects";
 import { contents } from "@/content/contents";
-import { pageMetadata } from "@/lib/metadata";
+import { pageMetadata, siteUrl } from "@/lib/metadata";
 import ContentsList from "@/components/ContentsList";
 import HeroHeadline from "@/components/home/HeroHeadline";
 import HeroVisual from "@/components/home/HeroVisual";
@@ -26,6 +26,36 @@ const glitchFontsHref =
   "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Space+Mono:wght@700&family=UnifrakturMaguntia&family=Bebas+Neue&family=Bungee&family=Pacifico&family=Major+Mono+Display" +
   "&text=" + encodeURIComponent(heroGlyphs) + "&display=block";
 
+// Structured data for search engines: the site's name (Google shows it above the result instead of the
+// host's name) and who it belongs to. See node_modules/next/dist/docs/01-app/02-guides/json-ld.md.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: siteName,
+      alternateName: ["seiyannn", "Kurt Atoat Portfolio"],
+      url: `${siteUrl}/`,
+      publisher: { "@id": `${siteUrl}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: siteName,
+      url: `${siteUrl}/`,
+      image: `${siteUrl}/assets/aboutimg.jpg`,
+      jobTitle: "Front-End Developer",
+      description: "Graphic designer and full-stack developer from Lucena City, Philippines.",
+      worksFor: { "@type": "Organization", name: "Pixel Hive" },
+      alumniOf: { "@type": "CollegeOrUniversity", name: "Dalubhasaan ng Lungsod ng Lucena" },
+      address: { "@type": "PostalAddress", addressLocality: "Lucena City", addressRegion: "Quezon", addressCountry: "PH" },
+      knowsAbout: ["Front-End Development", "React", "Laravel", "PHP", "WordPress", "UI/UX Design", "Graphic Design"],
+      sameAs: contact.socials.map((social) => social.url),
+    },
+  ],
+};
+
 // Phones (under 768px) hide the slideshow; the <source> hands them a 1px placeholder
 // so the real photos are never downloaded there.
 const BLANK_GIF = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
@@ -36,6 +66,7 @@ export default function HomePage() {
   return (
     <>
       <link rel="stylesheet" href={glitchFontsHref} precedence="default" />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
       {/* Hero Section Container: a full screen from md up; on phones (no slideshow) it sizes to its content
           so the contents index follows without a blank band. */}

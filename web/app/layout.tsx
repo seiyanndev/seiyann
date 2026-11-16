@@ -25,9 +25,13 @@ export const metadata: Metadata = {
   keywords: siteKeywords,
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
-  // "KA" mark, rendered by app/icon.png/ and app/apple-icon.png/.
+  // "KA" mark, rendered by app/icon*.png/ and app/apple-icon.png/.
   icons: {
-    icon: [{ url: "/icon.png", type: "image/png", sizes: "32x32" }],
+    icon: [
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-48.png", type: "image/png", sizes: "48x48" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
     apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
   },
   title: {
