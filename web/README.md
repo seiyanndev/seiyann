@@ -1,4 +1,4 @@
-# seiyannn.vercel.app (Next.js)
+# www.seiyannn.site (Next.js)
 
 Kurt Atoat's portfolio, ported from the WordPress theme in the repository root. It renders the same pages,
 at the same URLs, with the same CSS and animations.
@@ -67,9 +67,9 @@ so don't commit it. Only `.env.example` (no value) is committed.
 
 - [ ] Get a Web3Forms access key and add `NEXT_PUBLIC_WEB3FORMS_KEY` in Vercel, then redeploy.
 - [ ] Send a real message from the live contact form and confirm it reaches your inbox (check spam too).
-- [ ] Restrict the Web3Forms key to `seiyannn.vercel.app` in the Web3Forms dashboard.
-- [ ] Add `https://seiyannn.vercel.app` to Google Search Console (URL-prefix property) and submit
-      `https://seiyannn.vercel.app/sitemap.xml`.
+- [ ] Restrict the Web3Forms key to `seiyannn.site` in the Web3Forms dashboard.
+- [ ] Add `seiyannn.site` to Google Search Console (Domain property) and submit
+      `https://www.seiyannn.site/sitemap.xml`.
 - [ ] Review the page titles and meta descriptions (the `metadata` export at the top of each `app/*/page.tsx`).
 - [ ] Paste a page link into https://www.opengraph.xyz or LinkedIn's Post Inspector to check the preview card.
 - [ ] If you add a custom domain later: add it in Vercel (Project → Settings → Domains) and change `siteUrl`
