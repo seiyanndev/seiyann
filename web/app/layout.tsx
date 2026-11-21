@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Cursor from "@/components/Cursor";
+import { Analytics } from "@vercel/analytics/next";
 import { siteName } from "@/content/site";
 import { siteUrl, siteKeywords } from "@/lib/metadata";
 
@@ -71,6 +72,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Footer />
         </div>
         <Cursor />
+        {/* Vercel Web Analytics: page views and visitors, shown on the project's Analytics tab. */}
+        <Analytics />
       </body>
     </html>
   );
