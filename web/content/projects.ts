@@ -86,25 +86,25 @@ export const projects: Project[] = [
     title: "Auslands Care", tag: "UI/UX Revamp", category: "UI-UX Design",
     summary: "An NDIS housing site redesigned for accessibility.",
     description: "Auslands Care is a comprehensive UI/UX design revamp for an NDIS accommodation website. The redesign focuses on accessibility, user trust, and a seamless discovery process to help participants and families easily find specialized disability housing and support services.",
-    image: "", url: "https://auslandscare.com.au", art: ["silk", "#0e7c86", "#9ee6d8", "#ff8a5b", "#fdf6ec"],
+    image: "auslandscare.jpg", imageSize: { width: 2160, height: 1620 }, url: "https://auslandscare.com.au", art: ["silk", "#0e7c86", "#9ee6d8", "#ff8a5b", "#fdf6ec"],
   },
   {
     title: "BEST DSS", tag: "NDIS Provider Site", category: "UI-UX / Web Development",
     summary: "Culturally inclusive NDIS support, easy to find.",
     description: "BEST DSS is the website for an NDIS disability support and accommodation provider, where I spearheaded both the UI/UX design and frontend development. It gives participants, families and support coordinators a clear path to personalised, culturally inclusive support and accommodation, with a warm, accessible interface and responsive pages.",
-    image: "", url: "https://bestdss.com.au", art: ["pour", "#f9d71c", "#1d3557", "#3a86ff", "#0b132b"],
+    image: "bestdss.jpg", imageSize: { width: 2160, height: 1620 }, url: "https://bestdss.com.au", art: ["pour", "#f9d71c", "#1d3557", "#3a86ff", "#0b132b"],
   },
   {
     title: "Alan Associates", tag: "UI/UX + Frontend", category: "UI-UX / Web Development",
     summary: "A debt-recovery site rebuilt around trust.",
     description: "Alan Associates is a trusted Australian business debt collection and credit management specialist website. I handled the complete UI/UX design revamp and frontend development, creating a clean, professional, and empathetic digital experience designed to build trust and streamline client outreach.",
-    image: "", url: "https://alanscreditmanagement.com.au", art: ["marble", "#0b132b", "#1c2541", "#c9a227", "#e0e1dd"],
+    image: "alanassociates.jpg", imageSize: { width: 2160, height: 1620 }, url: "https://alanscreditmanagement.com.au", art: ["marble", "#0b132b", "#1c2541", "#c9a227", "#e0e1dd"],
   },
   {
     title: "Reliable Touch Cleaning Services", tag: "UI/UX + Frontend", category: "UI-UX / Web Development",
     summary: "A cleaning-services site built to convert bookings.",
     description: "Reliable Touch Cleaning Services is a modern website redesign and frontend development project. I spearheaded the UI/UX revamp and custom frontend implementation to deliver a clean, trustworthy, and conversion-focused platform optimized for service bookings.",
-    image: "", url: "https://reliabletouch.com.au", art: ["marble", "#00b4d8", "#caf0f8", "#0077b6", "#ffffff"],
+    image: "reliabletouch.jpg", imageSize: { width: 2160, height: 1620 }, url: "https://reliabletouch.com.au", art: ["marble", "#00b4d8", "#caf0f8", "#0077b6", "#ffffff"],
   },
 ];
 
