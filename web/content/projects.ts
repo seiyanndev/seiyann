@@ -98,7 +98,7 @@ export const projects: Project[] = [
     title: "Alan Associates", tag: "UI/UX + Frontend", category: "UI-UX / Web Development",
     summary: "A debt-recovery site rebuilt around trust.",
     description: "Alan Associates is a trusted Australian business debt collection and credit management specialist website. I handled the complete UI/UX design revamp and frontend development, creating a clean, professional, and empathetic digital experience designed to build trust and streamline client outreach.",
-    image: "", art: ["marble", "#0b132b", "#1c2541", "#c9a227", "#e0e1dd"],
+    image: "", url: "https://alanscreditmanagement.com.au", art: ["marble", "#0b132b", "#1c2541", "#c9a227", "#e0e1dd"],
   },
   {
     title: "Reliable Touch Cleaning Services", tag: "UI/UX + Frontend", category: "UI-UX / Web Development",
