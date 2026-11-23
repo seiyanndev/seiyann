@@ -42,7 +42,8 @@ export const projects: Project[] = [
     title: "LoanTrackr", tag: "PWA", category: "UI-UX / Web Development",
     summary: "Loans, payments and balances, tracked in one place.",
     description: "LoanTrackr is a simple and efficient personal loan tracking Progressive Web App (PWA) that helps you stay in control of your finances. It allows you to record loans, monitor payments, and track remaining balances—all in one place.",
-    image: "", art: ["streaks", "#06281f", "#00c2a8", "#c6ff3d", "#ffffff"],
+    image: "loantrackr.jpg", imageSize: { width: 2160, height: 1620 }, url: "https://loan-trackr.seiyannn.site",
+    art: ["streaks", "#06281f", "#00c2a8", "#c6ff3d", "#ffffff"],
   },
   {
     title: "Seiyann", tag: "Brand + CMS", category: "Branding / UI-UX / Web Development",
