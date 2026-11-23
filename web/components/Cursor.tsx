@@ -26,6 +26,7 @@ const LABELS: Array<[string, Label]> = [
   ["[data-cursor]", (el) => el.dataset.cursor || ""],
   [".folder-toggle", (el) => (el.closest(".folder")!.classList.contains("is-open") ? "Close file" : "Open file")],
   [".case-close", "Close file"],
+  [".case-visit", "Visit site ↗"],
   [".req-stamp", "File request"],
   [".ct-copy", (el) => (el.classList.contains("is-copied") ? "Copied" : "Copy")],
   [".contents-row", (el) => "Open " + el.querySelector(".contents-num")?.textContent],

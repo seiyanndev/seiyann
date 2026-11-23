@@ -13,10 +13,19 @@ export type Project = {
   image: string;
   /** Image size in px, used by next/image (the CSS decides the displayed size). */
   imageSize?: { width: number; height: number };
+  /** Live site, shown as a "Visit site" link on the case sheet. */
+  url?: string;
   art: [ArtVariant, string, string, string, string];
 };
 
 export const projects: Project[] = [
+  {
+    title: "Oakhaven Studio", tag: "3D Storefront", category: "UI-UX / Web Development",
+    summary: "A furniture store you can walk around and customise in 3D.",
+    description: "Oakhaven Studio is a premium furniture e-commerce prototype for a fictional oak and walnut workshop. Built with Next.js and Three.js, it features a progressive 3D storefront: a room you can drag to look around with morning, afternoon and evening lighting, shoppable price hotspots, and a sofa customiser for wood and fabric.",
+    image: "oakhaven.jpg", imageSize: { width: 2160, height: 1620 }, url: "https://oakhaven.seiyannn.site",
+    art: ["silk", "#3b2a1e", "#c8a27a", "#8fa58e", "#f5efe6"],
+  },
   {
     title: "Agrilink", tag: "Web App", category: "UI-UX / Web Development",
     summary: "Farm-to-table marketplace with GIS monitoring.",

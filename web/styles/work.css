@@ -334,6 +334,36 @@ html.js .cab:not(.is-ready) .cab-drawer { visibility: hidden; }
     transition: transform 0.2s ease;
 }
 .case-close:hover { transform: rotate(-2deg) scale(1.04); }
+
+/* "Visit site" link for projects with a live URL: the close stamp, inked in */
+.case-actions { display: inline-flex; align-items: center; gap: 14px; }
+.case-actions .case-close { white-space: nowrap; }
+/* Phones: two stamps and the barcode don't fit on one line, so drop the (decorative) barcode */
+@media (max-width: 639px) {
+    .case-foot:has(.case-visit) { justify-content: flex-end; }
+    .case-foot:has(.case-visit) .case-barcode { display: none; }
+    .case-foot:has(.case-visit) > .case-actions { min-width: 0; flex-wrap: wrap; justify-content: flex-end; gap: 10px; margin-right: 6px; }
+    .case-visit, .case-actions .case-close { padding: 8px 10px; font-size: 10.5px; letter-spacing: 0.12em; }
+}
+.case-visit {
+    padding: 10px 18px;
+    border: 4px double var(--manila);
+    border-radius: 6px;
+    background-color: var(--ink);
+    box-shadow: 0 0 0 1px var(--ink);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--manila);
+    text-decoration: none;
+    white-space: nowrap;
+    transform: rotate(2deg);
+    transition: transform 0.2s ease;
+}
+.case-visit:hover { transform: rotate(0deg) scale(1.04); }
+.case-visit:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
 .case-close:active { transform: rotate(-4deg) scale(0.94); }
 .case-close:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
 

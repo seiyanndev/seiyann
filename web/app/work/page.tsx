@@ -122,7 +122,12 @@ export default function WorkPage() {
                         </dl>
                         <div className="case-foot">
                           <span className="case-barcode" aria-hidden="true"></span>
-                          <button type="button" className="case-close">Close file</button>
+                          <span className="case-actions">
+                            {project.url && (
+                              <a className="case-visit" href={project.url} target="_blank" rel="noopener">Visit site {"↗"}</a>
+                            )}
+                            <button type="button" className="case-close">Close file</button>
+                          </span>
                         </div>
                       </div>
                     </div>
